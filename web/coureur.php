@@ -4,8 +4,8 @@
 
 
 	require "includes/init.php";
-	require "includes/db/Database.class.php";
-	require "includes/AlertBanner.class.php";
+	require "model/db/Database.class.php";
+	require "model/AlertBanner.class.php";
 
 ?>
 
@@ -20,7 +20,7 @@
 
 	require "includes/navbar.php";
 
-	if(isset($_GET['success'])) {
+	if (isset($_GET['success'])) {
 		echo AlertBanner::getGenericSuccessMessage("Wouhou !", "L'opération a été effectuée avec succès.");
 	}
 

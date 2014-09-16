@@ -4,9 +4,9 @@
 
 
 	require "includes/init.php";
-	require "includes/db/Database.class.php";
-	require "includes/AlertBanner.class.php";
-	require "includes/FormControls.class.php";
+	require "model/db/Database.class.php";
+	require "model/AlertBanner.class.php";
+	require "model/FormControls.class.php";
 
 	function getPostVar($id)
 	{

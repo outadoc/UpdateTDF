@@ -14,7 +14,7 @@
 
 		public static function getTextField($id, $label, $value = "", $isRequired = false, $maxLength = 30, $placeholder = "")
 		{
-			$value = (!empty($value)) ? htmlspecialchars($value) : "";
+			$value    = (!empty($value)) ? htmlspecialchars($value) : "";
 			$required = ($isRequired) ? "required" : "";
 
 			return '<div class="form-group">'
