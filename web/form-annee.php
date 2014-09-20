@@ -61,20 +61,19 @@
 	$title = (isset($n_annee) && $n_annee !== null) ? "Modifier une année" : "Ajouter une année";
 	define("PAGE_TITLE", "TDF - " . $title);
 
-	require "view/header.php";
-
 	try {
 		$db = new Database();
 
 		/** @var $n_annee integer */
 		if ($n_annee !== null) {
-			$annee = $db->getAnnee($n_annee);
+			$fatal_error = $db->getAnnee($n_annee);
 		}
 
 		$db->close();
 	} catch (\Exception $e) {
-		$error = $e->getMessage();
+		$fatal_error = $e->getMessage();
 	}
 
+	require "view/header.php";
 	require "view/form-annee.php";
 	require "view/footer.php";

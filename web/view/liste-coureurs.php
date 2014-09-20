@@ -7,18 +7,6 @@
 
 	namespace TDF;
 
-	if (isset($_GET['error'])) {
-		echo AlertBanner::getGenericErrorMessage("Erreur lors de l'exécution de l'opération.");
-	}
-
-	if (isset($_GET['success'])) {
-		echo AlertBanner::getGenericSuccessMessage("Opération exécutée avec succès !");
-	}
-
-	if (isset($error)) {
-		die(AlertBanner::getGenericErrorMessage($error));
-	}
-
 ?>
 <div class="row">
 	<div class="col-md-12">

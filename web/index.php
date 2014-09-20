@@ -14,15 +14,14 @@
 
 	define("PAGE_TITLE", "TDF - Liste des coureurs");
 
-	require "view/header.php";
-
 	try {
 		$db       = new Database();
 		$coureurs = $db->getListeCoureurs();
 		$db->close();
 	} catch (\Exception $e) {
-		$error = $e->getMessage();
+		$fatal_error = $e->getMessage();
 	}
 
+	require "view/header.php";
 	require "view/liste-coureurs.php";
 	require "view/footer.php";

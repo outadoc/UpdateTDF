@@ -10,15 +10,6 @@
 
 	/** @var $n_coureur integer */
 	/** @var $coureur object */
-	/** @var $error string */
-
-	if (isset($_GET['success'])) {
-		echo AlertBanner::getGenericSuccessMessage("L'opération a été effectuée avec succès.");
-	}
-
-	if (isset($error)) {
-		die(AlertBanner::getGenericErrorMessage($error));
-	}
 
 ?>
 <div class="row">

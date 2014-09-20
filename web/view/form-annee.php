@@ -8,15 +8,6 @@
 
 	namespace TDF;
 
-
-	if (isset($_GET['success'])) {
-		echo AlertBanner::getGenericSuccessMessage("Succès !", "L'année a été mise à jour avec succès.");
-	}
-
-	if (isset($error)) {
-		die(AlertBanner::getGenericErrorMessage($error));
-	}
-
 ?>
 <div class="row">
 	<div class="col-md-12">

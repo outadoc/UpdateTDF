@@ -62,8 +62,6 @@
 	$title = (isset($n_coureur) && $n_coureur !== null) ? "Modifier un coureur" : "Ajouter un coureur";
 	define("PAGE_TITLE", "TDF - " . $title);
 
-	require "view/header.php";
-
 	try {
 		$db   = new Database();
 		$pays = $db->getListePays();
@@ -74,8 +72,9 @@
 
 		$db->close();
 	} catch (\Exception $e) {
-		$error = $e->getMessage();
+		$fatal_error = $e->getMessage();
 	}
 
+	require "view/header.php";
 	require "view/form-coureur.php";
 	require "view/footer.php";
