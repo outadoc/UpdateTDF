@@ -10,18 +10,8 @@
 		echo AlertBanner::getGenericErrorMessage("Erreur !", "Suppression du coureur impossible (il a probablement des participations).");
 	}
 
-	try {
-		$db   = new Database();
-		$pays = $db->getListePays();
-
-		/** @var $n_coureur integer */
-		if ($n_coureur !== null) {
-			$coureur = $db->getCoureur($n_coureur);
-		}
-
-		$db->close();
-	} catch (\Exception $e) {
-		die(AlertBanner::getGenericErrorMessage("Erreur !", $e->getMessage()));
+	if (isset($error)) {
+		die(AlertBanner::getGenericErrorMessage("Oups !", $error));
 	}
 
 ?>

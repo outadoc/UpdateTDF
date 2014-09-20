@@ -63,6 +63,19 @@
 
 	define("PAGE_TITLE", "TDF - " . $title);
 
+	try {
+		$db   = new Database();
+		$pays = $db->getListePays();
+
+		if ($n_coureur !== null) {
+			$coureur = $db->getCoureur($n_coureur);
+		}
+
+		$db->close();
+	} catch (\Exception $e) {
+		$error = $e->getMessage();
+	}
+
 	require "view/header.php";
 	require "view/form-coureur.php";
 	require "view/footer.php";
