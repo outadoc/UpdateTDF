@@ -14,6 +14,7 @@
 
 		/**
 		 * Supprime les accents d'un string et les remplace par leur équivalent en plain ASCII.
+		 *
 		 * @param $str string la chaîne dont les accents doivent être remplacés
 		 * @return string la chaîne ne comportant plus d'accents
 		 */
@@ -38,6 +39,7 @@
 		/**
 		 * Normalise le nom de famille d'un coureur.
 		 * Met le nom en majuscules, supprime les accents et les tirets/espaces superflus.
+		 *
 		 * @param $nom string le nom du coureur
 		 * @return string le nom une fois normalisé
 		 */
@@ -58,6 +60,7 @@
 		/**
 		 * Normalise le prénom d'un coureur.
 		 * Capitalise le nom, supprime l'accent de la première lettre, et supprime les tirets/espace superflus.
+		 *
 		 * @param $prenom string le prénom du coureur
 		 * @return string le prénom normalisé
 		 */

@@ -50,6 +50,7 @@
 
 		/**
 		 * Exécute une requête qui ne retourne pas de lignes (ex: INSERT INTO) sur la base de données Oracle.
+		 *
 		 * @param string $sql la requête à exécuter, avec des placeholders
 		 * @param array $bindings les valeurs des placeholders
 		 * @return resource le statement correspondant à la requête exécutée
@@ -70,6 +71,7 @@
 
 		/**
 		 * Exécute une requête retournant des lignes sur la base de données Oracle.
+		 *
 		 * @param string $sql la requête à exécuter, avec des placeholders
 		 * @param array $bindings les valeurs des placeholders
 		 * @return array une liste des résultats retournés
@@ -81,6 +83,7 @@
 
 		/**
 		 * Parse le résultat d'une requête et la renvoie dans un array.
+		 *
 		 * @param resource $stid la transaction dont il faut passer le résultat
 		 * @return array une liste des lignes retournées par la requête
 		 */
@@ -97,6 +100,7 @@
 
 		/**
 		 * Ajoute un coureur dans la base de données.
+		 *
 		 * @param string $nom le nom du coureur (sera normalisé)
 		 * @param string $prenom le prénom du coureur (sera normalisé)
 		 * @param string $code_tdf le code pays du coureur, en 3 caractères maximum
@@ -118,6 +122,7 @@
 
 		/**
 		 * Met à jour les informations d'un coureur dans la base de données.
+		 *
 		 * @param integer $n_coureur le numéro du coureur à mettre à jour
 		 * @param string $nom le nom du coureur (sera normalisé)
 		 * @param string $prenom le prénom du coureur (sera normalisé)
@@ -141,6 +146,7 @@
 
 		/**
 		 * Liste les coureurs présents dans la base.
+		 *
 		 * @return array un tableau contenant la liste des coureurs
 		 */
 		public function getListeCoureurs()
@@ -151,6 +157,7 @@
 
 		/**
 		 * Récupère les informations d'un coureur dans la base de données.
+		 *
 		 * @param integer $n_coureur le numéro du coureur
 		 * @return object les informations du coureur
 		 * @throws \ErrorException si aucun coureur ne possède ce numéro
@@ -169,6 +176,7 @@
 
 		/**
 		 * Supprime un coureur de la base de données.
+		 *
 		 * @param integer $n_coureur le numéro du coureur à supprimer
 		 * @throws \ErrorException si le coureur ne peut pas être supprimé
 		 * @return resource le résultat de la requête
@@ -186,6 +194,7 @@
 
 		/**
 		 * Récupère la liste des participations d'un coureur spécifique.
+		 *
 		 * @param integer $n_coureur le numéro du coureur
 		 * @return array la liste des participations
 		 */
@@ -197,6 +206,7 @@
 
 		/**
 		 * Récupère la liste des pays dans la base de données.
+		 *
 		 * @return array la liste des pays
 		 */
 		public function getListePays()
@@ -207,6 +217,7 @@
 
 		/**
 		 * Récupère le dernier numéro de coureur inséré dans la base de données.
+		 *
 		 * @return integer
 		 */
 		public function getDernierNumCoureur()
@@ -217,24 +228,26 @@
 
 		/**
 		 * Récupère les informations pour une année dans la base de données (jours de repos).
+		 *
 		 * @param integer $annee l'année pour laquelle les données doivent être récupérées
 		 * @throws \ErrorException si l'année ne fait pas partie de la base
 		 * @return object un objet contenant des informations sur l'année passée en paramètre
 		 */
 		public function getAnnee($annee)
 		{
-			$sql = "SELECT * FROM vt_annee WHERE annee = :annee";
+			$sql    = "SELECT * FROM vt_annee WHERE annee = :annee";
 			$result = $this->executerRequeteAvecResultat($sql, Array(":annee" => $annee));
 
 			if ($result === null || count($result) < 1) {
 				throw new \ErrorException("L'année " . $annee . " n'existe pas dans la base.");
 			}
 
-			return  $result[0];
+			return $result[0];
 		}
 
 		/**
 		 * Ajoute une année dans la base de données.
+		 *
 		 * @param integer $annee l'année à ajouter
 		 * @param integer $jours_repos le nombre de jours de repos pour cette année
 		 * @return resource le résultat de la requête
@@ -247,6 +260,7 @@
 
 		/**
 		 * Met à jour une année de la base de données.
+		 *
 		 * @param integer $annee l'année à mettre à jour
 		 * @param integer $jours_repos le nombre de jours de repos pour cette année
 		 * @return resource le résultat de la requête

@@ -9,14 +9,14 @@
 
 	$n_coureur = FormUtils::getGetVar("n_coureur");
 
-	if($n_coureur !== null) {
+	if ($n_coureur !== null) {
 		try {
 			$db = new Database();
 			$db->supprimerCoureur($n_coureur);
 			$db->close();
 
 			header("Location: ./?success");
-		} catch(\Exception $e) {
+		} catch (\Exception $e) {
 			header("Location: ./form-coureur.php?n_coureur=" . $n_coureur . "&error");
 		}
 	} else {

@@ -11,7 +11,7 @@
 
 	//traitement du formulaire année
 
-	$error = null;
+	$error   = null;
 	$n_annee = FormUtils::getGetVar("annee");
 
 	//on récupère les éléments du formulaire, s'ils sont définis
@@ -29,7 +29,7 @@
 					try {
 						$db->getAnnee($data_annee);
 						$error = "Cette année existe déjà dans la base de données.";
-					} catch(\ErrorException $e) {
+					} catch (\ErrorException $e) {
 						$db->ajouterAnnee($data_annee, $data_jours_repos);
 
 						//on redirige vers la page de l'année
@@ -56,7 +56,7 @@
 
 	define("PAGE_TITLE", "TDF - " . $title);
 
-	if($error !== null) {
+	if ($error !== null) {
 		define("ERROR", $error);
 	}
 

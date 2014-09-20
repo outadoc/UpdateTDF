@@ -14,6 +14,7 @@
 
 		/**
 		 * Créé un champ texte HTML.
+		 *
 		 * @param string $id l'identifiant du champ
 		 * @param string $label le texte qui sera affiché comme étiquette
 		 * @param string $value la valeur du champ (vide par défaut)
@@ -61,6 +62,7 @@
 
 		/**
 		 * Récupère une variable POST, et retourne soit sa valeur, soit null.
+		 *
 		 * @param $id string le nom de la variable
 		 * @return null|string la valeur de la variable (null si non définie)
 		 */
@@ -71,6 +73,7 @@
 
 		/**
 		 * Récupère une variable GET, et retourne soit sa valeur, soit null.
+		 *
 		 * @param $id string le nom de la variable
 		 * @return null|string la valeur de la variable (null si non définie)
 		 */
