@@ -317,6 +317,8 @@
 			if ($result === null || count($result) < 1) {
 				throw new NoSuchEntryException("Il n'existe pas de participation en " . $annee . " pour le coureur " . $n_coureur . ".");
 			}
+
+			return $result[0];
 		}
 
 	}
