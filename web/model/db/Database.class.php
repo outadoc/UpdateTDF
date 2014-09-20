@@ -323,5 +323,4 @@
 
 	class NoSuchEntryException extends \ErrorException
 	{
-
 	}
