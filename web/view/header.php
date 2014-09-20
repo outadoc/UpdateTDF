@@ -16,20 +16,25 @@
 	<div class="container-fluid">
 <?php
 
+	/** @var $error string */
+	/** @var $fatal_error string */
+
 	//si on doit afficher une erreur... on le fait
 	if (isset($error)) {
-		echo \TDF\AlertBanner::getGenericErrorMessage($error);
+		echo AlertBanner::getGenericErrorMessage($error);
 		$error = null;
 	}
 
+	//on peut passer "success" ou "error" avec GET pour afficher des messages
 	if (isset($_GET['success'])) {
 		echo AlertBanner::getGenericSuccessMessage("L'opération a été effectuée avec succès.");
 	}
 
 	if (isset($_GET['error'])) {
-		echo AlertBanner::getGenericErrorMessage("Erreur lors de l'exécution de l'opération.");
+		echo AlertBanner::getGenericErrorMessage(AlertBanner::getMessageFromCode($_GET['error']));
 	}
 
+	//si on a rencontré une erreur fatale, on l'affiche et on arrête le traitement
 	if (isset($fatal_error)) {
 		die(AlertBanner::getGenericErrorMessage($fatal_error));
 	}
