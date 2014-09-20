@@ -17,7 +17,7 @@
 
 			header("Location: ./?success");
 		} catch(\Exception $e) {
-			header("Location: ./?error");
+			header("Location: ./form-coureur.php?n_coureur=" . $n_coureur . "&error");
 		}
 	} else {
 		header("Location: ./?error");

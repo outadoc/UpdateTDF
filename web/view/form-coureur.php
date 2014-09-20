@@ -8,6 +8,10 @@
 
 	namespace TDF;
 
+	if (isset($_GET['error'])) {
+		echo AlertBanner::getGenericErrorMessage("Erreur !", "Suppression du coureur impossible (il a probablement des participations).");
+	}
+
 	try {
 		$db   = new Database();
 		$pays = $db->getListePays();

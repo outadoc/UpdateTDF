@@ -165,11 +165,27 @@
 		/**
 		 * Supprime un coureur de la base de données.
 		 * @param integer $n_coureur le numéro du coureur à supprimer
+		 * @throws \ErrorException si le coureur ne peut pas être supprimé
 		 * @return resource le résultat de la requête
 		 */
 		public function supprimerCoureur($n_coureur) {
+			if(count($this->getParticipations($n_coureur)) > 0) {
+				//le coureur a des participations dans la base, on ne peut donc pas le supprimer
+				throw new \ErrorException("Ce coureur possède des participations");
+			}
+
 			$sql = "DELETE FROM vt_coureur WHERE n_coureur = :n_coureur";
 			return $this->executerRequete($sql, Array(":n_coureur" => $n_coureur));
+		}
+
+		/**
+		 * Récupère la liste des participations d'un coureur spécifique.
+		 * @param integer $n_coureur le numéro du coureur
+		 * @return array la liste des participations
+		 */
+		public function getParticipations($n_coureur) {
+			$sql = "SELECT * FROM vt_participation WHERE n_coureur = :n_coureur";
+			return $this->executerRequeteAvecResultat($sql, Array(":n_coureur" => $n_coureur));
 		}
 
 		/**
