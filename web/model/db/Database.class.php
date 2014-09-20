@@ -269,4 +269,16 @@
 			return $this->executerRequete($sql, array(":annee" => $annee, ":jour_repos" => $jours_repos));
 		}
 
+		/**
+		 * Récupère les participations d'un coureur.
+		 *
+		 * @param integer $n_coureur le numéro du coureur
+		 * @return array la liste des participations
+		 */
+		public function getListeParticipationsCoureur($n_coureur)
+		{
+			$sql = "SELECT * FROM vt_participation JOIN vt_sponsor USING (n_equipe, n_sponsor) JOIN vt_equipe USING (n_equipe) WHERE n_coureur = :n_coureur";
+			return $this->executerRequeteAvecResultat($sql, array(":n_coureur", $n_coureur));
+		}
+
 	}
