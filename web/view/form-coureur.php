@@ -1,9 +1,7 @@
 <?php
 	/**
-	 * Created by PhpStorm.
-	 * User: outadoc
-	 * Date: 20/09/14
-	 * Time: 11:07
+	 * Fichier de vue pour l'affichage d'un formulaire d'édition/ajout de coureur.
+	 * (c) 2014 Baptiste Candellier
 	 */
 
 	namespace TDF;

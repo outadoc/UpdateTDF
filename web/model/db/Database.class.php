@@ -1,9 +1,7 @@
 <?php
 	/**
-	 * Created by PhpStorm.
-	 * User: outadoc
-	 * Date: 12/09/14
-	 * Time: 18:26
+	 * Classes liées à l'accès à la base de donnée.
+	 * (c) 2014 Baptiste Candellier
 	 */
 
 	namespace TDF;

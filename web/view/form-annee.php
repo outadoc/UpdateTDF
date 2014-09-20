@@ -1,7 +1,7 @@
 <?php
 	/**
-	 * Created by PhpStorm.
-	 * User: outadoc
+	 * Fichier de vue pour l'affichage d'un formulaire d'ajout/édition d'année.
+	 * (c) 2014 Baptiste Candellier
 	 * Date: 20/09/14
 	 * Time: 11:07
 	 */

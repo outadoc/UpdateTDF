@@ -1,5 +1,10 @@
 <?php
 
+	/**
+	 * Fichier de vue pour l'affichage des détails d'un coureur.
+	 * (c) 2014 Baptiste Candellier
+	 */
+
 	namespace TDF;
 
 	if (isset($_GET['success'])) {

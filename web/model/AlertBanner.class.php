@@ -1,9 +1,7 @@
 <?php
 	/**
-	 * Created by PhpStorm.
-	 * User: outadoc
-	 * Date: 14/09/14
-	 * Time: 18:37
+	 * Classe pour afficher des bandeaux d'alertes.
+	 * (c) 2014 Baptiste Candellier
 	 */
 
 	namespace TDF;

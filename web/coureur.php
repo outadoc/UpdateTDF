@@ -1,5 +1,10 @@
 <?php
 
+	/**
+	 * Fichier contrôleur pour l'affichage d'un coureur.
+	 * (c) 2014 Baptiste Candellier
+	 */
+
 	require "model/init.php";
 	require "model/db/Database.class.php";
 	require "model/AlertBanner.class.php";

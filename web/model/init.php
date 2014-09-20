@@ -1,9 +1,7 @@
 <?php
 	/**
-	 * Created by PhpStorm.
-	 * User: outadoc
-	 * Date: 14/09/14
-	 * Time: 12:15
+	 * Initialisation de l'application, à insérer dans chaque page affichée.
+	 * (c) 2014 Baptiste Candellier
 	 */
 
 	//encodage des pages

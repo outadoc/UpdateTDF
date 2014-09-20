@@ -1,5 +1,10 @@
 <?php
 
+	/**
+	 * Fichier contrôleur pour la suppression d'un coureur.
+	 * (c) 2014 Baptiste Candellier
+	 */
+
 	namespace TDF;
 
 	require "model/init.php";

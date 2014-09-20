@@ -1,9 +1,7 @@
 <?php
 	/**
-	 * Created by PhpStorm.
-	 * User: outadoc
-	 * Date: 13/09/14
-	 * Time: 15:38
+	 * Classes liées au traitement des strings.
+	 * (c) 2014 Baptiste Candellier
 	 */
 
 	namespace TDF;

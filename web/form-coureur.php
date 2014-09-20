@@ -1,5 +1,10 @@
 <?php
 
+	/**
+	 * Fichier contrôleur pour le formulaire d'édition/ajout d'un coureur.
+	 * (c) 2014 Baptiste Candellier
+	 */
+
 	namespace TDF;
 
 

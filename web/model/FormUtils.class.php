@@ -1,9 +1,7 @@
 <?php
 	/**
-	 * Created by PhpStorm.
-	 * User: outadoc
-	 * Date: 14/09/14
-	 * Time: 21:42
+	 * Classe contenant des méthodes pour la création de formulaires.
+	 * (c) 2014 Baptiste Candellier
 	 */
 
 	namespace TDF;

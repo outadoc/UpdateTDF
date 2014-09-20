@@ -1,5 +1,10 @@
 <?php
 
+	/**
+	 * Fichier de vue pour l'affichage de la liste des coureurs.
+	 * (c) 2014 Baptiste Candellier
+	 */
+
 	namespace TDF;
 
 	if (isset($_GET['error'])) {
