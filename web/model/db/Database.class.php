@@ -34,7 +34,7 @@
 		}
 
 		/**
-		 * Fermeture de la base de données.
+		 * Ferme de la base de données.
 		 */
 		public function close()
 		{
@@ -45,8 +45,8 @@
 
 		/**
 		 * Exécute une requête qui ne retourne pas de lignes (ex: INSERT INTO) sur la base de données Oracle.
-		 * @param $sql string la requête à exécuter, avec des placeholders
-		 * @param $bindings array les valeurs des placeholders
+		 * @param string $sql la requête à exécuter, avec des placeholders
+		 * @param array $bindings les valeurs des placeholders
 		 * @return resource le statement correspondant à la requête exécutée
 		 */
 		private function executerRequete($sql, $bindings = null)
@@ -65,8 +65,8 @@
 
 		/**
 		 * Exécute une requête retournant des lignes sur la base de données Oracle.
-		 * @param $sql string la requête à exécuter, avec des placeholders
-		 * @param $bindings array les valeurs des placeholders
+		 * @param string $sql la requête à exécuter, avec des placeholders
+		 * @param array $bindings les valeurs des placeholders
 		 * @return array une liste des résultats retournés
 		 */
 		private function executerRequeteAvecResultat($sql, $bindings = null)
@@ -76,7 +76,7 @@
 
 		/**
 		 * Parse le résultat d'une requête et la renvoie dans un array.
-		 * @param $stid resource la transaction dont il faut passer le résultat
+		 * @param resource $stid la transaction dont il faut passer le résultat
 		 * @return array une liste des lignes retournées par la requête
 		 */
 		private function parserResultat($stid)
@@ -92,11 +92,11 @@
 
 		/**
 		 * Ajoute un coureur dans la base de données.
-		 * @param $nom string le nom du coureur (sera normalisé)
-		 * @param $prenom string le prénom du coureur (sera normalisé)
-		 * @param $code_tdf string le code pays du coureur, en 3 caractères maximum
-		 * @param $annee_naissance integer l'année de naissance du coureur
-		 * @param $annee_tdf integer l'année du premier tour de france du coureur
+		 * @param string $nom le nom du coureur (sera normalisé)
+		 * @param string $prenom le prénom du coureur (sera normalisé)
+		 * @param string $code_tdf le code pays du coureur, en 3 caractères maximum
+		 * @param integer $annee_naissance l'année de naissance du coureur
+		 * @param integer $annee_tdf l'année du premier tour de france du coureur
 		 */
 		public function ajouterCoureur($nom, $prenom, $code_tdf, $annee_naissance, $annee_tdf)
 		{
@@ -111,6 +111,15 @@
 			));
 		}
 
+		/**
+		 * Met à jour les informations d'un coureur dans la base de données.
+		 * @param integer $n_coureur le numéro du coureur à mettre à jour
+		 * @param string $nom le nom du coureur (sera normalisé)
+		 * @param string $prenom le prénom du coureur (sera normalisé)
+		 * @param string $code_tdf le code pays du coureur, en 3 caractères maximum
+		 * @param integer $annee_naissance l'année de naissance du coureur
+		 * @param integer $annee_tdf l'année du premier tour de france du coureur
+		 */
 		public function majCoureur($n_coureur, $nom, $prenom, $code_tdf, $annee_naissance, $annee_tdf)
 		{
 			$sql = "UPDATE vt_coureur SET code_tdf = :code_tdf, nom = :nom, prenom = :prenom, annee_naissance = :annee_naissance, annee_tdf = :annee_tdf WHERE n_coureur = :n_coureur";
@@ -135,6 +144,12 @@
 			return $this->executerRequeteAvecResultat($sql);
 		}
 
+		/**
+		 * Récupère les informations d'un coureur dans la base de données.
+		 * @param integer $n_coureur le numéro du coureur
+		 * @return object les informations du coureur
+		 * @throws \ErrorException si aucun coureur ne possède ce numéro
+		 */
 		public function getCoureur($n_coureur)
 		{
 			$sql    = "SELECT n_coureur, cou.nom, prenom, annee_naissance, annee_tdf, code_tdf, pays.nom AS pays FROM vt_coureur cou JOIN vt_pays pays USING(code_tdf) WHERE n_coureur = :n_coureur";
@@ -147,26 +162,20 @@
 			return $result[0];
 		}
 
-		public function updateCoureur($n_coureur, $nom, $prenom, $code_tdf, $annee_naissance, $annee_tdf)
-		{
-			$sql = "UPDATE vt_coureur SET nom = :nom, prenom = :prenom, code_tdf = :code_tdf, annee_naissance = :annee_naissance, annee_tdf = :annee_tdf WHERE n_coureur = :n_coureur";
-
-			return $this->executerRequete($sql, Array(
-				":code_tdf"        => $code_tdf,
-				":nom"             => TextUtils::normaliserNomCoureur($nom),
-				":prenom"          => TextUtils::normaliserPrenomCoureur($prenom),
-				":annee_naissance" => $annee_naissance,
-				":annee_tdf"       => $annee_tdf,
-				":n_coureur"       => $n_coureur
-			));
-		}
-
+		/**
+		 * Récupère la liste des pays dans la base de données.
+		 * @return array la liste des pays
+		 */
 		public function getListePays()
 		{
 			$sql = "SELECT code_tdf, c_pays, nom FROM vt_pays ORDER BY nom";
 			return $this->executerRequeteAvecResultat($sql);
 		}
 
+		/**
+		 * Récupère le dernier numéro de coureur inséré dans la base de données.
+		 * @return integer
+		 */
 		public function getDernierNumCoureur()
 		{
 			$sql = "SELECT max(n_coureur) AS MAXNUM FROM vt_coureur";

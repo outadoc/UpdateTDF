@@ -11,19 +11,21 @@
 
 	//traitement du formulaire coureur
 
-	$n_coureur = (isset($_GET['n_coureur']) && is_numeric($_GET['n_coureur']))
-		? htmlspecialchars($_GET['n_coureur']) : null;
+	//on récupère le numéro de coureur s'il est défini
+	$n_coureur = FormUtils::getGetVar("n_coureur");
 
+	//on récupère les éléments du formulaire, s'ils sont définis
 	$data_nom             = FormUtils::getPostVar("nom");
 	$data_prenom          = FormUtils::getPostVar("prenom");
 	$data_code_tdf        = FormUtils::getPostVar("code_tdf");
 	$data_annee_naissance = FormUtils::getPostVar("annee_naissance");
 	$data_annee_tdf       = FormUtils::getPostVar("annee_tdf");
 
-
+	//si le formulaire a été dûment rempli
 	if ($data_nom !== null && $data_prenom !== null && $data_code_tdf !== null
 		&& ($data_annee_naissance === null || ($data_annee_naissance < 9999 && $data_annee_naissance > 1800))
 		&& ($data_annee_tdf === null || ($data_annee_tdf < 9999 && $data_annee_tdf > 1800))
+		&& $data_annee_naissance < $data_annee_tdf
 	) {
 		try {
 			$db = new Database();
