@@ -23,7 +23,7 @@
 
 		$db->close();
 	} catch (\Exception $e) {
-		die(AlertBanner::getGenericErrorMessage("Erreur !", $e->getMessage()));
+		die(AlertBanner::getGenericErrorMessage($e->getMessage()));
 	}
 
 ?>

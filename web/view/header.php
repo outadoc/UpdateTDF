@@ -17,5 +17,5 @@
 
 	//si on doit afficher une erreur... on le fait
 	if (defined("ERROR")) {
-		echo \TDF\AlertBanner::getGenericErrorMessage("Erreur !", ERROR);
+		echo \TDF\AlertBanner::getGenericErrorMessage(ERROR);
 	}

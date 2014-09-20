@@ -8,11 +8,11 @@
 	namespace TDF;
 
 	if (isset($_GET['error'])) {
-		echo AlertBanner::getGenericErrorMessage("Erreur !", "Erreur lors de l'exécution de l'opération.");
+		echo AlertBanner::getGenericErrorMessage("Erreur lors de l'exécution de l'opération.");
 	}
 
 	if (isset($_GET['success'])) {
-		echo AlertBanner::getGenericSuccessMessage("Ça roule !", "Opération exécutée avec succès !");
+		echo AlertBanner::getGenericSuccessMessage("Opération exécutée avec succès !");
 	}
 
 ?>
@@ -56,7 +56,7 @@
 
 					$db->close();
 				} catch (\Exception $e) {
-					echo AlertBanner::getGenericErrorMessage("Erreur !", $e->getMessage());
+					echo AlertBanner::getGenericErrorMessage($e->getMessage());
 				}
 
 			?>

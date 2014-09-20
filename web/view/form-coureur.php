@@ -7,11 +7,11 @@
 	namespace TDF;
 
 	if (isset($_GET['error'])) {
-		echo AlertBanner::getGenericErrorMessage("Erreur !", "Suppression du coureur impossible (il a probablement des participations).");
+		echo AlertBanner::getGenericErrorMessage("Suppression du coureur impossible (il a probablement des participations).");
 	}
 
 	if (isset($error)) {
-		die(AlertBanner::getGenericErrorMessage("Oups !", $error));
+		die(AlertBanner::getGenericErrorMessage($error));
 	}
 
 ?>

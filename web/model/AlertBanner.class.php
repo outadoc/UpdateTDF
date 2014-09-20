@@ -10,18 +10,18 @@
 	abstract class AlertBanner
 	{
 
-		public static function getGenericErrorMessage($title, $message)
+		public static function getGenericErrorMessage($message)
 		{
 			return '<div class="alert alert-danger" role="alert">'
-			. '<strong>' . htmlspecialchars($title) . '</strong>&nbsp;&nbsp;'
+			. '<strong>Oups !..</strong>&nbsp;&nbsp;'
 			. htmlspecialchars($message)
 			. '</div>';
 		}
 
-		public static function getGenericSuccessMessage($title, $message)
+		public static function getGenericSuccessMessage($message)
 		{
 			return '<div class="alert alert-success" role="alert">'
-			. '<strong>' . htmlspecialchars($title) . '</strong>&nbsp;&nbsp;'
+			. '<strong>Ça roule !</strong>&nbsp;&nbsp;'
 			. htmlspecialchars($message)
 			. '</div>';
 		}
