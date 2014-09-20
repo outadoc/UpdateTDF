@@ -9,7 +9,7 @@
 	namespace TDF;
 
 
-	abstract class FormControls
+	abstract class FormUtils
 	{
 
 		public static function getTextField($id, $label, $value = "", $isRequired = false, $maxLength = 30, $placeholder = "")
@@ -46,6 +46,16 @@
 
 			$html .= '</select></div>';
 			return $html;
+		}
+
+		/**
+		 * Récupère une variable POST, et retourne soit sa valeur, soit null.
+		 * @param $id string le nom de la variable
+		 * @return null|string la valeur de la variable (null si non définie)
+		 */
+		public static function getPostVar($id)
+		{
+			return ((isset($_POST[$id]) && !empty($_POST[$id])) ? htmlspecialchars($_POST[$id]) : null);
 		}
 
 	}
