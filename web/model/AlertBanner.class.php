@@ -47,6 +47,10 @@
 		 */
 		public static function getMessageFromCode($code)
 		{
+			if (empty($code)) {
+				return "Erreur lors de l'exécution de l'opération.";
+			}
+
 			switch ($code) {
 				case 0:
 					return "Erreur lors de la connexion à la base de données.";
