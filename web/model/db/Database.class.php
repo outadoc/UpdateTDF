@@ -166,19 +166,19 @@
 		 *
 		 * @param integer $n_coureur le numéro du coureur
 		 * @return object les informations du coureur
-		 * @throws \ErrorException si aucun coureur ne possède ce numéro
+		 * @throws NoSuchEntryException si aucun coureur ne possède ce numéro
 		 */
 		public function getCoureur($n_coureur)
 		{
-			$sql    = "SELECT n_coureur, cou.nom, prenom, annee_naissance, annee_tdf, code_tdf, pays.nom AS pays
-						FROM vt_coureur cou
-						JOIN vt_pays pays USING(code_tdf)
-						WHERE n_coureur = :n_coureur";
+			$sql = "SELECT n_coureur, cou.nom, prenom, annee_naissance, annee_tdf, code_tdf, pays.nom AS pays
+					FROM vt_coureur cou
+					JOIN vt_pays pays USING(code_tdf)
+					WHERE n_coureur = :n_coureur";
 
 			$result = $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur));
 
 			if ($result === null || count($result) < 1) {
-				throw new \ErrorException("Pas de coureur avec le numéro " . $n_coureur . ".");
+				throw new NoSuchEntryException("Pas de coureur avec le numéro " . $n_coureur . ".");
 			}
 
 			return $result[0];
@@ -240,7 +240,7 @@
 		 * Récupère les informations pour une année dans la base de données (jours de repos).
 		 *
 		 * @param integer $annee l'année pour laquelle les données doivent être récupérées
-		 * @throws \ErrorException si l'année ne fait pas partie de la base
+		 * @throws NoSuchEntryException si l'année ne fait pas partie de la base
 		 * @return object un objet contenant des informations sur l'année passée en paramètre
 		 */
 		public function getAnnee($annee)
@@ -249,7 +249,7 @@
 			$result = $this->executerRequeteAvecResultat($sql, array(":annee" => $annee));
 
 			if ($result === null || count($result) < 1) {
-				throw new \ErrorException("L'année " . $annee . " n'existe pas dans la base.");
+				throw new NoSuchEntryException("L'année " . $annee . " n'existe pas dans la base.");
 			}
 
 			return $result[0];
@@ -294,7 +294,34 @@
 					JOIN vt_equipe USING (n_equipe)
 					WHERE n_coureur = :n_coureur";
 
-			return $this->executerRequeteAvecResultat($sql, array(":n_coureur", $n_coureur));
+			return $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur));
 		}
+
+		/**
+		 * Récupère une participation pour un coureur durant une année.
+		 *
+		 * @param integer $n_coureur le coureur participant
+		 * @param integer $annee l'année de participation
+		 * @throws NoSuchEntryException si la participation n'existe pas
+		 */
+		public function getParticipation($n_coureur, $annee)
+		{
+			$sql = "SELECT * FROM vt_participation
+					JOIN vt_sponsor USING (n_equipe, n_sponsor)
+					JOIN vt_equipe USING (n_equipe)
+					WHERE n_coureur = :n_coureur
+					AND annee = :annee";
+
+			$result = $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur, ":annee" => $annee));
+
+			if ($result === null || count($result) < 1) {
+				throw new NoSuchEntryException("Il n'existe pas de participation en " . $annee . " pour le coureur " . $n_coureur . ".");
+			}
+		}
+
+	}
+
+	class NoSuchEntryException extends \ErrorException
+	{
 
 	}

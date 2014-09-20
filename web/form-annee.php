@@ -34,7 +34,7 @@
 					try {
 						$db->getAnnee($data_annee);
 						$error = "Cette année existe déjà dans la base de données.";
-					} catch (\ErrorException $e) {
+					} catch (NoSuchEntryException $e) {
 						$db->ajouterAnnee($data_annee, $data_jours_repos);
 
 						//on redirige vers la page de l'année
