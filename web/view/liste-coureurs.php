@@ -1,4 +1,16 @@
-<?php namespace TDF; ?>
+<?php
+
+	namespace TDF;
+
+	if (isset($_GET['error'])) {
+		echo AlertBanner::getGenericErrorMessage("Erreur !", "Erreur lors de l'exécution de l'opération.");
+	}
+
+	if (isset($_GET['success'])) {
+		echo AlertBanner::getGenericSuccessMessage("Yay !", "Opération exécutée avec succès !");
+	}
+
+?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="page-header">

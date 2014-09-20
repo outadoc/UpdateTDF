@@ -54,8 +54,14 @@
 				echo FormUtils::getDropdownList("code_tdf", "Pays", "CODE_TDF", "NOM",
 					$pays, (isset($coureur)) ? $coureur->CODE_TDF : 'FRA');
 
+				echo '<input type="submit" class="btn btn-default">';
+
+				if ($n_coureur !== null) {
+					echo '<a class="btn btn-danger" id="delete" href="delete-coureur.php?n_coureur=' . $n_coureur . '">Supprimer</a>';
+				}
+
 			?>
-			<input type="submit" class="btn btn-default">
+
 		</form>
 	</div>
 </div>
@@ -79,5 +85,15 @@
 			annee_naissance.val(annee_tdf.val());
 		}
 	});
+
+	<?php
+
+		if(isset($coureur)) {
+			echo
+				'$("#delete").click(function () {
+					return confirm(\'Voulez-vous vraiment supprimer le coureur ' . $coureur->PRENOM . ' ' . $coureur->NOM . ' ?\');
+				});';
+		}
+	?>
 
 </script>

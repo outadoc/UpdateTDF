@@ -163,6 +163,16 @@
 		}
 
 		/**
+		 * Supprime un coureur de la base de données.
+		 * @param integer $n_coureur le numéro du coureur à supprimer
+		 * @return resource le résultat de la requête
+		 */
+		public function supprimerCoureur($n_coureur) {
+			$sql = "DELETE FROM vt_coureur WHERE n_coureur = :n_coureur";
+			return $this->executerRequete($sql, Array(":n_coureur" => $n_coureur));
+		}
+
+		/**
 		 * Récupère la liste des pays dans la base de données.
 		 * @return array la liste des pays
 		 */

@@ -37,8 +37,8 @@
 				<h3 class="panel-title">
 					<span class="glyphicon glyphicon-user"></span>
 					&nbsp;Fiche d'identité
-					<?php echo '<a href="form-coureur.php?n_coureur=' . $_GET['n_coureur']
-						. '" class="pull-right">Modifier</a>'; ?>
+					<a href="form-coureur.php?n_coureur=<?php echo $_GET['n_coureur']; ?>"
+					   class="pull-right">Modifier</a>
 				</h3>
 
 			</div>
