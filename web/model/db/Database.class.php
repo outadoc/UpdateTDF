@@ -371,7 +371,7 @@
 		 * @param string $ville_a la ville d'arrivée
 		 * @param integer $distance la distance de l'épreuve
 		 * @param integer $moyenne la moyenne
-		 * @param string $jour le jour de l'épreuve (au format dd/mm/yyyy)
+		 * @param string $jour le jour de l'épreuve (au format dd/mm)
 		 * @param string $cat_code le code de catégorie de l'épreuve
 		 * @return resource le résultat de la requête
 		 */
@@ -389,7 +389,7 @@
 				":ville_a"    => $ville_a,
 				":distance"   => $distance,
 				":moyenne"    => $moyenne,
-				":jour"       => $jour,
+				":jour"       => $jour . "/" . $annee,
 				":cat_code"   => $cat_code
 			));
 		}
