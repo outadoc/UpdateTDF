@@ -44,11 +44,13 @@
 				echo FormUtils::getNumberField("annee_tdf", "Année du 1er TDF", 1903, 2999, 1,
 					(isset($coureur) ? $coureur->ANNEE_TDF : Time::getCurrentYear()));
 
+				/** @var $pays string */
 				echo FormUtils::getDropdownList("code_tdf", "Pays", "CODE_TDF", "NOM",
 					$pays, (isset($coureur)) ? $coureur->CODE_TDF : 'FRA');
 
 				echo '<input type="submit" class="btn btn-default">';
 
+				/** @var $n_coureur integer */
 				if ($n_coureur !== null) {
 					echo '<a class="btn btn-danger" id="delete" href="delete-coureur.php?n_coureur=' . $n_coureur . '">Supprimer</a>';
 				}
