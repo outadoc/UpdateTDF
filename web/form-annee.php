@@ -12,10 +12,11 @@
 	require "model/db/Database.class.php";
 	require "model/AlertBanner.class.php";
 	require "model/FormUtils.class.php";
-
+	require "model/Time.class.php";
 
 	//traitement du formulaire année
 
+	
 	$error   = null;
 	$n_annee = FormUtils::getGetVar("annee");
 

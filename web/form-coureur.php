@@ -12,6 +12,7 @@
 	require "model/db/Database.class.php";
 	require "model/AlertBanner.class.php";
 	require "model/FormUtils.class.php";
+	require "model/Time.class.php";
 
 
 	//traitement du formulaire coureur

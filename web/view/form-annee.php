@@ -46,7 +46,7 @@
 			<?php
 
 				echo FormUtils::getNumberField("n_annee", "Année", 1800, 2999, 1,
-					(isset($annee) ? $annee->ANNEE : 1955), (!isset($annee) || $annee === null));
+					(isset($annee) ? $annee->ANNEE : Time::getCurrentYear()), (!isset($annee) || $annee === null));
 
 				echo FormUtils::getNumberField("jours_repos", "Jours de repos", 0, 100, 1,
 					(isset($annee) ? $annee->JOUR_REPOS : 0));

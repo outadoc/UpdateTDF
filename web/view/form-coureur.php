@@ -51,7 +51,7 @@
 				echo FormUtils::getNumberField("annee_naissance", "Année de naissance", 1800, 2999, 1,
 					(isset($coureur) ? $coureur->ANNEE_NAISSANCE : 1955));
 				echo FormUtils::getNumberField("annee_tdf", "Année du 1er TDF", 1903, 2999, 1,
-					(isset($coureur) ? $coureur->ANNEE_TDF : 2014));
+					(isset($coureur) ? $coureur->ANNEE_TDF : Time::getCurrentYear()));
 
 				echo FormUtils::getDropdownList("code_tdf", "Pays", "CODE_TDF", "NOM",
 					$pays, (isset($coureur)) ? $coureur->CODE_TDF : 'FRA');
