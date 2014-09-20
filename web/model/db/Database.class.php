@@ -107,7 +107,9 @@
 		 */
 		public function ajouterCoureur($nom, $prenom, $code_tdf, $annee_naissance, $annee_tdf)
 		{
-			$sql = "INSERT INTO vt_coureur (n_coureur, code_tdf, nom, prenom, annee_naissance, annee_tdf) VALUES ((SELECT max(n_coureur) + 1 FROM vt_coureur), :code_tdf, :nom, :prenom, :annee_naissance, :annee_tdf)";
+			$sql = "INSERT INTO vt_coureur
+					(n_coureur, code_tdf, nom, prenom, annee_naissance, annee_tdf)
+					VALUES ((SELECT max(n_coureur) + 1 FROM vt_coureur), :code_tdf, :nom, :prenom, :annee_naissance, :annee_tdf)";
 
 			$this->executerRequete($sql, array(
 				":code_tdf"        => $code_tdf,
@@ -130,7 +132,9 @@
 		 */
 		public function majCoureur($n_coureur, $nom, $prenom, $code_tdf, $annee_naissance, $annee_tdf)
 		{
-			$sql = "UPDATE vt_coureur SET code_tdf = :code_tdf, nom = :nom, prenom = :prenom, annee_naissance = :annee_naissance, annee_tdf = :annee_tdf WHERE n_coureur = :n_coureur";
+			$sql = "UPDATE vt_coureur
+					SET code_tdf = :code_tdf, nom = :nom, prenom = :prenom, annee_naissance = :annee_naissance, annee_tdf = :annee_tdf
+					WHERE n_coureur = :n_coureur";
 
 			$this->executerRequete($sql, array(
 				":n_coureur"       => $n_coureur,
@@ -149,7 +153,11 @@
 		 */
 		public function getListeCoureurs()
 		{
-			$sql = "SELECT n_coureur, cou.nom, prenom, annee_naissance, annee_tdf, code_tdf, pays.nom AS pays FROM vt_coureur cou JOIN vt_pays pays USING(code_tdf) WHERE n_coureur >= 0 ORDER BY cou.nom, prenom";
+			$sql = "SELECT n_coureur, cou.nom, prenom, annee_naissance, annee_tdf, code_tdf, pays.nom AS pays
+					FROM vt_coureur cou
+					JOIN vt_pays pays USING(code_tdf)
+					WHERE n_coureur >= 0 ORDER BY cou.nom, prenom";
+
 			return $this->executerRequeteAvecResultat($sql);
 		}
 
@@ -162,7 +170,11 @@
 		 */
 		public function getCoureur($n_coureur)
 		{
-			$sql    = "SELECT n_coureur, cou.nom, prenom, annee_naissance, annee_tdf, code_tdf, pays.nom AS pays FROM vt_coureur cou JOIN vt_pays pays USING(code_tdf) WHERE n_coureur = :n_coureur";
+			$sql    = "SELECT n_coureur, cou.nom, prenom, annee_naissance, annee_tdf, code_tdf, pays.nom AS pays
+						FROM vt_coureur cou
+						JOIN vt_pays pays USING(code_tdf)
+						WHERE n_coureur = :n_coureur";
+
 			$result = $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur));
 
 			if ($result === null || count($result) < 1) {
@@ -277,7 +289,11 @@
 		 */
 		public function getListeParticipationsCoureur($n_coureur)
 		{
-			$sql = "SELECT * FROM vt_participation JOIN vt_sponsor USING (n_equipe, n_sponsor) JOIN vt_equipe USING (n_equipe) WHERE n_coureur = :n_coureur";
+			$sql = "SELECT * FROM vt_participation
+					JOIN vt_sponsor USING (n_equipe, n_sponsor)
+					JOIN vt_equipe USING (n_equipe)
+					WHERE n_coureur = :n_coureur";
+
 			return $this->executerRequeteAvecResultat($sql, array(":n_coureur", $n_coureur));
 		}
 
