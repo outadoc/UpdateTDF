@@ -59,3 +59,25 @@
 		</form>
 	</div>
 </div>
+<script type="application/javascript">
+
+	var annee_naissance = $("input[name=annee_naissance]"),
+		annee_tdf = $("input[name=annee_tdf]");
+
+	annee_naissance.change(function (e) {
+		//si l'année du premier TDF est inférieure à l'année de naissance,
+		//on met les deux égaux
+		if (annee_tdf.val() < annee_naissance.val()) {
+			annee_tdf.val(annee_naissance.val());
+		}
+	});
+
+	annee_tdf.change(function (e) {
+		//si l'année de naissance est supérieure à l'année du premier TDF,
+		//on met les deux égaux
+		if (annee_naissance.val() > annee_tdf.val()) {
+			annee_naissance.val(annee_tdf.val());
+		}
+	});
+
+</script>
