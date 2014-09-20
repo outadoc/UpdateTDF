@@ -13,6 +13,7 @@
 <div class="container-fluid">
 <?php
 
-	if(defined("ERROR")) {
+	//si on doit afficher une erreur... on le fait
+	if (defined("ERROR")) {
 		echo \TDF\AlertBanner::getGenericErrorMessage("Erreur !", ERROR);
 	}
