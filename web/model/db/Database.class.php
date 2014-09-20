@@ -233,12 +233,6 @@
 			return  $result[0];
 		}
 
-		public function getListeAnnees()
-		{
-			$sql = "SELECT * FROM vt_annee";
-			return $this->executerRequeteAvecResultat($sql);
-		}
-
 		/**
 		 * Ajoute une année dans la base de données.
 		 * @param integer $annee l'année à ajouter
