@@ -34,13 +34,14 @@
 			. '</div>';
 		}
 
-		public static function getNumberField($id, $label, $min, $max, $step, $value = "")
+		public static function getNumberField($id, $label, $min, $max, $step, $value = "", $isEnabled = true)
 		{
+			$enabled = (!$isEnabled) ? "disabled" : "";
 			return '<div class="form-group">'
 			. '<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>'
 			. '<input type="number" min="' . htmlspecialchars($min) . '" max="' . htmlspecialchars($max)
 			. '" step="' . htmlspecialchars($step) . '" class="form-control" name="' . htmlspecialchars($id)
-			. '" value="' . htmlspecialchars($value) . '">'
+			. '" value="' . htmlspecialchars($value) . '" ' . $enabled . '>'
 			. '</div>';
 		}
 
@@ -65,7 +66,7 @@
 		 */
 		public static function getPostVar($id)
 		{
-			return ((isset($_POST[$id]) && !empty($_POST[$id])) ? htmlspecialchars($_POST[$id]) : null);
+			return (isset($_POST[$id]) ? htmlspecialchars($_POST[$id]) : null);
 		}
 
 		/**
@@ -75,7 +76,7 @@
 		 */
 		public static function getGetVar($id)
 		{
-			return ((isset($_GET[$id]) && !empty($_GET[$id])) ? htmlspecialchars($_GET[$id]) : null);
+			return (isset($_GET[$id]) ? htmlspecialchars($_GET[$id]) : null);
 		}
 
 	}

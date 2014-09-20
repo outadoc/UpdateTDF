@@ -33,6 +33,11 @@
 			}
 		}
 
+		public function __destruct()
+		{
+			$this->close();
+		}
+
 		/**
 		 * Ferme de la base de données.
 		 */
@@ -168,8 +173,9 @@
 		 * @throws \ErrorException si le coureur ne peut pas être supprimé
 		 * @return resource le résultat de la requête
 		 */
-		public function supprimerCoureur($n_coureur) {
-			if(count($this->getParticipations($n_coureur)) > 0) {
+		public function supprimerCoureur($n_coureur)
+		{
+			if (count($this->getParticipations($n_coureur)) > 0) {
 				//le coureur a des participations dans la base, on ne peut donc pas le supprimer
 				throw new \ErrorException("Ce coureur possède des participations");
 			}
@@ -183,7 +189,8 @@
 		 * @param integer $n_coureur le numéro du coureur
 		 * @return array la liste des participations
 		 */
-		public function getParticipations($n_coureur) {
+		public function getParticipations($n_coureur)
+		{
 			$sql = "SELECT * FROM vt_participation WHERE n_coureur = :n_coureur";
 			return $this->executerRequeteAvecResultat($sql, Array(":n_coureur" => $n_coureur));
 		}
@@ -208,9 +215,52 @@
 			return $this->executerRequeteAvecResultat($sql)[0]->MAXNUM;
 		}
 
-		public function __destruct()
+		/**
+		 * Récupère les informations pour une année dans la base de données (jours de repos).
+		 * @param integer $annee l'année pour laquelle les données doivent être récupérées
+		 * @throws \ErrorException si l'année ne fait pas partie de la base
+		 * @return object un objet contenant des informations sur l'année passée en paramètre
+		 */
+		public function getAnnee($annee)
 		{
-			$this->close();
+			$sql = "SELECT * FROM vt_annee WHERE annee = :annee";
+			$result = $this->executerRequeteAvecResultat($sql, Array(":annee" => $annee));
+
+			if ($result === null || count($result) < 1) {
+				throw new \ErrorException("L'année " . $annee . " n'existe pas dans la base.");
+			}
+
+			return  $result[0];
+		}
+
+		public function getListeAnnees()
+		{
+			$sql = "SELECT * FROM vt_annee";
+			return $this->executerRequeteAvecResultat($sql);
+		}
+
+		/**
+		 * Ajoute une année dans la base de données.
+		 * @param integer $annee l'année à ajouter
+		 * @param integer $jours_repos le nombre de jours de repos pour cette année
+		 * @return resource le résultat de la requête
+		 */
+		public function ajouterAnnee($annee, $jours_repos)
+		{
+			$sql = "INSERT INTO vt_annee (annee, jour_repos) VALUES (:annee, :jour_repos)";
+			return $this->executerRequete($sql, Array(":annee" => $annee, ":jour_repos" => $jours_repos));
+		}
+
+		/**
+		 * Met à jour une année de la base de données.
+		 * @param integer $annee l'année à mettre à jour
+		 * @param integer $jours_repos le nombre de jours de repos pour cette année
+		 * @return resource le résultat de la requête
+		 */
+		public function majAnnee($annee, $jours_repos)
+		{
+			$sql = "UPDATE vt_annee SET jour_repos = :jour_repos WHERE annee = :annee";
+			return $this->executerRequete($sql, Array(":annee" => $annee, ":jour_repos" => $jours_repos));
 		}
 
 	}

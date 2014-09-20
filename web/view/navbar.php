@@ -10,6 +10,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Ajouter <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="form-coureur.php">Coureur</a></li>
+						<li><a href="form-annee.php">Année</a></li>
 						<li><a href="#">Épreuve</a></li>
 						<li><a href="#">Sponsor/Équipe</a></li>
 						<li><a href="#">Pays</a></li>

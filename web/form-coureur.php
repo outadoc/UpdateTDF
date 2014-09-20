@@ -36,7 +36,7 @@
 
 					//on redirige vers la page du coureur ajouté
 					header("Location: coureur.php?n_coureur=" . $db->getDernierNumCoureur() . "&success");
-				} else if ($n_coureur !== null) {
+				} else {
 					//on met à jour un coureur existant
 					$db->majCoureur($n_coureur, $data_nom, $data_prenom, $data_code_tdf, $data_annee_naissance, $data_annee_tdf);
 
@@ -49,7 +49,7 @@
 				define("ERROR", $e->getMessage());
 			}
 		} else {
-			define("ERROR", "Formulaire mal rempli. Vérifiez les informations.");
+			define("ERROR", "Formulaire mal rempli. Vérifiez les informations données.");
 		}
 	}
 
