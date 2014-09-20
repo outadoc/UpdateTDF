@@ -11,3 +11,8 @@
 <body>
 <?php require "navbar.php"; ?>
 <div class="container-fluid">
+<?php
+
+	if(defined("ERROR")) {
+		echo \TDF\AlertBanner::getGenericErrorMessage("Erreur !", ERROR);
+	}

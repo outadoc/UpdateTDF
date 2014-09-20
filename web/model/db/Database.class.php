@@ -179,7 +179,7 @@
 		public function getDernierNumCoureur()
 		{
 			$sql = "SELECT max(n_coureur) AS MAXNUM FROM vt_coureur";
-			return $this->executerRequeteAvecResultat($sql)[0];
+			return $this->executerRequeteAvecResultat($sql)[0]->MAXNUM;
 		}
 
 		public function __destruct()
