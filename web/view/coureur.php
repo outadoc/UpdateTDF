@@ -7,7 +7,7 @@
 	}
 
 	try {
-		$n_coureur = (isset($_GET['n_coureur'])) ? htmlspecialchars($_GET['n_coureur']) : null;
+		$n_coureur = FormUtils::getGetVar("n_coureur");
 
 		if ($n_coureur === null || !is_numeric($n_coureur)) {
 			die(AlertBanner::getGenericErrorMessage("Oups !", "Vous devez spécifier un numéro de coureur."));
@@ -37,7 +37,7 @@
 				<h3 class="panel-title">
 					<span class="glyphicon glyphicon-user"></span>
 					&nbsp;Fiche d'identité
-					<a href="form-coureur.php?n_coureur=<?php echo $_GET['n_coureur']; ?>"
+					<a href="form-coureur.php?n_coureur=<?php echo $n_coureur ?>"
 					   class="pull-right">Modifier</a>
 				</h3>
 

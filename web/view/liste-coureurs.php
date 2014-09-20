@@ -7,7 +7,7 @@
 	}
 
 	if (isset($_GET['success'])) {
-		echo AlertBanner::getGenericSuccessMessage("Yay !", "Opération exécutée avec succès !");
+		echo AlertBanner::getGenericSuccessMessage("Ça roule !", "Opération exécutée avec succès !");
 	}
 
 ?>
