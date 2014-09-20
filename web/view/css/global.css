@@ -2,3 +2,7 @@
     color: gray;
     font-style: italic;
 }
+
+a#delete {
+    margin-left: 10px;
+}
