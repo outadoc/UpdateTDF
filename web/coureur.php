@@ -15,6 +15,8 @@
 
 	define("PAGE_TITLE", "TDF - Détails du coureur");
 
+	require "view/header.php";
+
 	try {
 		$n_coureur = FormUtils::getGetVar("n_coureur");
 
@@ -29,6 +31,5 @@
 		$error = $e->getMessage();
 	}
 
-	require "view/header.php";
 	require "view/coureur.php";
 	require "view/footer.php";

@@ -16,7 +16,7 @@
 
 	//traitement du formulaire année
 
-	
+
 	$error   = null;
 	$n_annee = FormUtils::getGetVar("annee");
 
@@ -59,13 +59,22 @@
 	}
 
 	$title = (isset($n_annee) && $n_annee !== null) ? "Modifier une année" : "Ajouter une année";
-
 	define("PAGE_TITLE", "TDF - " . $title);
 
-	if ($error !== null) {
-		define("ERROR", $error);
+	require "view/header.php";
+
+	try {
+		$db = new Database();
+
+		/** @var $n_annee integer */
+		if ($n_annee !== null) {
+			$annee = $db->getAnnee($n_annee);
+		}
+
+		$db->close();
+	} catch (\Exception $e) {
+		$error = $e->getMessage();
 	}
 
-	require "view/header.php";
 	require "view/form-annee.php";
 	require "view/footer.php";

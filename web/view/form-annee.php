@@ -13,17 +13,8 @@
 		echo AlertBanner::getGenericSuccessMessage("Succès !", "L'année a été mise à jour avec succès.");
 	}
 
-	try {
-		$db = new Database();
-
-		/** @var $n_annee integer */
-		if ($n_annee !== null) {
-			$annee = $db->getAnnee($n_annee);
-		}
-
-		$db->close();
-	} catch (\Exception $e) {
-		die(AlertBanner::getGenericErrorMessage($e->getMessage()));
+	if (isset($error)) {
+		die(AlertBanner::getGenericErrorMessage($error));
 	}
 
 ?>

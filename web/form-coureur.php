@@ -52,16 +52,17 @@
 
 				$db->close();
 			} catch (\Exception $e) {
-				define("ERROR", $e->getMessage());
+				$error = $e->getMessage();
 			}
 		} else {
-			define("ERROR", "Formulaire mal rempli. Vérifiez les informations données.");
+			$error = "Formulaire mal rempli. Vérifiez les informations données.";
 		}
 	}
 
 	$title = (isset($n_coureur) && $n_coureur !== null) ? "Modifier un coureur" : "Ajouter un coureur";
-
 	define("PAGE_TITLE", "TDF - " . $title);
+
+	require "view/header.php";
 
 	try {
 		$db   = new Database();
@@ -76,6 +77,5 @@
 		$error = $e->getMessage();
 	}
 
-	require "view/header.php";
 	require "view/form-coureur.php";
 	require "view/footer.php";

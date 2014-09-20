@@ -16,6 +16,7 @@
 <?php
 
 	//si on doit afficher une erreur... on le fait
-	if (defined("ERROR")) {
-		echo \TDF\AlertBanner::getGenericErrorMessage(ERROR);
+	if (isset($error)) {
+		echo \TDF\AlertBanner::getGenericErrorMessage($error);
+		$error = null;
 	}

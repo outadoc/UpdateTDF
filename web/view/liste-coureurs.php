@@ -15,6 +15,10 @@
 		echo AlertBanner::getGenericSuccessMessage("Opération exécutée avec succès !");
 	}
 
+	if (isset($error)) {
+		die(AlertBanner::getGenericErrorMessage($error));
+	}
+
 ?>
 <div class="row">
 	<div class="col-md-12">
@@ -39,24 +43,16 @@
 			<tbody>
 			<?php
 
-				try {
-					$db       = new Database();
-					$coureurs = $db->getListeCoureurs();
-
-					foreach ($coureurs as $coureur) {
-						echo "<tr>";
-						echo '<td><a href="coureur.php?n_coureur=' . $coureur->N_COUREUR . '">' . $coureur->N_COUREUR . "</a></td>";
-						echo "<td>" . $coureur->NOM . "</td>";
-						echo "<td>" . $coureur->PRENOM . "</td>";
-						echo "<td>" . $coureur->PAYS . "</td>";
-						echo "<td>" . $coureur->ANNEE_NAISSANCE . "</td>";
-						echo "<td>" . $coureur->ANNEE_TDF . "</td>";
-						echo "</tr>\n";
-					}
-
-					$db->close();
-				} catch (\Exception $e) {
-					echo AlertBanner::getGenericErrorMessage($e->getMessage());
+				/** @var $coureurs array */
+				foreach ($coureurs as $coureur) {
+					echo "<tr>";
+					echo '<td><a href="coureur.php?n_coureur=' . $coureur->N_COUREUR . '">' . $coureur->N_COUREUR . "</a></td>";
+					echo "<td>" . $coureur->NOM . "</td>";
+					echo "<td>" . $coureur->PRENOM . "</td>";
+					echo "<td>" . $coureur->PAYS . "</td>";
+					echo "<td>" . $coureur->ANNEE_NAISSANCE . "</td>";
+					echo "<td>" . $coureur->ANNEE_TDF . "</td>";
+					echo "</tr>\n";
 				}
 
 			?>

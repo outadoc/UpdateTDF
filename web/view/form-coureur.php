@@ -6,6 +6,7 @@
 
 	namespace TDF;
 
+
 	if (isset($_GET['error'])) {
 		echo AlertBanner::getGenericErrorMessage("Suppression du coureur impossible (il a probablement des participations).");
 	}
