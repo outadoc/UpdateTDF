@@ -303,6 +303,7 @@
 		 * @param integer $n_coureur le coureur participant
 		 * @param integer $annee l'année de participation
 		 * @throws NoSuchEntryException si la participation n'existe pas
+		 * @return object la participation
 		 */
 		public function getParticipation($n_coureur, $annee)
 		{
@@ -319,6 +320,78 @@
 			}
 
 			return $result[0];
+		}
+
+		/**
+		 * Récupère la liste des épreuves s'étant déroulées sur une année spécifiée.
+		 *
+		 * @param integer $annee l'année des épreuves
+		 * @return array la liste des épreuves
+		 */
+		public function getListeEpreuvesAnnee($annee)
+		{
+			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a, TO_CHAR(jour, 'dd/MM/yyyy') as jour, cat_code
+					FROM vt_epreuve WHERE annee = :annee";
+
+			return $this->executerRequeteAvecResultat($sql, array(":annee" => $annee));
+		}
+
+		/**
+		 * Récupère une épreuve par son numéro et son année.
+		 *
+		 * @param integer $annee l'année de l'épreuve
+		 * @param integer $n_epreuve le numéro de l'épreuve
+		 * @return object l'épreuve
+		 * @throws NoSuchEntryException si l'épreuve n'existe pas dans la base
+		 */
+		public function getEpreuve($annee, $n_epreuve)
+		{
+			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a, TO_CHAR(jour, 'dd/MM/yyyy') as jour, cat_code
+					FROM vt_epreuve
+					WHERE annee = :annee
+					AND n_epreuve = :n_epreuve";
+
+			$result = $this->executerRequeteAvecResultat($sql, array(":n_epreuve" => $n_epreuve, ":annee" => $annee));
+
+			if ($result === null || count($result) < 1) {
+				throw new NoSuchEntryException("Il n'existe pas d'épreuve en " . $annee . " avec comme numéro " . $n_epreuve . ".");
+			}
+
+			return $result[0];
+		}
+
+		/**
+		 * Ajoute une épreuve dans la base de donnée.
+		 *
+		 * @param integer $annee l'année de l'épreuve
+		 * @param integer $n_epreuve le numéro de l'épreuve (relatif à l'année)
+		 * @param string $code_tdf_d le code pays de départ
+		 * @param string $code_tdf_a le code pays d'arrivée
+		 * @param string $ville_d la ville de départ
+		 * @param string $ville_a la ville d'arrivée
+		 * @param integer $distance la distance de l'épreuve
+		 * @param integer $moyenne la moyenne
+		 * @param string $jour le jour de l'épreuve (au format dd/mm/yyyy)
+		 * @param string $cat_code le code de catégorie de l'épreuve
+		 * @return resource le résultat de la requête
+		 */
+		public function ajouterEpreuve($annee, $n_epreuve, $code_tdf_d, $code_tdf_a, $ville_d, $ville_a, $distance, $moyenne, $jour, $cat_code)
+		{
+			$sql = "INSERT INTO vt_epreuve (annee, n_epreuve, code_tdf_a, code_tdf_d, ville_d, ville_a, distance, moyenne, jour, cat_code)
+					VALUES (:annee, :n_epreuve, :code_tdf_a, :code_tdf_d, :ville_a, :ville_d, :distance, :moyenne, TO_DATE(:jour, 'dd/MM/yyyy'), :cat_code)";
+
+			return $this->executerRequete($sql, array(
+				":annee"      => $annee,
+				":n_epreuve"  => $n_epreuve,
+				":code_tdf_d" => $code_tdf_d,
+				":code_tdf_a" => $code_tdf_a,
+				":ville_d"    => $ville_d,
+				":ville_a"    => $ville_a,
+				":distance"   => $distance,
+				":moyenne"    => $moyenne,
+				":jour"       => $jour,
+				":cat_code"   => $cat_code
+			));
 		}
 
 	}
