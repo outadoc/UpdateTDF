@@ -27,7 +27,10 @@
 	<div class="col-md-12">
 		<div class="page-header">
 			<h1>
-				<?php echo $title; ?>
+				<?php
+					/** @var $title string */
+					echo $title;
+				?>
 			</h1>
 		</div>
 	</div>
