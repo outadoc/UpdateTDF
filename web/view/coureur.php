@@ -7,22 +7,17 @@
 
 	namespace TDF;
 
+
+	/** @var $n_coureur integer */
+	/** @var $coureur object */
+	/** @var $error string */
+
 	if (isset($_GET['success'])) {
 		echo AlertBanner::getGenericSuccessMessage("Wouhou !", "L'opération a été effectuée avec succès.");
 	}
 
-	try {
-		$n_coureur = FormUtils::getGetVar("n_coureur");
-
-		if ($n_coureur === null || !is_numeric($n_coureur)) {
-			die(AlertBanner::getGenericErrorMessage("Oups !", "Vous devez spécifier un numéro de coureur."));
-		}
-
-		$db      = new Database();
-		$coureur = $db->getCoureur($n_coureur);
-
-	} catch (\Exception $e) {
-		die(AlertBanner::getGenericErrorMessage("Erreur !", $e->getMessage()));
+	if (isset($error)) {
+		die(AlertBanner::getGenericErrorMessage("Oups !", $error));
 	}
 
 ?>
