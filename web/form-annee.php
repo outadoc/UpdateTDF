@@ -66,7 +66,7 @@
 
 		/** @var $n_annee integer */
 		if ($n_annee !== null) {
-			$fatal_error = $db->getAnnee($n_annee);
+			$annee = $db->getAnnee($n_annee);
 		}
 
 		$db->close();
