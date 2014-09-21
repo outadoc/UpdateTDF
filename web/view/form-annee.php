@@ -27,7 +27,11 @@
 			<?php echo 'action="form-annee.php' . (isset($key_annee) ? '?annee=' . $key_annee : '') . '"'; ?>>
 		<?php
 
-				echo FormUtils::getNumberField("n_annee", "Année", 1800, 2999, 1,
+			if (isset($annee)) {
+				echo '<input type="hidden" name="n_annee" value="' . $annee->ANNEE . '">';
+			}
+
+			echo FormUtils::getNumberField("n_annee", "Année", 1800, 2999, 1,
 					(isset($annee) ? $annee->ANNEE : Time::getCurrentYear()), (!isset($annee) || $annee === null));
 
 				echo FormUtils::getNumberField("jours_repos", "Jours de repos", 0, 100, 1,
