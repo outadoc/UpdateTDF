@@ -341,7 +341,7 @@
 		 */
 		public function getListeEpreuvesAnnee($annee)
 		{
-			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a, TO_CHAR(jour, 'dd/MM/yyyy') as jour, cat_code
+			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a, TO_CHAR(jour, 'dd/MM') as jour, cat_code
 					FROM vt_epreuve WHERE annee = :annee";
 
 			return $this->executerRequeteAvecResultat($sql, array(":annee" => $annee));
@@ -357,7 +357,7 @@
 		 */
 		public function getEpreuve($annee, $n_epreuve)
 		{
-			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a, TO_CHAR(jour, 'dd/MM/yyyy') as jour, cat_code
+			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a, TO_CHAR(jour, 'dd/MM') as jour, cat_code
 					FROM vt_epreuve
 					WHERE annee = :annee
 					AND n_epreuve = :n_epreuve";
@@ -394,14 +394,14 @@
 			return $this->executerRequete($sql, array(
 				":annee"      => $annee,
 				":n_epreuve"  => $n_epreuve,
-				":code_tdf_d" => $code_tdf_d,
-				":code_tdf_a" => $code_tdf_a,
-				":ville_d"    => $ville_d,
-				":ville_a"    => $ville_a,
+				":code_tdf_d" => TextUtils::normaliserNomCoureur($code_tdf_d),
+				":code_tdf_a" => TextUtils::normaliserNomCoureur($code_tdf_a),
+				":ville_d"    => TextUtils::normaliserNomCoureur($ville_d),
+				":ville_a"    => TextUtils::normaliserNomCoureur($ville_a),
 				":distance"   => $distance,
 				":moyenne"    => $moyenne,
 				":jour"       => $jour . "/" . $annee,
-				":cat_code"   => $cat_code
+				":cat_code"   => TextUtils::normaliserNomCoureur($cat_code)
 			));
 		}
 
