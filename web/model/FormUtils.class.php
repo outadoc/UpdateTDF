@@ -33,7 +33,19 @@
 			. '</div>';
 		}
 
-		public static function getNumberField($id, $label, $min, $max, $step, $value = "", $isEnabled = true)
+		/**
+		 * Créé un champ nombre HTML.
+		 *
+		 * @param string $id l'identifiant du champ
+		 * @param string $label le texte qui sera affiché comme étiquette
+		 * @param integer $min la valeur minimum que peut prendre le champ
+		 * @param integer $max la valeur maximum que peut prendre le champ
+		 * @param integer $step le pas (différence entre chaque valeur)
+		 * @param string $value la valeur par défaut du champ
+		 * @param bool $isEnabled indique si le champ est activé et modifiable
+		 * @return string le contrôle au format HTML
+		 */
+		public static function getNumberField($id, $label, $min, $max, $step = 1, $value = "", $isEnabled = true)
 		{
 			$enabled = (!$isEnabled) ? "disabled" : "";
 			return '<div class="form-group">'
@@ -44,6 +56,17 @@
 			. '</div>';
 		}
 
+		/**
+		 * Créé une liste déroulante HTML à partir d'un tableau.
+		 *
+		 * @param string $id l'identifiant du champ
+		 * @param string $label le texte qui sera affiché comme étiquette
+		 * @param string $id_col la colonne du tableau $items correspondant à l'identifiant
+		 * @param string $name_col la colonne du tableau $items correspondant au nom (affiché)
+		 * @param array $items le tableau servant à peupler la liste
+		 * @param string $selectedId l'identifiant de l'entrée sélectionnée par défaut
+		 * @return string le contrôle au format HTML
+		 */
 		public static function getDropdownList($id, $label, $id_col, $name_col, $items, $selectedId = null)
 		{
 			$html = '<div class="form-group"><label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label)
