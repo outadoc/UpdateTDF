@@ -46,7 +46,7 @@
 	) {
 		if ($data_annee < 9999 && $data_annee > 1800
 			&& $data_n_epreuve >= 0
-			&& preg_match("#[0-9]{2}/[0-9]{2}/[0-9]{2}#", $data_jour)
+			&& preg_match("#[0-9]{2}/[0-9]{2}#", $data_jour)
 			&& count($data_cat_code) < 4
 		) {
 			try {
@@ -66,10 +66,11 @@
 					}
 				} else {
 					//on met à jour une année existante
-					//$db->majEpreuve($key_annee, $data_jours_repos);
+					$db->majEpreuve($key_annee, $key_n_epreuve, $data_code_tdf_d, $data_code_tdf_a, $data_ville_d,
+						$data_ville_a, $data_distance, $data_moyenne, $data_jour, $data_cat_code);
 
 					//on redirige vers la page de l'année
-					header("Location: form-annee.php?annee=" . $data_annee . "&success");
+					header("Location: form-epreuve.php?annee=" . $data_annee . "&epreuve=" . $data_n_epreuve . "&success");
 				}
 
 				$db->close();

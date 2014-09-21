@@ -405,6 +405,42 @@
 			));
 		}
 
+		/**
+		 * Met à jour une épreuve dans la base de donnée.
+		 *
+		 * @param integer $annee l'année de l'épreuve
+		 * @param integer $n_epreuve le numéro de l'épreuve (relatif à l'année)
+		 * @param string $code_tdf_d le code pays de départ
+		 * @param string $code_tdf_a le code pays d'arrivée
+		 * @param string $ville_d la ville de départ
+		 * @param string $ville_a la ville d'arrivée
+		 * @param integer $distance la distance de l'épreuve
+		 * @param integer $moyenne la moyenne
+		 * @param string $jour le jour de l'épreuve (au format dd/mm)
+		 * @param string $cat_code le code de catégorie de l'épreuve
+		 * @return resource le résultat de la requête
+		 */
+		public function majEpreuve($annee, $n_epreuve, $code_tdf_d, $code_tdf_a, $ville_d, $ville_a, $distance, $moyenne, $jour, $cat_code)
+		{
+			$sql = "UPDATE vt_epreuve SET code_tdf_a = :code_tdf_a, code_tdf_d = :code_tdf_d, ville_a = :ville_a,
+					ville_d = :ville_d, distance = :distance, moyenne = :moyenne, jour = TO_DATE(:jour, 'dd/MM/yyyy'),
+					cat_code = :cat_code
+					WHERE annee = :annee AND n_epreuve = :n_epreuve";
+
+			return $this->executerRequete($sql, array(
+				":annee"      => $annee,
+				":n_epreuve"  => $n_epreuve,
+				":code_tdf_d" => TextUtils::normaliserNomCoureur($code_tdf_d),
+				":code_tdf_a" => TextUtils::normaliserNomCoureur($code_tdf_a),
+				":ville_d"    => TextUtils::normaliserNomCoureur($ville_d),
+				":ville_a"    => TextUtils::normaliserNomCoureur($ville_a),
+				":distance"   => $distance,
+				":moyenne"    => $moyenne,
+				":jour"       => $jour . "/" . $annee,
+				":cat_code"   => TextUtils::normaliserNomCoureur($cat_code)
+			));
+		}
+
 	}
 
 	class NoSuchEntryException extends \ErrorException

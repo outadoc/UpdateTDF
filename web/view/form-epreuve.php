@@ -24,7 +24,7 @@
 <div class="row">
 	<div class="col-md-3">
 		<form role="form" method="post"
-			<?php echo 'action="form-epreuve.php' . ((isset($key_annee) && isset($key_epreuve)) ? '?annee=' . $key_annee . '&epreuve=' . $key_epreuve : '') . '"'; ?>>
+			<?php echo 'action="form-epreuve.php' . ((isset($key_annee) && isset($key_n_epreuve)) ? '?annee=' . $key_annee . '&epreuve=' . $key_n_epreuve : '') . '"'; ?>>
 			<?php
 
 				echo FormUtils::getNumberField("n_annee", "Année", 1800, 2999, 1,
@@ -48,7 +48,7 @@
 				echo FormUtils::getNumberField("distance", "Distance (km)", 0, 500, 0.5,
 					(isset($epreuve) ? $epreuve->DISTANCE : 100));
 
-				echo FormUtils::getNumberField("distance", "Moyenne (km)", 0, 100, 0.001,
+				echo FormUtils::getNumberField("moyenne", "Moyenne (km)", 0, 100, 0.001,
 					(isset($epreuve) ? $epreuve->MOYENNE : 15));
 
 				echo FormUtils::getTextField("jour", "Jour (JJ/MM)",
