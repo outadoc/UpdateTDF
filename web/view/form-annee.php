@@ -24,8 +24,8 @@
 <div class="row">
 	<div class="col-md-3">
 		<form role="form" method="post"
-			<?php echo 'action="form-annee.php' . (isset($n_annee) ? '?annee=' . $n_annee : '') . '"'; ?>>
-			<?php
+			<?php echo 'action="form-annee.php' . (isset($key_annee) ? '?annee=' . $key_annee : '') . '"'; ?>>
+		<?php
 
 				echo FormUtils::getNumberField("n_annee", "Année", 1800, 2999, 1,
 					(isset($annee) ? $annee->ANNEE : Time::getCurrentYear()), (!isset($annee) || $annee === null));
