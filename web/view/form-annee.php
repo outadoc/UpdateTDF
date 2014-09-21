@@ -25,13 +25,16 @@
 	<div class="col-md-3">
 		<form role="form" method="post"
 			<?php echo 'action="form-annee.php' . (isset($key_annee) ? '?annee=' . $key_annee : '') . '"'; ?>>
-		<?php
+			<?php
 
-			if (isset($annee)) {
-				echo '<input type="hidden" name="n_annee" value="' . $annee->ANNEE . '">';
-			}
+				//on veut désactiver le champ "année" si on est en train de MODIFIER année.
+				//cependant, un champ désactivé n'envoie pas la donnée qu'il contient.
+				//il faut donc créer un champ caché supplémentaire pour cela.
+				if (isset($annee)) {
+					echo '<input type="hidden" name="n_annee" value="' . $annee->ANNEE . '">';
+				}
 
-			echo FormUtils::getNumberField("n_annee", "Année", 1800, 2999, 1,
+				echo FormUtils::getNumberField("n_annee", "Année", 1800, 2999, 1,
 					(isset($annee) ? $annee->ANNEE : Time::getCurrentYear()), (!isset($annee) || $annee === null));
 
 				echo FormUtils::getNumberField("jours_repos", "Jours de repos", 0, 100, 1,
