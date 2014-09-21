@@ -282,6 +282,17 @@
 		}
 
 		/**
+		 * Récupère la liste des années insérées dans la base de données.
+		 *
+		 * @return array la liste des années
+		 */
+		public function getListeAnnees()
+		{
+			$sql = "SELECT * FROM vt_annee";
+			return $this->executerRequeteAvecResultat($sql);
+		}
+
+		/**
 		 * Récupère les participations d'un coureur.
 		 *
 		 * @param integer $n_coureur le numéro du coureur
