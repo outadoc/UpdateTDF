@@ -32,3 +32,7 @@ a#delete {
     padding-right: 15px;
     padding-left: 15px;
 }
+
+.center {
+    text-align: center;
+}

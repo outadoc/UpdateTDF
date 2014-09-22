@@ -294,7 +294,9 @@
 		 */
 		public function getListeAnnees()
 		{
-			$sql = "SELECT * FROM vt_annee";
+			$sql = "SELECT * FROM vt_annee
+					ORDER BY annee DESC";
+
 			return $this->executerRequeteAvecResultat($sql);
 		}
 
@@ -340,17 +342,19 @@
 		}
 
 		/**
-		 * Récupère la liste des épreuves s'étant déroulées sur une année spécifiée.
+		 * Récupère la liste des épreuves.
 		 *
-		 * @param integer $annee l'année des épreuves
 		 * @return array la liste des épreuves
 		 */
-		public function getListeEpreuvesAnnee($annee)
+		public function getListeEpreuves()
 		{
-			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a, TO_CHAR(jour, 'dd/MM') as jour, cat_code
-					FROM vt_epreuve WHERE annee = :annee";
+			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, p1.nom as code_tdf_d, p2.nom as code_tdf_a, TO_CHAR(jour, 'dd/MM') as jour, cat_code
+					FROM vt_epreuve
+					JOIN vt_pays p1 ON (code_tdf_d = p1.code_tdf)
+					JOIN vt_pays p2 ON (code_tdf_a = p2.code_tdf)
+					ORDER BY annee DESC, jour DESC";
 
-			return $this->executerRequeteAvecResultat($sql, array(":annee" => $annee));
+			return $this->executerRequeteAvecResultat($sql);
 		}
 
 		/**
