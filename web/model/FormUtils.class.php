@@ -28,11 +28,11 @@
 			$required = ($isRequired) ? "required" : "";
 			$pattern = ($match !== null) ? 'pattern="' . $match . '"' : "";
 
-			return '<div class="form-group">'
-			. '<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>'
-			. '<input type="text" class="form-control" maxlength="' . $maxLength . '" name="' . htmlspecialchars($id)
-			. '" placeholder="' . htmlspecialchars($placeholder) . '" value="' . $value . '" ' . $required . ' ' . $pattern . '>'
-			. '</div>';
+			return '<div class="form-group">
+						<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>
+						<input type="text" class="form-control" maxlength="' . $maxLength . '" name="' . htmlspecialchars($id) . '"
+							placeholder="' . htmlspecialchars($placeholder) . '" value="' . $value . '" ' . $required . ' ' . $pattern . '>
+					</div>';
 		}
 
 		/**
@@ -50,12 +50,12 @@
 		public static function getNumberField($id, $label, $min, $max, $step = 1, $value = "", $isEnabled = true)
 		{
 			$enabled = (!$isEnabled) ? "disabled" : "";
-			return '<div class="form-group">'
-			. '<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>'
-			. '<input type="number" min="' . htmlspecialchars($min) . '" max="' . htmlspecialchars($max)
-			. '" step="' . htmlspecialchars($step) . '" class="form-control" name="' . htmlspecialchars($id)
-			. '" value="' . htmlspecialchars($value) . '" ' . $enabled . '>'
-			. '</div>';
+			return '<div class="form-group">
+						<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>
+						<input type="number" min="' . htmlspecialchars($min) . '" max="' . htmlspecialchars($max) . '"
+							step="' . htmlspecialchars($step) . '" class="form-control" name="' . htmlspecialchars($id) . '"
+							value="' . htmlspecialchars($value) . '" ' . $enabled . '>
+					</div>';
 		}
 
 		/**
@@ -71,8 +71,9 @@
 		 */
 		public static function getDropdownList($id, $label, $id_col, $name_col, $items, $selectedId = null)
 		{
-			$html = '<div class="form-group"><label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label)
-				. '</label><select name="' . htmlspecialchars($id) . '" class="form-control">';
+			$html = '<div class="form-group">
+						<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>
+						<select name="' . htmlspecialchars($id) . '" class="form-control">';
 
 			foreach ($items as $item) {
 				$selected = ($selectedId != null && $item->$id_col == $selectedId) ? "selected" : "";
