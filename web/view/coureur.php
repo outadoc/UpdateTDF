@@ -60,39 +60,35 @@
 				</h3>
 
 			</div>
-			<div class="panel-body">
-				<ul>
-					<table class="table table-striped">
-						<thead>
-						<tr>
-							<th class="center">Année</th>
-							<th class="center">Dossard #</th>
-							<th class="center">Jeune</th>
-							<th>Sponsor</th>
-						</tr>
-						</thead>
-						<tbody>
-						<?php
+			<table class="table table-striped">
+				<thead>
+				<tr>
+					<th class="center">Année</th>
+					<th class="center">Dossard #</th>
+					<th class="center">Jeune</th>
+					<th>Sponsor</th>
+				</tr>
+				</thead>
+				<tbody>
+				<?php
 
-							foreach ($participations as $participation) {
-								if ($participation->VALIDE == 'O') {
-									echo '<tr>';
-								} else {
-									echo '<tr class="strike">';
-								}
+					foreach ($participations as $participation) {
+						if ($participation->VALIDE == 'O') {
+							echo '<tr>';
+						} else {
+							echo '<tr class="strike">';
+						}
 
-								echo '<td class="center">' . $participation->ANNEE . '</td>';
-								echo '<td class="center">' . $participation->N_DOSSARD . '</td>';
-								echo '<td class="center">' . (($participation->JEUNE == 'o') ? "Oui" : "Non") . '</td>';
-								echo '<td>' . $participation->NOM . '</td>';
-								echo '</tr>';
-							}
+						echo '<td class="center">' . $participation->ANNEE . '</td>';
+						echo '<td class="center">' . $participation->N_DOSSARD . '</td>';
+						echo '<td class="center">' . (($participation->JEUNE == 'o') ? "Oui" : "Non") . '</td>';
+						echo '<td>' . $participation->NOM . '</td>';
+						echo '</tr>';
+					}
 
-						?>
-						</tbody>
-					</table>
-				</ul>
-			</div>
+				?>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
