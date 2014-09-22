@@ -34,7 +34,7 @@
 				/** @var $coureurs array */
 				foreach ($coureurs as $coureur) {
 					echo "<tr>";
-					echo '<td><a href="coureur.php?n_coureur=' . $coureur->N_COUREUR . '">' . $coureur->N_COUREUR . "</a></td>";
+					echo '<td class="center"><a href="coureur.php?n_coureur=' . $coureur->N_COUREUR . '">' . $coureur->N_COUREUR . "</a></td>";
 					echo "<td>" . $coureur->NOM . "</td>";
 					echo "<td>" . $coureur->PRENOM . "</td>";
 					echo "<td>" . $coureur->PAYS . "</td>";
