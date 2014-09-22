@@ -17,8 +17,8 @@
 </div>
 <div class="row">
 	<div class="col-md-12">
-		<table class="table table-striped sorted">
-			<thead>
+		<table class="table table-striped table-condensed">
+		<thead>
 			<tr>
 				<th class="center">Année</th>
 				<th class="center">Numéro</th>
