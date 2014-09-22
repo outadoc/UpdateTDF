@@ -19,17 +19,19 @@
 		 * @param bool $isRequired indique si le champ est requis ou pas (faux par défaut)
 		 * @param int $maxLength la taille maximale du champ (30 caractères par défaut)
 		 * @param string $placeholder le placeholder pour ce champ
+		 * @param string $match une regex optionnelle pour valider le champ
 		 * @return string le contrôle au format HTML
 		 */
-		public static function getTextField($id, $label, $value = "", $isRequired = false, $maxLength = 30, $placeholder = "")
+		public static function getTextField($id, $label, $value = "", $isRequired = false, $maxLength = 30, $placeholder = "", $match = null)
 		{
 			$value    = (!empty($value)) ? htmlspecialchars($value) : "";
 			$required = ($isRequired) ? "required" : "";
+			$pattern = ($match !== null) ? 'pattern="' . $match . '"' : "";
 
 			return '<div class="form-group">'
 			. '<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>'
 			. '<input type="text" class="form-control" maxlength="' . $maxLength . '" name="' . htmlspecialchars($id)
-			. '" placeholder="' . htmlspecialchars($placeholder) . '" value="' . $value . '" ' . $required . '>'
+			. '" placeholder="' . htmlspecialchars($placeholder) . '" value="' . $value . '" ' . $required . ' ' . $pattern . '>'
 			. '</div>';
 		}
 

@@ -50,7 +50,7 @@
 					(isset($epreuve) ? $epreuve->MOYENNE : null));
 
 				echo FormUtils::getTextField("jour", "Jour (JJ/MM)",
-					(isset($epreuve) ? $epreuve->JOUR : null), true, 40, "JJ/MM");
+					(isset($epreuve) ? $epreuve->JOUR : null), true, 40, "JJ/MM", "[0-9]{2}/[0-9]{2}");
 
 				echo FormUtils::getDropdownList("cat_code", "Code catégorie",
 					"ID", "ID", array(
