@@ -51,6 +51,7 @@
 		 *
 		 * @param string $sql la requête à exécuter, avec des placeholders
 		 * @param array $bindings les valeurs des placeholders
+		 * @throws \ErrorException si la requête a échoué
 		 * @return resource le statement correspondant à la requête exécutée
 		 */
 		private function executerRequete($sql, $bindings = null)
@@ -63,7 +64,12 @@
 				}
 			}
 
-			oci_execute($stid);
+			$succes = oci_execute($stid);
+
+			if (!$succes) {
+				throw new \ErrorException(oci_error($stid)['message']);
+			}
+
 			return $stid;
 		}
 
