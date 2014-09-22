@@ -27,7 +27,7 @@
 
 			//si erreur à la connection, on balance une exception
 			if ($this->db === false) {
-				throw new \ErrorException(oci_error()['message']);
+				throw new OracleSQLException(oci_error()['message']);
 			}
 		}
 
@@ -67,7 +67,7 @@
 			$succes = oci_execute($stid);
 
 			if (!$succes) {
-				throw new \ErrorException(oci_error($stid)['message']);
+				throw new OracleSQLException(oci_error($stid)['message']);
 			}
 
 			return $stid;
@@ -451,9 +451,20 @@
 
 	/**
 	 * Class NoSuchEntryException
+	 * Lancée quand un élément n'a pas été trouvé dans la base.
 	 *
 	 * @package TDF
 	 */
 	class NoSuchEntryException extends \ErrorException
+	{
+	}
+
+	/**
+	 * Class OracleSQLException
+	 * Lancée quand une erreur SQL s'est produite.
+	 *
+	 * @package TDF
+	 */
+	class OracleSQLException extends \ErrorException
 	{
 	}
