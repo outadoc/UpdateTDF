@@ -305,6 +305,16 @@
 		}
 
 		/**
+		 * Récupère l'année la plus récente entrée dans la base.
+		 * @return object l'année maximale de la base
+		 */
+		public function getMaxAnnee()
+		{
+			$sql = "SELECT MAX(annee) AS annee FROM vt_annee";
+			return $this->executerRequeteAvecResultat($sql)[0];
+		}
+
+		/**
 		 * Récupère les participations d'un coureur.
 		 *
 		 * @param integer $n_coureur le numéro du coureur

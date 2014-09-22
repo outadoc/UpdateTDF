@@ -9,6 +9,7 @@
 	/** @var $pays array */
 	/** @var $annees array */
 	/** @var $title string */
+	/** @var $maxAnnee integer */
 
 ?>
 <div class="row">
@@ -27,7 +28,7 @@
 			<?php
 
 				echo FormUtils::getDropdownList("n_annee", "Année", "ANNEE", "ANNEE", $annees,
-					(isset($epreuve) ? $epreuve->ANNEE : Time::getCurrentYear()));
+					(isset($epreuve) ? $epreuve->ANNEE : null));
 
 				echo FormUtils::getNumberField("n_epreuve", "N° épreuve", 0, 50, 1,
 					(isset($epreuve) ? $epreuve->N_EPREUVE : 0));
