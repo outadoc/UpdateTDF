@@ -41,11 +41,6 @@
 
 				echo '<input type="submit" class="btn btn-default">';
 
-				/** @var $n_coureur integer */
-				if ($n_coureur !== null) {
-					echo '<a class="btn btn-danger" id="delete" href="delete-coureur.php?n_coureur=' . $n_coureur . '">Supprimer</a>';
-				}
-
 			?>
 
 		</form>
@@ -71,15 +66,5 @@
 			annee_naissance.val(annee_tdf.val());
 		}
 	});
-
-	<?php
-
-		if(isset($coureur)) {
-			echo
-				'$("#delete").click(function () {
-					return confirm(\'Voulez-vous vraiment supprimer le coureur ' . $coureur->PRENOM . ' ' . $coureur->NOM . ' ?\');
-				});';
-		}
-	?>
 
 </script>
