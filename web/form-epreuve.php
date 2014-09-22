@@ -85,8 +85,9 @@
 	define("PAGE_TITLE", "TDF - " . $title);
 
 	try {
-		$db   = new Database();
-		$pays = $db->getListePays();
+		$db     = new Database();
+		$pays   = $db->getListePays();
+		$annees = $db->getListeAnnees();
 
 		/** @var $key_annee integer */
 		if ($key_annee !== null && $key_n_epreuve !== null) {

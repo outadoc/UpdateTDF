@@ -7,6 +7,7 @@
 	namespace TDF;
 
 	/** @var $pays array */
+	/** @var $annees array */
 	/** @var $title string */
 
 ?>
@@ -25,7 +26,7 @@
 			<?php echo 'action="form-epreuve.php' . ((isset($key_annee) && isset($key_n_epreuve)) ? '?annee=' . $key_annee . '&epreuve=' . $key_n_epreuve : '') . '"'; ?>>
 			<?php
 
-				echo FormUtils::getNumberField("n_annee", "Année", 1800, 2999, 1,
+				echo FormUtils::getDropdownList("n_annee", "Année", "ANNEE", "ANNEE", $annees,
 					(isset($epreuve) ? $epreuve->ANNEE : Time::getCurrentYear()));
 
 				echo FormUtils::getNumberField("n_epreuve", "N° épreuve", 0, 50, 1,
