@@ -217,6 +217,7 @@
 		public function getParticipations($n_coureur)
 		{
 			$sql = "SELECT * FROM vt_participation
+					JOIN vt_sponsor spo USING (n_equipe, n_sponsor)
 					WHERE n_coureur = :n_coureur
 					ORDER BY annee DESC";
 

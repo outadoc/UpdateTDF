@@ -65,11 +65,10 @@
 					<table class="table table-striped">
 						<thead>
 						<tr>
-							<th>Année</th>
-							<th>Équipe</th>
+							<th class="center">Année</th>
+							<th class="center">Dossard #</th>
+							<th class="center">Jeune</th>
 							<th>Sponsor</th>
-							<th>Dossard #</th>
-							<th>Jeune</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -84,12 +83,10 @@
 									echo '<tr>';
 								}
 
-								echo '<td>' . $participation->ANNEE . '</td>';
-								echo '<td>' . $participation->N_EQUIPE . '</td>';
-								echo '<td>' . $participation->N_SPONSOR . '</td>';
-								echo '<td>' . $participation->N_DOSSARD . '</td>';
-								echo '<td>' . (($participation->JEUNE == 'o') ? "Oui" : "Non") . '</td>';
-								if ($isValid) echo '</s>';
+								echo '<td class="center">' . $participation->ANNEE . '</td>';
+								echo '<td class="center">' . $participation->N_DOSSARD . '</td>';
+								echo '<td class="center">' . (($participation->JEUNE == 'o') ? "Oui" : "Non") . '</td>';
+								echo '<td>' . $participation->NOM . '</td>';
 								echo '</tr>';
 							}
 
