@@ -42,8 +42,8 @@
 					echo '<td class="center">' . $coureur->ANNEE_NAISSANCE . "</td>";
 					echo '<td class="center">' . $coureur->ANNEE_TDF . "</td>";
 					echo '<td class="center">
-							<a title="Détails" href="coureur.php?n_coureur=' . $coureur->N_COUREUR . '"><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp;
-							<a title="Modifier" href="form-coureur.php?n_coureur=' . $coureur->N_COUREUR . '"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;
+							<a title="Détails" href="coureur.php?n_coureur=' . $coureur->N_COUREUR . '"><span class="glyphicon glyphicon-eye-open"></span></a>&nbsp;&nbsp;
+							<a title="Modifier" href="form-coureur.php?n_coureur=' . $coureur->N_COUREUR . '"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
 							<a title="Supprimer" class="delete" href="delete-coureur.php?n_coureur=' . $coureur->N_COUREUR . '"><span class="glyphicon glyphicon-trash"></span></a>
 						  </td>';
 

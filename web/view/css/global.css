@@ -36,3 +36,7 @@ a#delete {
 .center {
     text-align: center;
 }
+
+.glyphicon-trash {
+    color: #c60000;
+}
