@@ -26,9 +26,9 @@
 			<?php
 
 				echo FormUtils::getTextField("prenom", "Prénom",
-					(isset($coureur) ? $coureur->PRENOM : ""), true, 20);
+					(isset($coureur) ? $coureur->PRENOM : ""), true, 20, "Alberto");
 				echo FormUtils::getTextField("nom", "Nom",
-					(isset($coureur) ? $coureur->NOM : ""), true, 30);
+					(isset($coureur) ? $coureur->NOM : ""), true, 30, "CONTADOR");
 
 				echo FormUtils::getNumberField("annee_naissance", "Année de naissance", 1800, 2999, 1,
 					(isset($coureur) ? $coureur->ANNEE_NAISSANCE : 1955));
