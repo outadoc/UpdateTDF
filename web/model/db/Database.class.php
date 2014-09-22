@@ -216,7 +216,10 @@
 		 */
 		public function getParticipations($n_coureur)
 		{
-			$sql = "SELECT * FROM vt_participation WHERE n_coureur = :n_coureur";
+			$sql = "SELECT * FROM vt_participation
+					WHERE n_coureur = :n_coureur
+					ORDER BY annee DESC";
+
 			return $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur));
 		}
 

@@ -22,8 +22,9 @@
 			$fatal_error = "Vous devez spécifier un numéro de coureur.";
 		}
 
-		$db      = new Database();
-		$coureur = $db->getCoureur($n_coureur);
+		$db             = new Database();
+		$coureur        = $db->getCoureur($n_coureur);
+		$participations = $db->getParticipations($n_coureur);
 		$db->close();
 	} catch (\Exception $e) {
 		$fatal_error = $e->getMessage();

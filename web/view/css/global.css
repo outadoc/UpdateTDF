@@ -40,3 +40,8 @@ a#delete {
 .glyphicon-trash {
     color: #c60000;
 }
+
+.strike {
+    text-decoration: line-through;
+    color: gray;
+}

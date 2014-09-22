@@ -10,6 +10,7 @@
 
 	/** @var $n_coureur integer */
 	/** @var $coureur object */
+	/** @var $participations array */
 
 ?>
 <div class="row">
@@ -46,6 +47,55 @@
 							. htmlspecialchars($coureur->ANNEE_TDF) . "</li>";
 
 					?>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<span class="glyphicon glyphicon-bullhorn"></span>
+					&nbsp;Participations
+				</h3>
+
+			</div>
+			<div class="panel-body">
+				<ul>
+					<table class="table table-striped">
+						<thead>
+						<tr>
+							<th>Année</th>
+							<th>Équipe</th>
+							<th>Sponsor</th>
+							<th>Dossard #</th>
+							<th>Jeune</th>
+						</tr>
+						</thead>
+						<tbody>
+						<?php
+
+							foreach ($participations as $participation) {
+								$isValid = ($participation->VALIDE == 'O') ? true : false;
+
+								if ($isValid) {
+									echo '<tr class="strike">';
+								} else {
+									echo '<tr>';
+								}
+
+								echo '<td>' . $participation->ANNEE . '</td>';
+								echo '<td>' . $participation->N_EQUIPE . '</td>';
+								echo '<td>' . $participation->N_SPONSOR . '</td>';
+								echo '<td>' . $participation->N_DOSSARD . '</td>';
+								echo '<td>' . (($participation->JEUNE == 'o') ? "Oui" : "Non") . '</td>';
+								if ($isValid) echo '</s>';
+								echo '</tr>';
+							}
+
+						?>
+						</tbody>
+					</table>
 				</ul>
 			</div>
 		</div>
