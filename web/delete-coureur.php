@@ -10,7 +10,6 @@
 
 	require "model/init.php";
 	require "model/db/Database.class.php";
-	require "model/AlertBanner.class.php";
 	require "model/FormUtils.class.php";
 
 	$n_coureur = FormUtils::getGetVar("n_coureur");

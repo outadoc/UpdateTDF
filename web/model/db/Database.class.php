@@ -451,6 +451,14 @@
 			));
 		}
 
+		public function supprimerEpreuve($annee, $n_epreuve)
+		{
+			$sql = "DELETE FROM vt_epreuve
+					WHERE annee = :annee AND n_epreuve = :n_epreuve";
+
+			return $this->executerRequete($sql, array(":annee" => $annee, ":n_epreuve" => $n_epreuve));
+		}
+
 	}
 
 	/**

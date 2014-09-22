@@ -50,7 +50,11 @@
 					echo "<td>" . $epreuve->MOYENNE . "</td>";
 					echo '<td class="center">' . $epreuve->JOUR . "</td>";
 					echo '<td class="center">' . $epreuve->CAT_CODE . '</td>';
-					echo '<td class="center"><a href="form-epreuve.php?annee=' . $epreuve->ANNEE . '&epreuve=' . $epreuve->N_EPREUVE . '"><span class="glyphicon glyphicon-edit"></span></a>';
+					echo '<td class="center">
+							<a href="form-epreuve.php?annee=' . $epreuve->ANNEE . '&epreuve=' . $epreuve->N_EPREUVE . '"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;
+							<a class="delete" href="delete-epreuve.php?annee=' . $epreuve->ANNEE . '&epreuve=' . $epreuve->N_EPREUVE . '"><span class="glyphicon glyphicon-trash"></span></a>
+						  </td>';
+
 					echo "</tr>\n";
 				}
 
@@ -59,3 +63,10 @@
 		</table>
 	</div>
 </div>
+<script type="application/javascript">
+
+	$(".delete").click(function () {
+		return confirm('Voulez-vous vraiment supprimer cette épreuve ?');
+	});
+
+</script>
