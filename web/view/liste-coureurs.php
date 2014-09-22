@@ -20,12 +20,12 @@
 		<table class="table table-striped sorted">
 			<thead>
 			<tr>
-				<th>#</th>
+				<th class="center">#</th>
 				<th>Nom</th>
 				<th>Prénom</th>
 				<th>Pays</th>
-				<th>Année Naissance</th>
-				<th>Année 1er TDF</th>
+				<th class="center">Année Naissance</th>
+				<th class="center">Année 1er TDF</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -38,8 +38,8 @@
 					echo "<td>" . $coureur->NOM . "</td>";
 					echo "<td>" . $coureur->PRENOM . "</td>";
 					echo "<td>" . $coureur->PAYS . "</td>";
-					echo "<td>" . $coureur->ANNEE_NAISSANCE . "</td>";
-					echo "<td>" . $coureur->ANNEE_TDF . "</td>";
+					echo '<td class="center">' . $coureur->ANNEE_NAISSANCE . "</td>";
+					echo '<td class="center">' . $coureur->ANNEE_TDF . "</td>";
 					echo "</tr>\n";
 				}
 
