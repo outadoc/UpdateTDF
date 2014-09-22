@@ -40,7 +40,6 @@
 		&& $data_ville_d !== null
 		&& $data_ville_a !== null
 		&& $data_distance !== null
-		&& $data_moyenne !== null
 		&& $data_jour !== null
 		&& $data_cat_code !== null
 	) {
@@ -56,7 +55,7 @@
 					//on cherche une épreuve existante avec cette clé
 					try {
 						$db->getEpreuve($data_annee, $data_n_epreuve);
-						$error = "Cette année existe déjà dans la base de données.";
+						$error = "Cette épreuve existe déjà dans la base de données.";
 					} catch (NoSuchEntryException $e) {
 						$db->ajouterEpreuve($data_annee, $data_n_epreuve, $data_code_tdf_d, $data_code_tdf_a,
 							$data_ville_d, $data_ville_a, $data_distance, $data_moyenne, $data_jour, $data_cat_code);
