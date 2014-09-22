@@ -443,6 +443,11 @@
 
 	}
 
+	/**
+	 * Class NoSuchEntryException
+	 *
+	 * @package TDF
+	 */
 	class NoSuchEntryException extends \ErrorException
 	{
 	}

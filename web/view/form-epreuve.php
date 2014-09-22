@@ -2,8 +2,6 @@
 	/**
 	 * Fichier de vue pour l'affichage d'un formulaire d'ajout/édition d'épreuve.
 	 * (c) 2014 Baptiste Candellier
-	 * Date: 20/09/14
-	 * Time: 11:07
 	 */
 
 	namespace TDF;
