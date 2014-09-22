@@ -75,12 +75,10 @@
 						<?php
 
 							foreach ($participations as $participation) {
-								$isValid = ($participation->VALIDE == 'O') ? true : false;
-
-								if ($isValid) {
-									echo '<tr class="strike">';
-								} else {
+								if ($participation->VALIDE == 'O') {
 									echo '<tr>';
+								} else {
+									echo '<tr class="strike">';
 								}
 
 								echo '<td class="center">' . $participation->ANNEE . '</td>';
