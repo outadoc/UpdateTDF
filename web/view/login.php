@@ -7,6 +7,7 @@
 	namespace TDF;
 
 	/** @var $redirect string */
+	/** @var $username string */
 
 ?>
 <div class="row">
@@ -24,8 +25,8 @@
 				      method="post">
 					<?php
 
-						echo FormUtils::getTextField("username", "Nom d'utilisateur", "", true, 50, "Username");
-						echo FormUtils::getTextField("password", "Mot de passe", "", true, 50, "Password", null, true);
+						echo FormUtils::getTextField("username", "Nom d'utilisateur", $username, "", true, 50, "Username");
+						echo FormUtils::getTextField("password", "Mot de passe", "", "", true, 50, "Password", null, true);
 
 					?>
 					<input type="submit" class="btn btn-primary" value="Connexion">
