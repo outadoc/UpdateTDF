@@ -14,6 +14,7 @@
 		 * Supprime les accents d'un string et les remplace par leur équivalent en plain ASCII.
 		 *
 		 * @param $str string la chaîne dont les accents doivent être remplacés
+		 * @throws \ErrorException si la chaîne comporte des caractères interdits
 		 * @return string la chaîne ne comportant plus d'accents
 		 */
 		private static function supprimerAccents($str)
@@ -31,7 +32,13 @@
 				'ÿ' => 'y', 'ƒ' => 'f', 'ă' => 'a', 'ș' => 's', 'ț' => 't', 'Ă' => 'A', 'Ș' => 'S', 'Ț' => 'T'
 			);
 
-			return strtr($str, $normalizeChars);
+			$str = strtr($str, $normalizeChars);
+
+			if (!preg_match("/[a-zA-Z0-9\\-']*/", $str)) {
+				throw new \ErrorException('La chaine "' . $str . '" comporte des caractères non conformes.');
+			}
+
+			return $str;
 		}
 
 		/**
