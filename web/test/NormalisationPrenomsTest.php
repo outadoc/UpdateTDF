@@ -53,6 +53,11 @@
 			$this->assertEquals("Eléonore", TextUtils::normaliserPrenomCoureur("Éléoñore"));
 		}
 
+		public function testPrenomEspace()
+		{
+			$this->assertEquals("Machin Bidule", TextUtils::normaliserPrenomCoureur("machin bidule"));
+		}
+
 		/**
 		 * @expectedException \TDF\IllegalCharacterException
 		 */

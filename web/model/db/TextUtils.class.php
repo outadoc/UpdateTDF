@@ -130,9 +130,11 @@
 		public static function normaliserPrenomCoureur($prenom)
 		{
 			$prenom = TextUtils::supprimerAccentsEtrangers($prenom);
+			$prenom = mb_strtolower($prenom);
 
-			//on explose le prénom en un array, et on traîte chaque morceau séparé par des traits d'union
+			//on explose le prénom en un array, et on traîte chaque morceau séparé par des traits d'union OU des espaces
 			$prenom = implode('-', array_map(array('TDF\TextUtils', 'normaliserSectionPrenomCoureur'), explode('-', $prenom)));
+			$prenom = implode(' ', array_map(array('TDF\TextUtils', 'normaliserSectionPrenomCoureur'), explode(' ', $prenom)));
 
 			//on supprime les éventuels traits d'union/espaces au début et à la fin du prénom
 			$prenom = trim($prenom, " -\t\n\r\0\x0B");
@@ -146,9 +148,9 @@
 
 		/**
 		 * Normalise une section du prénom d'un coureur.
-		 * Par exemple, si un coureur s'appelle Jean-Éléonore, vous devriez passer successivement à cette méthode :
+		 * Par exemple, si un coureur s'appelle Jean-Jérôme, vous devriez passer successivement à cette méthode :
 		 * - Jean
-		 * - Éléonore
+		 * - Jérôme
 		 *
 		 * Cette méthode corrigera la casse et ne gardera que les accents demandés.
 		 *
@@ -162,7 +164,7 @@
 			$str = mb_substr(TextUtils::supprimerAccents($str), 0, 1) . mb_substr($str, 1);
 
 			//on met la chaine en minuscules, puis on met la première lettre uniquement en majuscule
-			return ucfirst(mb_strtolower($str));
+			return ucfirst($str);
 		}
 
 	}
