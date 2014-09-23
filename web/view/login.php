@@ -6,7 +6,6 @@
 
 	namespace TDF;
 
-	/** @var $redirect string */
 	/** @var $username string */
 
 ?>
@@ -21,9 +20,8 @@
 	<div class="col-md-4 col-md-offset-4">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<form action="login.php<?php echo ($redirect != null) ? "?redirect=" . $redirect : ""; ?>"
-				      method="post">
-					<?php
+				<form action="login.php" method="post">
+				<?php
 
 						echo FormUtils::getTextField("username", "Nom d'utilisateur", $username, "", true, 50, "Username");
 						echo FormUtils::getTextField("password", "Mot de passe", "", "", true, 50, "Password", null, true);
