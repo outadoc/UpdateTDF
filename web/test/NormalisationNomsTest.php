@@ -35,6 +35,16 @@
 			$this->assertEquals("CANDELLIER", TextUtils::normaliserNomCoureur("cAndElLieR"));
 		}
 
+		public function testNomSimpleTraitUnion()
+		{
+			$this->assertEquals("DUBEURRE-LAMOTTE", TextUtils::normaliserNomCoureur("dubeurre-lamotte"));
+		}
+
+		public function testNomDoubleTraitUnion()
+		{
+			$this->assertEquals("DUBEURRE--LAMOTTE", TextUtils::normaliserNomCoureur("dubeurre--lamotte"));
+		}
+
 		/**
 		 * @expectedException \ErrorException
 		 */
