@@ -26,9 +26,9 @@
 		 */
 		public static function getTextField($id, $label, $value = "", $default = "", $isRequired = false, $maxLength = 30, $placeholder = "", $match = null, $isPassword = false)
 		{
-			$value    = (!empty($value)) ? htmlspecialchars($value) : $default;
+			$value   = (!empty($value)) ? htmlspecialchars($value) : htmlspecialchars($default);
 			$required = ($isRequired) ? "required" : "";
-			$pattern  = ($match !== null) ? 'pattern="' . $match . '"' : "";
+			$pattern = ($match !== null) ? 'pattern="' . htmlspecialchars($match) . '"' : "";
 			$type     = ($isPassword) ? "password" : "text";
 
 			return '<div class="form-group">
@@ -58,7 +58,7 @@
 						<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>
 						<input type="number" min="' . htmlspecialchars($min) . '" max="' . htmlspecialchars($max) . '"
 							step="' . htmlspecialchars($step) . '" class="form-control" name="' . htmlspecialchars($id) . '"
-							value="' . (($value != null) ? htmlspecialchars($value) : $default) . '" ' . $enabled . '>
+							value="' . (($value != null) ? htmlspecialchars($value) : htmlspecialchars($default)) . '" ' . $enabled . '>
 					</div>';
 		}
 
@@ -88,7 +88,8 @@
 					$selected = ($item->$id_col == $default) ? "selected" : "";
 				}
 
-				$html .= '<option value="' . $item->$id_col . '" ' . $selected . '>' . $item->$name_col . '</option>';
+				$html .= '<option value="' . htmlspecialchars($item->$id_col) . '" ' . $selected . '>'
+					. htmlspecialchars($item->$name_col) . '</option>';
 			}
 
 			$html .= '</select></div>';
