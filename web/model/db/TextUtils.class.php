@@ -121,17 +121,10 @@
 		{
 			$prenom = TextUtils::supprimerAccentsEtrangers($prenom);
 
-			//on supprime le premier accent du nom, en faisant bien attention d'utiliser mb_substr pour
-			//ne pas avoir de problèmes avec l'encodage
-			$prenom = mb_substr(TextUtils::supprimerAccents($prenom), 0, 1) . mb_substr($prenom, 1);
+			//on explose le prénom en un array, et on traîte chaque morceau séparé par des traits d'union
+			$prenom = implode('-', array_map(array('TDF\TextUtils', 'normaliserSectionPrenomCoureur'), explode('-', $prenom)));
 
-			//on met seulement la première lettre en majuscule
-			$prenom = ucwords(mb_strtolower($prenom));
-
-			//on met en majuscule la première lettre de chaque section (après chaque trait d'union)
-			$prenom = implode('-', array_map('ucfirst', explode('-', $prenom)));
-
-			//on supprime les éventuels tirets/espaces au début et à la fin du prénom
+			//on supprime les éventuels traits d'union/espaces au début et à la fin du prénom
 			$prenom = trim($prenom, " -\t\n\r\0\x0B");
 
 			if (!preg_match("/^[a-zA-Zéèàùôöäâêëüûïîŷÿ\\-' ]*$/u", $prenom)) {
@@ -139,6 +132,27 @@
 			}
 
 			return $prenom;
+		}
+
+		/**
+		 * Normalise une section du prénom d'un coureur.
+		 * Par exemple, si un coureur s'appelle Jean-Éléonore, vous devriez passer successivement à cette méthode :
+		 * - Jean
+		 * - Éléonore
+		 *
+		 * Cette méthode corrigera la casse et ne gardera que les accents demandés.
+		 *
+		 * @param $str
+		 * @return string
+		 */
+		private static function normaliserSectionPrenomCoureur($str)
+		{
+			//on supprime le premier accent du nom, en faisant bien attention d'utiliser mb_substr pour
+			//ne pas avoir de problèmes avec l'encodage
+			$str = mb_substr(TextUtils::supprimerAccents($str), 0, 1) . mb_substr($str, 1);
+
+			//on met la chaine en minuscules, puis on met la première lettre uniquement en majuscule
+			return ucfirst(strtolower($str));
 		}
 
 	}

@@ -43,6 +43,11 @@
 			$this->assertEquals("Eléonore", TextUtils::normaliserPrenomCoureur("Éléonore"));
 		}
 
+		public function testPrenomDoubleAccentMajuscule()
+		{
+			$this->assertEquals("Sainte-Eléonore", TextUtils::normaliserPrenomCoureur("sainte-éléonore"));
+		}
+
 		public function testPrenomAccentNonFrRemplace()
 		{
 			$this->assertEquals("Eléonore", TextUtils::normaliserPrenomCoureur("Éléoñore"));
