@@ -14,7 +14,6 @@
 		 * Supprime les accents d'un string et les remplace par leur équivalent en plain ASCII.
 		 *
 		 * @param $str string la chaîne dont les accents doivent être remplacés
-		 * @throws \ErrorException si la chaîne comporte des caractères interdits
 		 * @return string la chaîne ne comportant plus d'accents
 		 */
 		private static function supprimerAccents($str)
@@ -32,13 +31,7 @@
 				'ÿ' => 'y', 'ƒ' => 'f', 'ă' => 'a', 'ș' => 's', 'ț' => 't', 'Ă' => 'A', 'Ș' => 'S', 'Ț' => 'T'
 			);
 
-			$str = strtr($str, $normalizeChars);
-
-			if (!preg_match("/[a-zA-Z0-9\\-']*/", $str)) {
-				throw new \ErrorException('La chaine "' . $str . '" comporte des caractères non conformes.');
-			}
-
-			return $str;
+			return strtr($str, $normalizeChars);
 		}
 
 		/**
@@ -66,6 +59,7 @@
 		 * Normalise le prénom d'un coureur.
 		 * Capitalise le nom, supprime l'accent de la première lettre, et supprime les tirets/espace superflus.
 		 *
+		 * @throws \ErrorException si la chaîne comporte des caractères interdits
 		 * @param $prenom string le prénom du coureur
 		 * @return string le prénom normalisé
 		 */
@@ -82,6 +76,10 @@
 
 			//on supprime les éventuels tirets/espaces au début et à la fin du prénom
 			$prenom = trim($prenom, " -\t\n\r\0\x0B");
+
+			if (!preg_match("/^[a-zA-Zéèàùôöäâêëüûïîŷÿ\\-']*$/u", $prenom)) {
+				throw new \ErrorException('Le prénom "' . $prenom . '" comporte des caractères non conformes.');
+			}
 
 			return $prenom;
 		}
