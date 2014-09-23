@@ -113,9 +113,9 @@
 		 */
 		public function ajouterCoureur($nom, $prenom, $code_tdf, $annee_naissance, $annee_tdf)
 		{
-			$sql = "INSERT INTO vt_coureur
+			$sql = "INSERT INTO tdf_coureur
 					(n_coureur, code_tdf, nom, prenom, annee_naissance, annee_tdf)
-					VALUES ((SELECT max(n_coureur) + 1 FROM vt_coureur), :code_tdf, :nom, :prenom, :annee_naissance, :annee_tdf)";
+					VALUES ((SELECT max(n_coureur) + 1 FROM tdf_coureur), :code_tdf, :nom, :prenom, :annee_naissance, :annee_tdf)";
 
 			$this->executerRequete($sql, array(
 				":code_tdf"        => $code_tdf,
@@ -138,7 +138,7 @@
 		 */
 		public function majCoureur($n_coureur, $nom, $prenom, $code_tdf, $annee_naissance, $annee_tdf)
 		{
-			$sql = "UPDATE vt_coureur
+			$sql = "UPDATE tdf_coureur
 					SET code_tdf = :code_tdf, nom = :nom, prenom = :prenom, annee_naissance = :annee_naissance, annee_tdf = :annee_tdf
 					WHERE n_coureur = :n_coureur";
 
@@ -160,8 +160,8 @@
 		public function getListeCoureurs()
 		{
 			$sql = "SELECT n_coureur, cou.nom, prenom, annee_naissance, annee_tdf, code_tdf, pays.nom AS pays
-					FROM vt_coureur cou
-					JOIN vt_pays pays USING(code_tdf)
+					FROM tdf_coureur cou
+					JOIN tdf_pays pays USING(code_tdf)
 					WHERE n_coureur >= 0 ORDER BY cou.nom, prenom";
 
 			return $this->executerRequeteAvecResultat($sql);
@@ -177,8 +177,8 @@
 		public function getCoureur($n_coureur)
 		{
 			$sql = "SELECT n_coureur, cou.nom, prenom, annee_naissance, annee_tdf, code_tdf, pays.nom AS pays
-					FROM vt_coureur cou
-					JOIN vt_pays pays USING(code_tdf)
+					FROM tdf_coureur cou
+					JOIN tdf_pays pays USING(code_tdf)
 					WHERE n_coureur = :n_coureur";
 
 			$result = $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur));
@@ -204,7 +204,7 @@
 				throw new \ErrorException("Ce coureur possède des participations");
 			}
 
-			$sql = "DELETE FROM vt_coureur WHERE n_coureur = :n_coureur";
+			$sql = "DELETE FROM tdf_coureur WHERE n_coureur = :n_coureur";
 			return $this->executerRequete($sql, array(":n_coureur" => $n_coureur));
 		}
 
@@ -216,8 +216,8 @@
 		 */
 		public function getParticipations($n_coureur)
 		{
-			$sql = "SELECT * FROM vt_participation
-					JOIN vt_sponsor spo USING (n_equipe, n_sponsor)
+			$sql = "SELECT * FROM tdf_participation
+					JOIN tdf_sponsor spo USING (n_equipe, n_sponsor)
 					WHERE n_coureur = :n_coureur
 					ORDER BY annee DESC";
 
@@ -231,7 +231,7 @@
 		 */
 		public function getListePays()
 		{
-			$sql = "SELECT code_tdf, c_pays, nom FROM vt_pays ORDER BY nom";
+			$sql = "SELECT code_tdf, c_pays, nom FROM tdf_pays ORDER BY nom";
 			return $this->executerRequeteAvecResultat($sql);
 		}
 
@@ -242,7 +242,7 @@
 		 */
 		public function getDernierNumCoureur()
 		{
-			$sql = "SELECT max(n_coureur) AS MAXNUM FROM vt_coureur";
+			$sql = "SELECT max(n_coureur) AS MAXNUM FROM tdf_coureur";
 			return $this->executerRequeteAvecResultat($sql)[0]->MAXNUM;
 		}
 
@@ -255,7 +255,7 @@
 		 */
 		public function getAnnee($annee)
 		{
-			$sql    = "SELECT * FROM vt_annee WHERE annee = :annee";
+			$sql = "SELECT * FROM tdf_annee WHERE annee = :annee";
 			$result = $this->executerRequeteAvecResultat($sql, array(":annee" => $annee));
 
 			if ($result === null || count($result) < 1) {
@@ -274,7 +274,7 @@
 		 */
 		public function ajouterAnnee($annee, $jours_repos)
 		{
-			$sql = "INSERT INTO vt_annee (annee, jour_repos) VALUES (:annee, :jour_repos)";
+			$sql = "INSERT INTO tdf_annee (annee, jour_repos) VALUES (:annee, :jour_repos)";
 			return $this->executerRequete($sql, array(":annee" => $annee, ":jour_repos" => $jours_repos));
 		}
 
@@ -287,7 +287,7 @@
 		 */
 		public function majAnnee($annee, $jours_repos)
 		{
-			$sql = "UPDATE vt_annee SET jour_repos = :jour_repos WHERE annee = :annee";
+			$sql = "UPDATE tdf_annee SET jour_repos = :jour_repos WHERE annee = :annee";
 			return $this->executerRequete($sql, array(":annee" => $annee, ":jour_repos" => $jours_repos));
 		}
 
@@ -298,7 +298,7 @@
 		 */
 		public function getListeAnnees()
 		{
-			$sql = "SELECT * FROM vt_annee
+			$sql = "SELECT * FROM tdf_annee
 					ORDER BY annee DESC";
 
 			return $this->executerRequeteAvecResultat($sql);
@@ -310,7 +310,7 @@
 		 */
 		public function getMaxAnnee()
 		{
-			$sql = "SELECT MAX(annee) AS annee FROM vt_annee";
+			$sql = "SELECT MAX(annee) AS annee FROM tdf_annee";
 			return $this->executerRequeteAvecResultat($sql)[0];
 		}
 
@@ -322,9 +322,9 @@
 		 */
 		public function getListeParticipationsCoureur($n_coureur)
 		{
-			$sql = "SELECT * FROM vt_participation
-					JOIN vt_sponsor USING (n_equipe, n_sponsor)
-					JOIN vt_equipe USING (n_equipe)
+			$sql = "SELECT * FROM tdf_participation
+					JOIN tdf_sponsor USING (n_equipe, n_sponsor)
+					JOIN tdf_equipe USING (n_equipe)
 					WHERE n_coureur = :n_coureur";
 
 			return $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur));
@@ -340,9 +340,9 @@
 		 */
 		public function getParticipation($n_coureur, $annee)
 		{
-			$sql = "SELECT * FROM vt_participation
-					JOIN vt_sponsor USING (n_equipe, n_sponsor)
-					JOIN vt_equipe USING (n_equipe)
+			$sql = "SELECT * FROM tdf_participation
+					JOIN tdf_sponsor USING (n_equipe, n_sponsor)
+					JOIN tdf_equipe USING (n_equipe)
 					WHERE n_coureur = :n_coureur
 					AND annee = :annee";
 
@@ -363,9 +363,9 @@
 		public function getListeEpreuves()
 		{
 			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, p1.nom as code_tdf_d, p2.nom as code_tdf_a, TO_CHAR(jour, 'dd/MM') as jour, cat_code
-					FROM vt_epreuve
-					JOIN vt_pays p1 ON (code_tdf_d = p1.code_tdf)
-					JOIN vt_pays p2 ON (code_tdf_a = p2.code_tdf)
+					FROM tdf_epreuve
+					JOIN tdf_pays p1 ON (code_tdf_d = p1.code_tdf)
+					JOIN tdf_pays p2 ON (code_tdf_a = p2.code_tdf)
 					ORDER BY annee DESC, jour DESC";
 
 			return $this->executerRequeteAvecResultat($sql);
@@ -382,7 +382,7 @@
 		public function getEpreuve($annee, $n_epreuve)
 		{
 			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a, TO_CHAR(jour, 'dd/MM') as jour, cat_code
-					FROM vt_epreuve
+					FROM tdf_epreuve
 					WHERE annee = :annee
 					AND n_epreuve = :n_epreuve";
 
@@ -412,7 +412,7 @@
 		 */
 		public function ajouterEpreuve($annee, $n_epreuve, $code_tdf_d, $code_tdf_a, $ville_d, $ville_a, $distance, $moyenne, $jour, $cat_code)
 		{
-			$sql = "INSERT INTO vt_epreuve (annee, n_epreuve, code_tdf_a, code_tdf_d, ville_d, ville_a, distance, moyenne, jour, cat_code)
+			$sql = "INSERT INTO tdf_epreuve (annee, n_epreuve, code_tdf_a, code_tdf_d, ville_d, ville_a, distance, moyenne, jour, cat_code)
 					VALUES (:annee, :n_epreuve, :code_tdf_a, :code_tdf_d, :ville_a, :ville_d, :distance, :moyenne, TO_DATE(:jour, 'dd/MM/yyyy'), :cat_code)";
 
 			return $this->executerRequete($sql, array(
@@ -446,7 +446,7 @@
 		 */
 		public function majEpreuve($annee, $n_epreuve, $code_tdf_d, $code_tdf_a, $ville_d, $ville_a, $distance, $moyenne, $jour, $cat_code)
 		{
-			$sql = "UPDATE vt_epreuve SET code_tdf_a = :code_tdf_a, code_tdf_d = :code_tdf_d, ville_a = :ville_a,
+			$sql = "UPDATE tdf_epreuve SET code_tdf_a = :code_tdf_a, code_tdf_d = :code_tdf_d, ville_a = :ville_a,
 					ville_d = :ville_d, distance = :distance, moyenne = :moyenne, jour = TO_DATE(:jour, 'dd/MM/yyyy'),
 					cat_code = :cat_code
 					WHERE annee = :annee AND n_epreuve = :n_epreuve";
@@ -467,7 +467,7 @@
 
 		public function supprimerEpreuve($annee, $n_epreuve)
 		{
-			$sql = "DELETE FROM vt_epreuve
+			$sql = "DELETE FROM tdf_epreuve
 					WHERE annee = :annee AND n_epreuve = :n_epreuve";
 
 			return $this->executerRequete($sql, array(":annee" => $annee, ":n_epreuve" => $n_epreuve));
