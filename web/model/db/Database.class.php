@@ -18,12 +18,18 @@
 		private static $DB_INSTANCE = DB_INSTANCE;
 		private static $DB_HOSTNAME = DB_HOSTNAME;
 
+		private static $DB_ENCODING = DB_ENCODING;
+
 		private $db;
 
 		public function __construct()
 		{
 			//connexion à la base de données
-			$this->db = oci_connect(Database::$DB_USERNAME, Database::$DB_PASSWORD, Database::$DB_HOSTNAME . "/" . Database::$DB_INSTANCE);
+			$this->db = oci_connect(
+				Database::$DB_USERNAME,
+				Database::$DB_PASSWORD,
+				Database::$DB_HOSTNAME . "/" . Database::$DB_INSTANCE,
+				Database::$DB_ENCODING);
 
 			//si erreur à la connection, on balance une exception
 			if ($this->db === false) {
