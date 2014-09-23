@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: outadoc
- * Date: 20/09/14
- * Time: 20:19
+ * Classe contenant des méthodes relatives à la date/l'heure.
+ * (c) 2014 Baptiste Candellier
  */
 
 namespace TDF;
