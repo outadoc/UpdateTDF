@@ -77,7 +77,6 @@
 		{
 			//on supprime les accents, comme demandé par la spec
 			$nom = TextUtils::supprimerAccents($nom);
-			$nom = TextUtils::supprimerAccents($nom);
 
 			//on met le nom en majuscules
 			$nom = mb_strtoupper($nom);
@@ -87,6 +86,24 @@
 
 			if (!preg_match("/^[A-Z\\-']*$/u", $nom)) {
 				throw new \ErrorException('Le nom "' . $nom . '" comporte des caractères non conformes.');
+			}
+
+			return $nom;
+		}
+
+		public static function normaliserNomVille($nom)
+		{
+			//on supprime les accents, comme demandé par la spec
+			$nom = TextUtils::supprimerAccents($nom);
+
+			//on met le nom en majuscules
+			$nom = mb_strtoupper($nom);
+
+			//on supprime les éventuels tirets/espaces au début et à la fin du nom
+			$nom = trim($nom, " -\t\n\r\0\x0B");
+
+			if (!preg_match("/^[A-Z0-9\\-']*$/u", $nom)) {
+				throw new \ErrorException('Le nom de ville "' . $nom . '" comporte des caractères non conformes.');
 			}
 
 			return $nom;
