@@ -1,6 +1,6 @@
 <?php
 	/**
-	 * NormalizationTest.php
+	 * NormalisationPrenomsTest.php
 	 * (c) 2014 outadoc
 	 */
 
