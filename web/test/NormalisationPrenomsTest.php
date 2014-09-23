@@ -43,6 +43,11 @@
 			$this->assertEquals("Eléonore", TextUtils::normaliserPrenomCoureur("Éléonore"));
 		}
 
+		public function testPrenomAccentNonFrRemplace()
+		{
+			$this->assertEquals("Eléonore", TextUtils::normaliserPrenomCoureur("Éléoñore"));
+		}
+
 		/**
 		 * @expectedException \ErrorException
 		 */
