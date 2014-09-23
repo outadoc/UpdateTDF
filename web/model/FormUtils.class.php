@@ -20,17 +20,19 @@
 		 * @param int $maxLength la taille maximale du champ (30 caractères par défaut)
 		 * @param string $placeholder le placeholder pour ce champ
 		 * @param string $match une regex optionnelle pour valider le champ
+		 * @param bool $isPassword indique si la valeur du champ doit être cachée
 		 * @return string le contrôle au format HTML
 		 */
-		public static function getTextField($id, $label, $value = "", $isRequired = false, $maxLength = 30, $placeholder = "", $match = null)
+		public static function getTextField($id, $label, $value = "", $isRequired = false, $maxLength = 30, $placeholder = "", $match = null, $isPassword = false)
 		{
 			$value    = (!empty($value)) ? htmlspecialchars($value) : "";
 			$required = ($isRequired) ? "required" : "";
 			$pattern = ($match !== null) ? 'pattern="' . $match . '"' : "";
+			$type = ($isPassword) ? "password" : "text";
 
 			return '<div class="form-group">
 						<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>
-						<input type="text" class="form-control" maxlength="' . $maxLength . '" name="' . htmlspecialchars($id) . '"
+						<input type="' . $type . '" class="form-control" maxlength="' . $maxLength . '" name="' . htmlspecialchars($id) . '"
 							placeholder="' . htmlspecialchars($placeholder) . '" value="' . $value . '" ' . $required . ' ' . $pattern . '>
 					</div>';
 		}

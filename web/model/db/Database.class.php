@@ -12,11 +12,11 @@
 	class Database
 	{
 
-		private static $DB_USERNAME = "copie_tdf";
-		private static $DB_PASSWORD = "copie_tdf";
+		private static $DB_USERNAME = DB_USERNAME;
+		private static $DB_PASSWORD = DB_PASSWORD;
 
-		private static $DB_INSTANCE = "XE";
-		private static $DB_HOSTNAME = "localhost";
+		private static $DB_INSTANCE = DB_INSTANCE;
+		private static $DB_HOSTNAME = DB_HOSTNAME;
 
 		private $db;
 
