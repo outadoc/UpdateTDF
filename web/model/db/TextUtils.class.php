@@ -66,87 +66,6 @@
 		}
 
 		/**
-		 * Normalise le nom de famille d'un coureur.
-		 * Met le nom en majuscules, supprime les accents et les tirets/espaces superflus.
-		 * Les chiffres ne sont pas autorisés.
-		 *
-		 * @param $nom string le nom du coureur
-		 * @throws \ErrorException si la chaine comporte des caractères interdits
-		 * @return string le nom une fois normalisé
-		 */
-		public static function normaliserNomCoureur($nom)
-		{
-			//on supprime les accents, comme demandé par la spec
-			$nom = TextUtils::supprimerAccents($nom);
-
-			//on met le nom en majuscules
-			$nom = mb_strtoupper($nom);
-
-			//on supprime les éventuels tirets/espaces au début et à la fin du nom
-			$nom = trim($nom, " -\t\n\r\0\x0B");
-
-			if (!preg_match("/^[A-Z\\-' ]*$/u", $nom)) {
-				throw new IllegalCharacterException('Le nom "' . $nom . '" comporte des caractères non conformes.');
-			}
-
-			return $nom;
-		}
-
-		/**
-		 * Normalise le nom d'une ville.
-		 * Met le nom en majuscules, supprime les accents et les tirets/espaces superflus.
-		 * Les chiffres sont autorisés.
-		 *
-		 * @param $nom
-		 * @return string
-		 * @throws \ErrorException
-		 */
-		public static function normaliserNomVille($nom)
-		{
-			//on supprime les accents, comme demandé par la spec
-			$nom = TextUtils::supprimerAccents($nom);
-
-			//on met le nom en majuscules
-			$nom = mb_strtoupper($nom);
-
-			//on supprime les éventuels tirets/espaces au début et à la fin du nom
-			$nom = trim($nom, " -\t\n\r\0\x0B");
-
-			if (!preg_match("/^[A-Z0-9\\-' ]*$/u", $nom)) {
-				throw new IllegalCharacterException('Le nom de ville "' . $nom . '" comporte des caractères non conformes.');
-			}
-
-			return $nom;
-		}
-
-		/**
-		 * Normalise le prénom d'un coureur.
-		 * Capitalise le nom, supprime l'accent de la première lettre, et supprime les tirets/espace superflus.
-		 *
-		 * @throws \ErrorException si la chaîne comporte des caractères interdits
-		 * @param $prenom string le prénom du coureur
-		 * @return string le prénom normalisé
-		 */
-		public static function normaliserPrenomCoureur($prenom)
-		{
-			$prenom = TextUtils::supprimerAccentsEtrangers($prenom);
-			$prenom = mb_strtolower($prenom);
-
-			//on explose le prénom en un array, et on traîte chaque morceau séparé par des traits d'union OU des espaces
-			$prenom = implode('-', array_map(array('TDF\TextUtils', 'normaliserSectionPrenomCoureur'), explode('-', $prenom)));
-			$prenom = implode(' ', array_map(array('TDF\TextUtils', 'normaliserSectionPrenomCoureur'), explode(' ', $prenom)));
-
-			//on supprime les éventuels traits d'union/espaces au début et à la fin du prénom
-			$prenom = trim($prenom, " -\t\n\r\0\x0B");
-
-			if (!preg_match("/^[a-zA-Zéèàùôöäâêëüûïîŷÿ\\-' ]*$/u", $prenom)) {
-				throw new IllegalCharacterException('Le prénom "' . $prenom . '" comporte des caractères non conformes.');
-			}
-
-			return $prenom;
-		}
-
-		/**
 		 * Normalise une section du prénom d'un coureur.
 		 * Par exemple, si un coureur s'appelle Jean-Jérôme, vous devriez passer successivement à cette méthode :
 		 * - Jean
@@ -167,8 +86,119 @@
 			return ucfirst($str);
 		}
 
+		/**
+		 * Convertit une chaîne en minuscules, et supprime les accents.
+		 *
+		 * 1ère lettre en majuscule sans accent.
+		 * Autres lettres en minuscules.
+		 * Tirets et espaces acceptés.
+		 *
+		 * @param string $str la chaîne à formater
+		 * @return string la chaîne normalisée
+		 */
+		private static function normaliserMinuscules($str)
+		{
+			$str = TextUtils::supprimerAccentsEtrangers($str);
+			$str = mb_strtolower($str);
+
+			//on explose le prénom en un array, et on traîte chaque morceau séparé par des traits d'union OU des espaces
+			$separators = array('-', ' ');
+
+			foreach ($separators as $separator) {
+				$str = implode($separator, array_map(array('TDF\TextUtils', 'normaliserSectionPrenomCoureur'), explode($separator, $str)));
+			}
+
+			//on supprime les éventuels traits d'union/espaces au début et à la fin du prénom
+			return trim($str, " -\t\n\r\0\x0B");
+		}
+
+		/**
+		 * Convertir une chaîne en majuscules, et supprime les accents.
+		 *
+		 * Toutes les lettres en majuscules.
+		 *
+		 * @param string $str la chaîne à formater
+		 * @return string la chaîne normalisée
+		 */
+		private static function normaliserMajuscules($str)
+		{
+			//on supprime les accents, comme demandé par la spec
+			$str = TextUtils::supprimerAccents($str);
+
+			//on met le nom en majuscules
+			$str = mb_strtoupper($str);
+
+			//on supprime les éventuels tirets/espaces au début et à la fin du nom
+			return trim($str, " -\t\n\r\0\x0B");
+		}
+
+		/**
+		 * Normalise le nom de famille d'un coureur.
+		 * Met le nom en majuscules, supprime les accents et les tirets/espaces superflus.
+		 * Les chiffres ne sont pas autorisés.
+		 *
+		 * @param $nom string le nom du coureur
+		 * @throws \ErrorException si la chaine comporte des caractères interdits
+		 * @return string le nom une fois normalisé
+		 */
+		public static function normaliserNomCoureur($nom)
+		{
+			$nom = TextUtils::normaliserMajuscules($nom);
+
+			if (!preg_match("/^[A-Z\\-' ]*$/u", $nom)) {
+				throw new IllegalCharacterException('Le nom "' . $nom . '" comporte des caractères non conformes.');
+			}
+
+			return $nom;
+		}
+
+		/**
+		 * Normalise le nom d'une ville.
+		 * Met le nom en majuscules, supprime les accents et les tirets/espaces superflus.
+		 * Les chiffres sont autorisés.
+		 *
+		 * @param $nom
+		 * @return string
+		 * @throws \ErrorException
+		 */
+		public static function normaliserNomVille($nom)
+		{
+			$nom = TextUtils::normaliserMajuscules($nom);
+
+			if (!preg_match("/^[A-Z0-9\\-' ]*$/u", $nom)) {
+				throw new IllegalCharacterException('Le nom de ville "' . $nom . '" comporte des caractères non conformes.');
+			}
+
+			return $nom;
+		}
+
+		/**
+		 * Normalise le prénom d'un coureur.
+		 * Capitalise le nom, supprime l'accent de la première lettre, et supprime les tirets/espace superflus.
+		 *
+		 * @throws \ErrorException si la chaîne comporte des caractères interdits
+		 * @param $prenom string le prénom du coureur
+		 * @return string le prénom normalisé
+		 */
+		public static function normaliserPrenomCoureur($prenom)
+		{
+			$prenom = TextUtils::normaliserMinuscules($prenom);
+
+			if (!preg_match("/^[a-zA-Zéèàùôöäâêëüûïîŷÿ\\-' ]*$/u", $prenom)) {
+				throw new IllegalCharacterException('Le prénom "' . $prenom . '" comporte des caractères non conformes.');
+			}
+
+			return $prenom;
+		}
+
 	}
 
+	/**
+	 * Class IllegalCharacterException
+	 * Lancée lorsqu'un caractère inattendu a été trouvé dans une chaîne.
+	 *
+	 * @package TDF
+	 */
 	class IllegalCharacterException extends \ErrorException
 	{
 	}
