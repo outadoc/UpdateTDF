@@ -54,7 +54,7 @@
 		}
 
 		/**
-		 * @expectedException \ErrorException
+		 * @expectedException \TDF\IllegalCharacterException
 		 */
 		public function testPrenomCaractereInterdit()
 		{
@@ -62,7 +62,7 @@
 		}
 
 		/**
-		 * @expectedException \ErrorException
+		 * @expectedException \TDF\IllegalCharacterException
 		 */
 		public function testPrenomCyrillique()
 		{
@@ -70,7 +70,7 @@
 		}
 
 		/**
-		 * @expectedException \ErrorException
+		 * @expectedException \TDF\IllegalCharacterException
 		 */
 		public function testPrenomEmojiInterdit()
 		{

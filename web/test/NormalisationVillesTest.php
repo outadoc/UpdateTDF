@@ -40,8 +40,13 @@
 			$this->assertEquals("SAINT-TROPEZ", TextUtils::normaliserNomVille("Saint-Tropez"));
 		}
 
+		public function testVilleNombre()
+		{
+			$this->assertEquals("LES 2 ALPES", TextUtils::normaliserNomVille("les 2 alpes"));
+		}
+
 		/**
-		 * @expectedException \ErrorException
+		 * @expectedException \TDF\IllegalCharacterException
 		 */
 		public function testVilleCaractereInterdit()
 		{
@@ -49,7 +54,7 @@
 		}
 
 		/**
-		 * @expectedException \ErrorException
+		 * @expectedException \TDF\IllegalCharacterException
 		 */
 		public function testVilleEmojiInterdit()
 		{

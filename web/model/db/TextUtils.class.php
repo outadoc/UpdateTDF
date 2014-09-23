@@ -68,6 +68,7 @@
 		/**
 		 * Normalise le nom de famille d'un coureur.
 		 * Met le nom en majuscules, supprime les accents et les tirets/espaces superflus.
+		 * Les chiffres ne sont pas autorisés.
 		 *
 		 * @param $nom string le nom du coureur
 		 * @throws \ErrorException si la chaine comporte des caractères interdits
@@ -85,12 +86,21 @@
 			$nom = trim($nom, " -\t\n\r\0\x0B");
 
 			if (!preg_match("/^[A-Z\\-' ]*$/u", $nom)) {
-				throw new \ErrorException('Le nom "' . $nom . '" comporte des caractères non conformes.');
+				throw new IllegalCharacterException('Le nom "' . $nom . '" comporte des caractères non conformes.');
 			}
 
 			return $nom;
 		}
 
+		/**
+		 * Normalise le nom d'une ville.
+		 * Met le nom en majuscules, supprime les accents et les tirets/espaces superflus.
+		 * Les chiffres sont autorisés.
+		 *
+		 * @param $nom
+		 * @return string
+		 * @throws \ErrorException
+		 */
 		public static function normaliserNomVille($nom)
 		{
 			//on supprime les accents, comme demandé par la spec
@@ -103,7 +113,7 @@
 			$nom = trim($nom, " -\t\n\r\0\x0B");
 
 			if (!preg_match("/^[A-Z0-9\\-' ]*$/u", $nom)) {
-				throw new \ErrorException('Le nom de ville "' . $nom . '" comporte des caractères non conformes.');
+				throw new IllegalCharacterException('Le nom de ville "' . $nom . '" comporte des caractères non conformes.');
 			}
 
 			return $nom;
@@ -128,7 +138,7 @@
 			$prenom = trim($prenom, " -\t\n\r\0\x0B");
 
 			if (!preg_match("/^[a-zA-Zéèàùôöäâêëüûïîŷÿ\\-' ]*$/u", $prenom)) {
-				throw new \ErrorException('Le prénom "' . $prenom . '" comporte des caractères non conformes.');
+				throw new IllegalCharacterException('Le prénom "' . $prenom . '" comporte des caractères non conformes.');
 			}
 
 			return $prenom;
@@ -155,4 +165,8 @@
 			return ucfirst(strtolower($str));
 		}
 
+	}
+
+	class IllegalCharacterException extends \ErrorException
+	{
 	}

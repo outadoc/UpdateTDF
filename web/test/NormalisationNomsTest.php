@@ -46,7 +46,15 @@
 		}
 
 		/**
-		 * @expectedException \ErrorException
+		 * @expectedException \TDF\IllegalCharacterException
+		 */
+		public function testNomChiffreInterdit()
+		{
+			TextUtils::normaliserNomCoureur("bogossdu14");
+		}
+
+		/**
+		 * @expectedException \TDF\IllegalCharacterException
 		 */
 		public function testNomCaractereInterdit()
 		{
@@ -54,7 +62,7 @@
 		}
 
 		/**
-		 * @expectedException \ErrorException
+		 * @expectedException \TDF\IllegalCharacterException
 		 */
 		public function testNomCyrillique()
 		{
@@ -62,7 +70,7 @@
 		}
 
 		/**
-		 * @expectedException \ErrorException
+		 * @expectedException \TDF\IllegalCharacterException
 		 */
 		public function testNomEmojiInterdit()
 		{
