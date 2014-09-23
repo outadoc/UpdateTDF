@@ -1,7 +1,7 @@
 <?php
 	/**
 	 * NormalisationPrenomsTest.php
-	 * (c) 2014 outadoc
+	 * (c) 2014 Baptiste Candellier
 	 */
 
 	namespace TDF;
