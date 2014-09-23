@@ -10,8 +10,8 @@
 	/** @var $title string */
 	/** @var $data_prenom string */
 	/** @var $data_nom string */
-	/** @var $data_annee_naissance string */
-	/** @var $data_annee_tdf string */
+	/** @var $data_annee_naissance integer */
+	/** @var $data_annee_tdf integer */
 	/** @var $data_code_tdf string */
 	/** @var $pays string */
 
@@ -32,17 +32,17 @@
 			<?php
 
 				echo FormUtils::getTextField("prenom", "Prénom",
-					(isset($coureur) ? $coureur->PRENOM : $data_prenom), true, 20, "Alberto");
+					(isset($coureur) ? $coureur->PRENOM : $data_prenom), "", true, 20, "Alberto");
 				echo FormUtils::getTextField("nom", "Nom",
-					(isset($coureur) ? $coureur->NOM : $data_nom), true, 30, "CONTADOR");
+					(isset($coureur) ? $coureur->NOM : $data_nom), "", true, 30, "CONTADOR");
 
 				echo FormUtils::getNumberField("annee_naissance", "Année de naissance", 1800, 2999, 1,
-					(isset($coureur) ? $coureur->ANNEE_NAISSANCE : (($data_annee_naissance != null) ? $data_annee_naissance : 1955)));
+					(isset($coureur) ? $coureur->ANNEE_NAISSANCE : $data_annee_naissance), 1955);
 				echo FormUtils::getNumberField("annee_tdf", "Année du 1er TDF", 1903, 2999, 1,
-					(isset($coureur) ? $coureur->ANNEE_TDF : (($data_annee_tdf != null) ? $data_annee_tdf : Time::getCurrentYear())));
+					(isset($coureur) ? $coureur->ANNEE_TDF : $data_annee_tdf), Time::getCurrentYear());
 
 				echo FormUtils::getDropdownList("code_tdf", "Pays", "CODE_TDF", "NOM",
-					$pays, (isset($coureur)) ? $coureur->CODE_TDF : (($data_code_tdf != null) ? $data_code_tdf : 'FRA'));
+					$pays, (isset($coureur) ? $coureur->CODE_TDF : $data_code_tdf), 'FRA');
 
 				echo '<input type="submit" class="btn btn-default">';
 

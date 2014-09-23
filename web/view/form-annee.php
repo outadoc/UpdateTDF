@@ -8,15 +8,17 @@
 
 	namespace TDF;
 
+
+	/** @var $title string */
+	/** @var $data_annee string */
+	/** @var $data_jours_repos string */
+
 ?>
 <div class="row">
 	<div class="col-md-12">
 		<div class="page-header">
 			<h1>
-				<?php
-					/** @var $title string */
-					echo $title;
-				?>
+				<?php echo $title; ?>
 			</h1>
 		</div>
 	</div>
@@ -35,10 +37,10 @@
 				}
 
 				echo FormUtils::getNumberField("n_annee", "Année", 1800, 2999, 1,
-					(isset($annee) ? $annee->ANNEE : Time::getCurrentYear()), (!isset($annee) || $annee === null));
+					(isset($annee) ? $annee->ANNEE : $data_annee), Time::getCurrentYear(), (!isset($annee) || $annee === null));
 
 				echo FormUtils::getNumberField("jours_repos", "Jours de repos", 0, 100, 1,
-					(isset($annee) ? $annee->JOUR_REPOS : 0));
+					(isset($annee) ? $annee->JOUR_REPOS : $data_jours_repos), 0);
 
 				echo '<input type="submit" class="btn btn-default">';
 
