@@ -22,7 +22,7 @@
 		if ($username === DEFAULT_USER && $password === DEFAULT_PASSWORD) {
 			$_SESSION["logged_in"] = true;
 
-			if ($redirect !== null && preg_match("/^[a-z_-]\\.php$/", $redirect)) {
+			if ($redirect !== null && preg_match("/^[a-z_\\-]+\\.php$/", $redirect)) {
 				header("Location: " . $redirect);
 			} else {
 				header("Location: ./");
