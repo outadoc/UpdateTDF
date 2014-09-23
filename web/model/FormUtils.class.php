@@ -53,7 +53,7 @@
 		 */
 		public static function getNumberField($id, $label, $min, $max, $step = 1, $value = "", $default = "", $isEnabled = true)
 		{
-			$enabled = (!$isEnabled) ? "disabled" : "";
+			$enabled = (!$isEnabled) ? "readonly" : "";
 			return '<div class="form-group">
 						<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>
 						<input type="number" min="' . htmlspecialchars($min) . '" max="' . htmlspecialchars($max) . '"
