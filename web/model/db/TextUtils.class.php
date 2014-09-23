@@ -162,7 +162,7 @@
 			$str = mb_substr(TextUtils::supprimerAccents($str), 0, 1) . mb_substr($str, 1);
 
 			//on met la chaine en minuscules, puis on met la première lettre uniquement en majuscule
-			return ucfirst(strtolower($str));
+			return ucfirst(mb_strtolower($str));
 		}
 
 	}

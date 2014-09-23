@@ -306,6 +306,7 @@
 
 		/**
 		 * Récupère l'année la plus récente entrée dans la base.
+		 *
 		 * @return object l'année maximale de la base
 		 */
 		public function getMaxAnnee()
