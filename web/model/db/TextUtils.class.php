@@ -84,7 +84,7 @@
 			//on supprime les éventuels tirets/espaces au début et à la fin du nom
 			$nom = trim($nom, " -\t\n\r\0\x0B");
 
-			if (!preg_match("/^[A-Z\\-']*$/u", $nom)) {
+			if (!preg_match("/^[A-Z\\-' ]*$/u", $nom)) {
 				throw new \ErrorException('Le nom "' . $nom . '" comporte des caractères non conformes.');
 			}
 
@@ -102,7 +102,7 @@
 			//on supprime les éventuels tirets/espaces au début et à la fin du nom
 			$nom = trim($nom, " -\t\n\r\0\x0B");
 
-			if (!preg_match("/^[A-Z0-9\\-']*$/u", $nom)) {
+			if (!preg_match("/^[A-Z0-9\\-' ]*$/u", $nom)) {
 				throw new \ErrorException('Le nom de ville "' . $nom . '" comporte des caractères non conformes.');
 			}
 
@@ -134,7 +134,7 @@
 			//on supprime les éventuels tirets/espaces au début et à la fin du prénom
 			$prenom = trim($prenom, " -\t\n\r\0\x0B");
 
-			if (!preg_match("/^[a-zA-Zéèàùôöäâêëüûïîŷÿ\\-']*$/u", $prenom)) {
+			if (!preg_match("/^[a-zA-Zéèàùôöäâêëüûïîŷÿ\\-' ]*$/u", $prenom)) {
 				throw new \ErrorException('Le prénom "' . $prenom . '" comporte des caractères non conformes.');
 			}
 
