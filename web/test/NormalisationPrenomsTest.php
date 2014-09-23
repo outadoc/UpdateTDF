@@ -54,7 +54,7 @@
 		/**
 		 * @expectedException \ErrorException
 		 */
-		public function testPrenomRusse()
+		public function testPrenomCyrillique()
 		{
 			TextUtils::normaliserPrenomCoureur("Владимир");
 		}
