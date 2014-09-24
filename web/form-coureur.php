@@ -31,7 +31,7 @@
 	if ($data_nom !== null && $data_prenom !== null && $data_code_tdf !== null) {
 		if (($data_annee_naissance === null || ($data_annee_naissance < 9999 && $data_annee_naissance > 1800))
 			&& ($data_annee_tdf === null || ($data_annee_tdf < 9999 && $data_annee_tdf > 1800))
-			&& $data_annee_naissance < $data_annee_tdf
+			&& (($data_annee_tdf === null || $data_annee_naissance === null) || ($data_annee_naissance < $data_annee_tdf))
 		) {
 			try {
 				$db = new Database();

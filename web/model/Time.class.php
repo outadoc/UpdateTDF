@@ -1,16 +1,18 @@
 <?php
-/**
- * Classe contenant des méthodes relatives à la date/l'heure.
- * (c) 2014 Baptiste Candellier
- */
+	/**
+	 * Classe contenant des méthodes relatives à la date/l'heure.
+	 * (c) 2014 Baptiste Candellier
+	 */
 
-namespace TDF;
+	namespace TDF;
 
 
-abstract class Time {
+	abstract class Time
+	{
 
-	public static function getCurrentYear() {
-		return date("Y");
+		public static function getCurrentYear()
+		{
+			return (int)date("Y");
+		}
+
 	}
-
-} 

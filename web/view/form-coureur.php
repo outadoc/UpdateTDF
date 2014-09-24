@@ -37,9 +37,10 @@
 					(isset($coureur) ? $coureur->NOM : $data_nom), "", true, 30, "CONTADOR");
 
 				echo FormUtils::getNumberField("annee_naissance", "Année de naissance", 1800, 2999, 1,
-					(isset($coureur) ? $coureur->ANNEE_NAISSANCE : $data_annee_naissance), 1955);
+					(isset($coureur) ? $coureur->ANNEE_NAISSANCE : $data_annee_naissance), null, true, true);
+
 				echo FormUtils::getNumberField("annee_tdf", "Année du 1er TDF", 1903, 2999, 1,
-					(isset($coureur) ? $coureur->ANNEE_TDF : $data_annee_tdf), Time::getCurrentYear());
+					(isset($coureur) ? $coureur->ANNEE_TDF : $data_annee_tdf), null, true, true);
 
 				echo FormUtils::getDropdownList("code_tdf", "Pays", "CODE_TDF", "NOM",
 					$pays, (isset($coureur) ? $coureur->CODE_TDF : $data_code_tdf), 'FRA');
@@ -59,16 +60,27 @@
 	annee_naissance.change(function (e) {
 		//si l'année du premier TDF est inférieure à l'année de naissance,
 		//on met les deux égaux
-		if (annee_tdf.val() < annee_naissance.val()) {
-			annee_tdf.val(annee_naissance.val());
+
+		if (!annee_naissance.prop("disabled")
+			&& !annee_tdf.prop("disabled")) {
+
+			if (annee_tdf.val() < annee_naissance.val()) {
+				annee_tdf.val(annee_naissance.val());
+			}
 		}
+
 	});
 
 	annee_tdf.change(function (e) {
 		//si l'année de naissance est supérieure à l'année du premier TDF,
 		//on met les deux égaux
-		if (annee_naissance.val() > annee_tdf.val()) {
-			annee_naissance.val(annee_tdf.val());
+
+		if (!annee_naissance.prop("disabled")
+			&& !annee_tdf.prop("disabled")) {
+
+			if (annee_naissance.val() > annee_tdf.val()) {
+				annee_naissance.val(annee_tdf.val());
+			}
 		}
 	});
 

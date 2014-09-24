@@ -60,7 +60,7 @@
 					(isset($epreuve) ? $epreuve->DISTANCE : $data_distance), 100);
 
 				echo FormUtils::getNumberField("moyenne", "Moyenne (km)", 0, 100, 0.001,
-					(isset($epreuve) ? $epreuve->MOYENNE : $data_moyenne), null);
+					(isset($epreuve) ? $epreuve->MOYENNE : $data_moyenne), null, true, true);
 
 				echo FormUtils::getTextField("jour", "Jour (JJ/MM)",
 					(isset($epreuve) ? $epreuve->JOUR : $data_jour), null, true, 40, "JJ/MM", "[0-9]{2}/[0-9]{2}");
