@@ -58,6 +58,11 @@
 			$this->assertEquals("Machin Bidule", TextUtils::normaliserPrenomCoureur("machin bidule"));
 		}
 
+		public function testPrenomApostrophe()
+		{
+			$this->assertEquals("N'Guyen", TextUtils::normaliserPrenomCoureur("n'guyen"));
+		}
+
 		/**
 		 * @expectedException \TDF\IllegalCharacterException
 		 */

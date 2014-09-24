@@ -102,7 +102,7 @@
 			$str = mb_strtolower($str);
 
 			//on explose le prénom en un array, et on traîte chaque morceau séparé par des traits d'union OU des espaces
-			$separators = array('-', ' ');
+			$separators = array("-", " ", "'");
 
 			foreach ($separators as $separator) {
 				$str = implode($separator, array_map(array('TDF\TextUtils', 'normaliserSectionPrenomCoureur'), explode($separator, $str)));
