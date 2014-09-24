@@ -21,10 +21,10 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<form action="login.php" method="post">
-				<?php
+					<?php
 
-						echo FormUtils::getTextField("username", "Nom d'utilisateur", $username, "", true, 50, "Username");
-						echo FormUtils::getTextField("password", "Mot de passe", "", "", true, 50, "Password", null, true);
+						echo FormUtils::getTextField("username", "Nom d'utilisateur", $username, "", true, 50, "admin");
+						echo FormUtils::getTextField("password", "Mot de passe", "", "", true, 50, "•••••••••••••••", null, true);
 
 					?>
 					<input type="submit" class="btn btn-primary" value="Connexion">
@@ -34,6 +34,8 @@
 	</div>
 </div>
 <script type="application/javascript">
+
+	$("input[name=username]").focus();
 
 	$(".delete").click(function () {
 		return confirm('Voulez-vous vraiment supprimer ce coureur ?');
