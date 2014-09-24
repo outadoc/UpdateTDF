@@ -26,7 +26,7 @@
 
 	//si le formulaire a été dûment rempli
 	if ($data_annee !== null && $data_jours_repos !== null) {
-		if ($data_annee < 9999 && $data_annee > 1800 && $data_jours_repos >= 0) {
+		if ($data_annee < 9999 && $data_annee >= Time::getCurrentYear() && $data_jours_repos >= 0) {
 			try {
 				$db = new Database();
 
