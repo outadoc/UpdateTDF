@@ -34,7 +34,13 @@
 					//on cherche une année existante avec cette clé
 					try {
 						$db->getAnnee($data_annee);
-						$error = "Cette année existe déjà dans la base de données.";
+
+						//si on n'a pas d'exception, on essaye de mettre à jour une année implicitement
+						//on met donc à jour une année existante
+						$db->majAnnee($data_annee, $data_jours_repos);
+
+						//on redirige vers la page de l'année
+						header("Location: form-annee.php?annee=" . $data_annee . "&success");
 					} catch (NoSuchEntryException $e) {
 						$db->ajouterAnnee($data_annee, $data_jours_repos);
 
@@ -58,7 +64,7 @@
 		}
 	}
 
-	$title = (isset($key_annee) && $key_annee !== null) ? "Modifier une année" : "Ajouter une année";
+	$title = "Ajouter / Modifier une année";
 	define("PAGE_TITLE", "TDF - " . $title);
 
 	try {
