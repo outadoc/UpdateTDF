@@ -13,7 +13,7 @@
 	/** @var $data_annee_naissance integer */
 	/** @var $data_annee_tdf integer */
 	/** @var $data_code_tdf string */
-	/** @var $pays string */
+	/** @var $pays array */
 
 ?>
 <div class="row">

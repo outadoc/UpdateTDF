@@ -53,6 +53,30 @@
 		}
 
 		/**
+		 * Ajoute un coureur dans la base de données.
+		 *
+		 * @param string $nom le nom du coureur (sera normalisé)
+		 * @param string $prenom le prénom du coureur (sera normalisé)
+		 * @param string $code_tdf le code pays du coureur, en 3 caractères maximum
+		 * @param integer $annee_naissance l'année de naissance du coureur
+		 * @param integer $annee_tdf l'année du premier tour de france du coureur
+		 */
+		public function ajouterCoureur($nom, $prenom, $code_tdf, $annee_naissance, $annee_tdf)
+		{
+			$sql = "INSERT INTO tdf_coureur
+					(n_coureur, code_tdf, nom, prenom, annee_naissance, annee_tdf)
+					VALUES ((SELECT max(n_coureur) + 1 FROM tdf_coureur), :code_tdf, :nom, :prenom, :annee_naissance, :annee_tdf)";
+
+			$this->executerRequete($sql, array(
+				":code_tdf"        => $code_tdf,
+				":nom"             => TextUtils::normaliserNomCoureur($nom),
+				":prenom"          => TextUtils::normaliserPrenomCoureur($prenom),
+				":annee_naissance" => $annee_naissance,
+				":annee_tdf"       => $annee_tdf
+			));
+		}
+
+		/**
 		 * Exécute une requête qui ne retourne pas de lignes (ex: INSERT INTO) sur la base de données Oracle.
 		 *
 		 * @param string $sql la requête à exécuter, avec des placeholders
@@ -77,59 +101,6 @@
 			}
 
 			return $stid;
-		}
-
-		/**
-		 * Exécute une requête retournant des lignes sur la base de données Oracle.
-		 *
-		 * @param string $sql la requête à exécuter, avec des placeholders
-		 * @param array $bindings les valeurs des placeholders
-		 * @return array une liste des résultats retournés
-		 */
-		private function executerRequeteAvecResultat($sql, $bindings = null)
-		{
-			return $this->parserResultat($this->executerRequete($sql, $bindings));
-		}
-
-		/**
-		 * Parse le résultat d'une requête et la renvoie dans un array.
-		 *
-		 * @param resource $stid la transaction dont il faut passer le résultat
-		 * @return array une liste des lignes retournées par la requête
-		 */
-		private function parserResultat($stid)
-		{
-			$result = array();
-
-			while (($row = oci_fetch_object($stid)) !== false) {
-				$result[] = $row;
-			}
-
-			return $result;
-		}
-
-		/**
-		 * Ajoute un coureur dans la base de données.
-		 *
-		 * @param string $nom le nom du coureur (sera normalisé)
-		 * @param string $prenom le prénom du coureur (sera normalisé)
-		 * @param string $code_tdf le code pays du coureur, en 3 caractères maximum
-		 * @param integer $annee_naissance l'année de naissance du coureur
-		 * @param integer $annee_tdf l'année du premier tour de france du coureur
-		 */
-		public function ajouterCoureur($nom, $prenom, $code_tdf, $annee_naissance, $annee_tdf)
-		{
-			$sql = "INSERT INTO tdf_coureur
-					(n_coureur, code_tdf, nom, prenom, annee_naissance, annee_tdf)
-					VALUES ((SELECT max(n_coureur) + 1 FROM tdf_coureur), :code_tdf, :nom, :prenom, :annee_naissance, :annee_tdf)";
-
-			$this->executerRequete($sql, array(
-				":code_tdf"        => $code_tdf,
-				":nom"             => TextUtils::normaliserNomCoureur($nom),
-				":prenom"          => TextUtils::normaliserPrenomCoureur($prenom),
-				":annee_naissance" => $annee_naissance,
-				":annee_tdf"       => $annee_tdf
-			));
 		}
 
 		/**
@@ -171,6 +142,35 @@
 					WHERE n_coureur >= 0 ORDER BY cou.nom, prenom";
 
 			return $this->executerRequeteAvecResultat($sql);
+		}
+
+		/**
+		 * Exécute une requête retournant des lignes sur la base de données Oracle.
+		 *
+		 * @param string $sql la requête à exécuter, avec des placeholders
+		 * @param array $bindings les valeurs des placeholders
+		 * @return array une liste des résultats retournés
+		 */
+		private function executerRequeteAvecResultat($sql, $bindings = null)
+		{
+			return $this->parserResultat($this->executerRequete($sql, $bindings));
+		}
+
+		/**
+		 * Parse le résultat d'une requête et la renvoie dans un array.
+		 *
+		 * @param resource $stid la transaction dont il faut passer le résultat
+		 * @return array une liste des lignes retournées par la requête
+		 */
+		private function parserResultat($stid)
+		{
+			$result = array();
+
+			while (($row = oci_fetch_object($stid)) !== false) {
+				$result[] = $row;
+			}
+
+			return $result;
 		}
 
 		/**
@@ -345,7 +345,7 @@
 		 * @throws NoSuchEntryException si la participation n'existe pas
 		 * @return object la participation
 		 */
-		public function getParticipation($n_coureur, $annee)
+		public function getParticipationCoureur($n_coureur, $annee)
 		{
 			$sql = "SELECT * FROM tdf_participation
 					JOIN tdf_sponsor USING (n_equipe, n_sponsor)
@@ -369,7 +369,7 @@
 		 */
 		public function getListeEpreuves()
 		{
-			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, p1.nom as code_tdf_d, p2.nom as code_tdf_a, TO_CHAR(jour, 'dd/MM') as jour, cat_code
+			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, p1.nom AS code_tdf_d, p2.nom AS code_tdf_a, TO_CHAR(jour, 'dd/MM') AS jour, cat_code
 					FROM tdf_epreuve
 					JOIN tdf_pays p1 ON (code_tdf_d = p1.code_tdf)
 					JOIN tdf_pays p2 ON (code_tdf_a = p2.code_tdf)
@@ -388,7 +388,7 @@
 		 */
 		public function getEpreuve($annee, $n_epreuve)
 		{
-			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a, TO_CHAR(jour, 'dd/MM') as jour, cat_code
+			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a, TO_CHAR(jour, 'dd/MM') AS jour, cat_code
 					FROM tdf_epreuve
 					WHERE annee = :annee
 					AND n_epreuve = :n_epreuve";
@@ -478,6 +478,33 @@
 					WHERE annee = :annee AND n_epreuve = :n_epreuve";
 
 			return $this->executerRequete($sql, array(":annee" => $annee, ":n_epreuve" => $n_epreuve));
+		}
+
+		public function ajouterDirecteur($nom, $prenom)
+		{
+			$sql = "INSERT INTO tdf_directeur (n_directeur, nom, prenom) VALUES (
+					(SELECT MAX(n_directeur) + 1 FROM tdf_directeur), :nom, :prenom)";
+
+			return $this->executerRequete($sql, array(
+					":nom"    => TextUtils::normaliserNomCoureur($nom),
+					":prenom" => TextUtils::normaliserPrenomCoureur($prenom))
+			);
+		}
+
+		public function getListeDirecteurs()
+		{
+			$sql = "SELECT * FROM tdf_directeur ORDER BY nom, prenom";
+			return $this->executerRequeteAvecResultat($sql);
+		}
+
+		public function getListeParticipationsEquipes()
+		{
+
+		}
+
+		public function getListeCoureursEquipeAnnee($n_equipe, $n_sponsor, $annee)
+		{
+
 		}
 
 	}
