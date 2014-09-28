@@ -22,9 +22,9 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Ajouter <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="form-coureur.php">Coureur</a></li>
-						<li><a href="form-annee.php">Année</a></li>
 						<li><a href="form-epreuve.php">Épreuve</a></li>
 						<li><a href="form-directeur.php">Directeur</a></li>
+						<li><a href="form-annee.php">Année</a></li>
 						<li><a href="form-pays.php">Pays</a></li>
 					</ul>
 				</li>
