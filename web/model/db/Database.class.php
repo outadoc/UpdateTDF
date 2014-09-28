@@ -241,6 +241,16 @@
 			return $this->executerRequeteAvecResultat($sql);
 		}
 
+		/**
+		 * Ajoute un pays dans la base de données.
+		 *
+		 * @param string $code_tdf le code du pays, codé sur 3 lettres majuscules (ISO 3166-1 alpha-3)
+		 * @param string $c_pays le code du pays, codé sur 2 lettres majuscules (ISO 3166-1 alpha-2)
+		 * @param string $nom le nom du pays, en majuscules
+		 * @return resource le résultat de la requête
+		 * @throws IllegalCharacterException si le nom du pays contient des caractères
+		 * @throws \ErrorException si le code du pays n'est pas valide
+		 */
 		public function ajouterPays($code_tdf, $c_pays, $nom)
 		{
 			if (!preg_match("/[A-Z]{1,3}/", $code_tdf)) {
@@ -259,12 +269,22 @@
 			));
 		}
 
+		/**
+		 * Vérifie si un pays a déjà été rentré dans la base de données en utilisant son nom.
+		 *
+		 * @param string $nom le nom à chercher
+		 * @return bool true si le pays existe déjà, false sinon
+		 */
 		public function verifierPaysExistant($nom)
 		{
 			$sql = "SELECT * FROM tdf_pays WHERE nom = :nom";
-			$res = $this->executerRequeteAvecResultat($sql, array(":nom" => TextUtils::normaliserNomVille(trim($nom))));
 
-			return count($res) > 0;
+			try {
+				$res = $this->executerRequeteAvecResultat($sql, array(":nom" => TextUtils::normaliserNomVille(trim($nom))));
+				return count($res) > 0;
+			} catch (IllegalCharacterException $e) {
+				return false;
+			}
 		}
 
 		/**
