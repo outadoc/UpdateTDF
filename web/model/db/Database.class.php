@@ -498,6 +498,13 @@
 			));
 		}
 
+		/**
+		 * Supprime une épreuve de la base de données.
+		 *
+		 * @param integer $annee l'année de l'épreuve
+		 * @param integer $n_epreuve le numéro de l'épreuve
+		 * @return resource le résultat de la requête
+		 */
 		public function supprimerEpreuve($annee, $n_epreuve)
 		{
 			$sql = "DELETE FROM tdf_epreuve
@@ -506,6 +513,14 @@
 			return $this->executerRequete($sql, array(":annee" => $annee, ":n_epreuve" => $n_epreuve));
 		}
 
+		/**
+		 * Ajoute un directeur dans la base de données.
+		 *
+		 * @param string $nom le nom du directeur (sera standardisé)
+		 * @param string $prenom le prénom du directeur (sera standardisé)
+		 * @return resource le résultat de la requête
+		 * @throws IllegalCharacterException si le nom contient un caractère interdit
+		 */
 		public function ajouterDirecteur($nom, $prenom)
 		{
 			$sql = "INSERT INTO tdf_directeur (n_directeur, nom, prenom) VALUES (
@@ -517,20 +532,15 @@
 			);
 		}
 
+		/**
+		 * Récupère la liste des directeurs dans la base de données.
+		 *
+		 * @return array la liste des directeurs
+		 */
 		public function getListeDirecteurs()
 		{
-			$sql = "SELECT n_directeur, nom, prenom FROM tdf_directeur ORDER BY nom, prenom";
+			$sql = "SELECT n_directeur, nom || ' ' || prenom AS nom FROM tdf_directeur ORDER BY nom, prenom";
 			return $this->executerRequeteAvecResultat($sql);
-		}
-
-		public function getListeParticipationsEquipes()
-		{
-
-		}
-
-		public function getListeCoureursEquipeAnnee($n_equipe, $n_sponsor, $annee)
-		{
-
 		}
 
 	}
