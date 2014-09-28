@@ -29,7 +29,7 @@
 			$db->ajouterDirecteur($data_nom, $data_prenom);
 			$db->close();
 
-			//on redirige vers la page du coureur ajouté
+			//on redirige vers la page d'accueil
 			header("Location: ./?success");
 		} catch (\Exception $e) {
 			$error = $e->getMessage();

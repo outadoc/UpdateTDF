@@ -25,8 +25,7 @@
 						<li><a href="form-annee.php">Année</a></li>
 						<li><a href="form-epreuve.php">Épreuve</a></li>
 						<li><a href="form-directeur.php">Directeur</a></li>
-						<li><a href="#">Sponsor/Équipe</a></li>
-						<li><a href="#">Pays</a></li>
+						<li><a href="form-pays.php">Pays</a></li>
 					</ul>
 				</li>
 			</ul>

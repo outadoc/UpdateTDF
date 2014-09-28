@@ -241,6 +241,32 @@
 			return $this->executerRequeteAvecResultat($sql);
 		}
 
+		public function ajouterPays($code_tdf, $c_pays, $nom)
+		{
+			if (!preg_match("/[A-Z]{1,3}/", $code_tdf)) {
+				throw new \ErrorException("Code pays " . $code_tdf . " incorrect, il doit respecter la norme ISO 3166-1 alpha-3");
+			}
+
+			if (!preg_match("/[A-Z]{1,2}/", $c_pays)) {
+				throw new \ErrorException("Code pays " . $c_pays . " incorrect, il doit respecter la norme ISO 3166-1 alpha-2");
+			}
+
+			$sql = "INSERT INTO tdf_pays (code_tdf, c_pays, nom) VALUES (UPPER(:code_tdf), UPPER(:c_pays), :nom)";
+			return $this->executerRequete($sql, array(
+				":code_tdf" => $code_tdf,
+				":c_pays"   => $c_pays,
+				":nom"      => TextUtils::normaliserNomVille($nom)
+			));
+		}
+
+		public function verifierPaysExistant($nom)
+		{
+			$sql = "SELECT * FROM tdf_pays WHERE nom = :nom";
+			$res = $this->executerRequeteAvecResultat($sql, array(":nom" => TextUtils::normaliserNomVille(trim($nom))));
+
+			return count($res) > 0;
+		}
+
 		/**
 		 * Récupère le dernier numéro de coureur inséré dans la base de données.
 		 *
@@ -261,7 +287,7 @@
 		 */
 		public function getAnnee($annee)
 		{
-			$sql = "SELECT * FROM tdf_annee WHERE annee = :annee";
+			$sql = "SELECT annee, jour_repos FROM tdf_annee WHERE annee = :annee";
 			$result = $this->executerRequeteAvecResultat($sql, array(":annee" => $annee));
 
 			if ($result === null || count($result) < 1) {
@@ -304,7 +330,7 @@
 		 */
 		public function getListeAnnees()
 		{
-			$sql = "SELECT * FROM tdf_annee
+			$sql = "SELECT annee, jour_repos FROM tdf_annee
 					ORDER BY annee DESC";
 
 			return $this->executerRequeteAvecResultat($sql);
@@ -493,7 +519,7 @@
 
 		public function getListeDirecteurs()
 		{
-			$sql = "SELECT * FROM tdf_directeur ORDER BY nom, prenom";
+			$sql = "SELECT n_directeur, nom, prenom FROM tdf_directeur ORDER BY nom, prenom";
 			return $this->executerRequeteAvecResultat($sql);
 		}
 
