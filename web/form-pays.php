@@ -32,7 +32,7 @@
 				$db->close();
 
 				//on redirige vers la page d'accueil
-				header("Location: ./?success");
+				header("Location: ./form-pays.php?success");
 			} else {
 				$error = "Un pays avec ce nom existe déjà dans la base de données.";
 			}

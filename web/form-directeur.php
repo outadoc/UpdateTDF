@@ -30,7 +30,7 @@
 			$db->close();
 
 			//on redirige vers la page d'accueil
-			header("Location: ./?success");
+			header("Location: ./form-directeur.php?success");
 		} catch (\Exception $e) {
 			$error = $e->getMessage();
 		}
