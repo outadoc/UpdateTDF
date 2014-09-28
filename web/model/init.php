@@ -29,4 +29,5 @@
 
 	if (!isset($_SESSION['logged_in']) && basename($_SERVER["PHP_SELF"]) != "login.php") {
 		header("Location: login.php");
+		exit(0);
 	}
