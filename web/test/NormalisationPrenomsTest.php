@@ -63,19 +63,19 @@
 			$this->assertEquals("N'Guyen", TextUtils::normaliserPrenomCoureur("n'guyen"));
 		}
 
-		public function testEbe()
+		public function testPrenomEbe()
 		{
 			$this->assertEquals("Ebe-Ebé", TextUtils::normaliserPrenomCoureur("ébe-ebé"));
 			$this->assertEquals("Ebé-Ebé", TextUtils::normaliserPrenomCoureur("ébé-ébé"));
 			$this->assertEquals("Eb'E Iuç", TextUtils::normaliserPrenomCoureur("éb'é iuç"));
 		}
 
-		public function testAeOe()
+		public function testPrenomAeOe()
 		{
 			$this->assertEquals("Oeuf Oeuf Soeur Aeronef", TextUtils::normaliserPrenomCoureur("Œuf œuf sœur Æronef"));
 		}
 
-		public function testLigaturesMultiples()
+		public function testPrenomLigaturesMultiples()
 		{
 			$this->assertEquals("Jean-Michel", TextUtils::normaliserPrenomCoureur("jean-----michel"));
 		}
@@ -83,7 +83,7 @@
 		/**
 		 * @expectedException \TDF\IllegalCharacterException
 		 */
-		public function testPonctuation()
+		public function testPrenomPonctuation()
 		{
 			TextUtils::normaliserPrenomCoureur("¿!uoaei");
 		}

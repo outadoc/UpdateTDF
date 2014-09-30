@@ -51,6 +51,11 @@
 			$this->assertEquals("DUBEURRE--LAMOTTE", TextUtils::normaliserNomCoureur("dubeurre-------lamotte"));
 		}
 
+		public function testNomAeOe()
+		{
+			$this->assertEquals("OEUF OEUF SOEUR AERONEF", TextUtils::normaliserNomCoureur("Œuf œuf sœur Æronef"));
+		}
+
 		/**
 		 * @expectedException \TDF\IllegalCharacterException
 		 */
