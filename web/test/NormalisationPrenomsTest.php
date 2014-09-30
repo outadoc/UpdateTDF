@@ -70,6 +70,11 @@
 			$this->assertEquals("Eb'E Iuç", TextUtils::normaliserPrenomCoureur("éb'é iuç"));
 		}
 
+		public function testAeOe()
+		{
+			$this->assertEquals("Oeuf Oeuf Soeur Aeronef", TextUtils::normaliserPrenomCoureur("Œuf œuf sœur Æronef"));
+		}
+
 		/**
 		 * @expectedException \TDF\IllegalCharacterException
 		 */
