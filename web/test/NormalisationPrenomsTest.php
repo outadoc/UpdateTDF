@@ -75,6 +75,11 @@
 			$this->assertEquals("Oeuf Oeuf Soeur Aeronef", TextUtils::normaliserPrenomCoureur("Œuf œuf sœur Æronef"));
 		}
 
+		public function testLigaturesMultiples()
+		{
+			$this->assertEquals("Jean-Michel", TextUtils::normaliserPrenomCoureur("jean-----michel"));
+		}
+
 		/**
 		 * @expectedException \TDF\IllegalCharacterException
 		 */

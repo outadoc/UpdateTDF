@@ -46,6 +46,11 @@
 			$this->assertEquals("DUBEURRE--LAMOTTE", TextUtils::normaliserNomCoureur("dubeurre--lamotte"));
 		}
 
+		public function testNomTraitsUnionMultiples()
+		{
+			$this->assertEquals("DUBEURRE--LAMOTTE", TextUtils::normaliserNomCoureur("dubeurre-------lamotte"));
+		}
+
 		/**
 		 * @expectedException \TDF\IllegalCharacterException
 		 */
