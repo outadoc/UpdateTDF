@@ -6,6 +6,7 @@
 
 	namespace TDF;
 
+	require_once 'model/db/TextUtils.class.php';
 
 	class NormalisationVillesTest extends \PHPUnit_Framework_TestCase
 	{

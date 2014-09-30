@@ -6,9 +6,9 @@
 
 	namespace TDF;
 
-	require 'model/init.php';
-	require 'model/db/TextUtils.class.php';
+	mb_internal_encoding("UTF-8");
 
+	require_once 'model/db/TextUtils.class.php';
 
 	class TDFTest extends \PHPUnit_Framework_TestCase
 	{
@@ -61,6 +61,11 @@
 		public function testPrenomApostrophe()
 		{
 			$this->assertEquals("N'Guyen", TextUtils::normaliserPrenomCoureur("n'guyen"));
+		}
+
+		public function testEbe()
+		{
+			$this->assertEquals("Ebe-Ebé", TextUtils::normaliserPrenomCoureur("ébe-ebé"));
 		}
 
 		/**
