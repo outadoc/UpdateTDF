@@ -66,6 +66,16 @@
 		public function testEbe()
 		{
 			$this->assertEquals("Ebe-Ebé", TextUtils::normaliserPrenomCoureur("ébe-ebé"));
+			$this->assertEquals("Ebé-Ebé", TextUtils::normaliserPrenomCoureur("ébé-ébé"));
+			$this->assertEquals("Eb'E Iuc", TextUtils::normaliserPrenomCoureur("éb'é iuç"));
+		}
+
+		/**
+		 * @expectedException \TDF\IllegalCharacterException
+		 */
+		public function testPonctuation()
+		{
+			TextUtils::normaliserPrenomCoureur("¿!uoaei");
 		}
 
 		/**
