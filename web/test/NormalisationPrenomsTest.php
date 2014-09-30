@@ -67,7 +67,7 @@
 		{
 			$this->assertEquals("Ebe-Ebé", TextUtils::normaliserPrenomCoureur("ébe-ebé"));
 			$this->assertEquals("Ebé-Ebé", TextUtils::normaliserPrenomCoureur("ébé-ébé"));
-			$this->assertEquals("Eb'E Iuc", TextUtils::normaliserPrenomCoureur("éb'é iuç"));
+			$this->assertEquals("Eb'E Iuç", TextUtils::normaliserPrenomCoureur("éb'é iuç"));
 		}
 
 		/**

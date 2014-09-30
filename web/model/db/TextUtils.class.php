@@ -51,6 +51,61 @@
 		}
 
 		/**
+		 * Supprime "tous" les accents d'un string et les remplace par leur équivalent en plain ASCII.
+		 *
+		 * @param $str string la chaîne dont les accents doivent être remplacés
+		 * @return string la chaîne ne comportant plus d'accents
+		 */
+		private static function supprimerAccents($str)
+		{
+			$str = TextUtils::supprimerAccentsFrancais($str);
+			$str = TextUtils::supprimerAccentsEtrangers($str);
+
+			return $str;
+		}
+
+		/**
+		 * Supprime les accents français d'un string et les remplace par leur équivalent en plain ASCII.
+		 *
+		 * @param $str string la chaîne dont les accents doivent être remplacés
+		 * @return string la chaîne ne comportant plus d'accents
+		 */
+		private static function supprimerAccentsFrancais($str)
+		{
+			//source: https://stackoverflow.com/questions/10054818/convert-accented-characters-to-their-plain-ascii-equivalents#answer-10064701
+			$normalizeChars = array(
+				'À' => 'A', 'Â' => 'A', 'Ä' => 'A', 'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E',
+				'Î' => 'I', 'Ï' => 'I', 'Ô' => 'O', 'Ö' => 'O', 'Ù' => 'U', 'Û' => 'U', 'Ü' => 'U',
+				'à' => 'a', 'â' => 'a', 'ä' => 'a', 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
+				'î' => 'i', 'ï' => 'i', 'ô' => 'o', 'ö' => 'o', 'ù' => 'u', 'û' => 'u', 'ÿ' => 'y',
+				'ç' => 'c', 'Ç' => 'C'
+			);
+
+			return strtr($str, $normalizeChars);
+		}
+
+		/**
+		 * Supprime les accents d'un string et les remplace par leur équivalent en plain ASCII.
+		 *
+		 * @param $str string la chaîne dont les accents doivent être remplacés
+		 * @return string la chaîne ne comportant plus d'accents
+		 */
+		private static function supprimerAccentsEtrangers($str)
+		{
+			//source: https://stackoverflow.com/questions/10054818/convert-accented-characters-to-their-plain-ascii-equivalents#answer-10064701
+			$normalizeChars = array(
+				'Š' => 'S', 'š' => 's', 'Ð' => 'Dj', 'Ž' => 'Z', 'ž' => 'z', 'Á' => 'A', 'Ã' => 'A',
+				'Å' => 'A', 'Æ' => 'A', 'Ì' => 'I', 'Í' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O',
+				'Õ' => 'O', 'Ø' => 'O', 'Ú' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'á' => 'a',
+				'ã' => 'a', 'å' => 'a', 'æ' => 'a', 'ì' => 'i', 'í' => 'i', 'ð' => 'o', 'ñ' => 'n',
+				'ò' => 'o', 'ó' => 'o', 'õ' => 'o', 'ø' => 'o', 'ú' => 'u', 'ý' => 'y', 'þ' => 'b',
+				'ƒ' => 'f', 'ă' => 'a', 'ș' => 's', 'ț' => 't', 'Ă' => 'A', 'Ș' => 'S', 'Ț' => 'T'
+			);
+
+			return strtr($str, $normalizeChars);
+		}
+
+		/**
 		 * Normalise le nom d'une ville.
 		 * Met le nom en majuscules, supprime les accents et les tirets/espaces superflus.
 		 * Les chiffres sont autorisés.
@@ -82,7 +137,7 @@
 		{
 			$prenom = TextUtils::normaliserMinuscules($prenom);
 
-			if (!preg_match("/^[a-zA-Zéèàùôöäâêëüûïîŷÿ\\-' ]*$/u", $prenom)) {
+			if (!preg_match("/^[a-zA-Zéèàùôöäâêëüûïîŷÿç\\-' ]*$/u", $prenom)) {
 				throw new IllegalCharacterException('Le prénom "' . $prenom . '" comporte des caractères non conformes.');
 			}
 
@@ -134,61 +189,6 @@
 
 			//on met la chaine en minuscules, puis on met la première lettre uniquement en majuscule
 			return ucfirst($str);
-		}
-
-		/**
-		 * Supprime "tous" les accents d'un string et les remplace par leur équivalent en plain ASCII.
-		 *
-		 * @param $str string la chaîne dont les accents doivent être remplacés
-		 * @return string la chaîne ne comportant plus d'accents
-		 */
-		private static function supprimerAccents($str)
-		{
-			$str = TextUtils::supprimerAccentsFrancais($str);
-			$str = TextUtils::supprimerAccentsEtrangers($str);
-
-			return $str;
-		}
-
-		/**
-		 * Supprime les accents français d'un string et les remplace par leur équivalent en plain ASCII.
-		 *
-		 * @param $str string la chaîne dont les accents doivent être remplacés
-		 * @return string la chaîne ne comportant plus d'accents
-		 */
-		private static function supprimerAccentsFrancais($str)
-		{
-			//source: https://stackoverflow.com/questions/10054818/convert-accented-characters-to-their-plain-ascii-equivalents#answer-10064701
-			$normalizeChars = array(
-				'À' => 'A', 'Â' => 'A', 'Ä' => 'A', 'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E',
-				'Î' => 'I', 'Ï' => 'I', 'Ô' => 'O', 'Ö' => 'O', 'Ù' => 'U', 'Û' => 'U', 'Ü' => 'U',
-				'à' => 'a', 'â' => 'a', 'ä' => 'a', 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
-				'î' => 'i', 'ï' => 'i', 'ô' => 'o', 'ö' => 'o', 'ù' => 'u', 'û' => 'u', 'ÿ' => 'y'
-			);
-
-			return strtr($str, $normalizeChars);
-		}
-
-		/**
-		 * Supprime les accents d'un string et les remplace par leur équivalent en plain ASCII.
-		 *
-		 * @param $str string la chaîne dont les accents doivent être remplacés
-		 * @return string la chaîne ne comportant plus d'accents
-		 */
-		private static function supprimerAccentsEtrangers($str)
-		{
-			//source: https://stackoverflow.com/questions/10054818/convert-accented-characters-to-their-plain-ascii-equivalents#answer-10064701
-			$normalizeChars = array(
-				'Š' => 'S', 'š' => 's', 'Ð' => 'Dj', 'Ž' => 'Z', 'ž' => 'z', 'Á' => 'A', 'Ã' => 'A',
-				'Å' => 'A', 'Æ' => 'A', 'Ì' => 'I', 'Í' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O',
-				'Õ' => 'O', 'Ø' => 'O', 'Ú' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'á' => 'a',
-				'ã' => 'a', 'å' => 'a', 'æ' => 'a', 'ì' => 'i', 'í' => 'i', 'ð' => 'o', 'ñ' => 'n',
-				'ò' => 'o', 'ó' => 'o', 'õ' => 'o', 'ø' => 'o', 'ú' => 'u', 'ý' => 'y', 'þ' => 'b',
-				'ƒ' => 'f', 'ă' => 'a', 'ș' => 's', 'ț' => 't', 'Ă' => 'A', 'Ș' => 'S', 'Ț' => 'T',
-				'ç' => 'c', 'Ç' => 'C'
-			);
-
-			return strtr($str, $normalizeChars);
 		}
 
 	}
