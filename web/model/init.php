@@ -9,7 +9,7 @@
 	define("DB_PASSWORD", "copie_tdf");
 	define("DB_INSTANCE", "XE");
 	define("DB_HOSTNAME", "localhost");
-	define("DB_ENCODING", "AL32UTF8");
+	define("DB_ENCODING", "WE8ISO8859P15");
 
 	define("DEFAULT_USER", "admin");
 	define("DEFAULT_PASSWORD", "admin");
