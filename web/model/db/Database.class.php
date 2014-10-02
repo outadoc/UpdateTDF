@@ -31,7 +31,7 @@
 				Database::$DB_HOSTNAME . "/" . Database::$DB_INSTANCE,
 				Database::$DB_ENCODING);
 
-			//si erreur à la connection, on balance une exception
+			//si erreur à la connexion, on balance une exception
 			if ($this->db === false) {
 				throw new OracleSQLException(oci_error()['message']);
 			}
