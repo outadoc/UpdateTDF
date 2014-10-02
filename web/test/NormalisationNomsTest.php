@@ -56,6 +56,11 @@
 			$this->assertEquals("OEUF OEUF SOEUR AERONEF", TextUtils::normaliserNomCoureur("Œuf œuf sœur Æronef"));
 		}
 
+		public function testEuro()
+		{
+			$this->assertEquals("DE LA TREUC", TextUtils::normaliserNomVille("DE LA TR€UC"));
+		}
+
 		/**
 		 * @expectedException \TDF\IllegalCharacterException
 		 */

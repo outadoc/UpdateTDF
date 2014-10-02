@@ -48,7 +48,7 @@
 
 			//on remplace les ligatures se répètant plus de deux fois en deux seulement
 			$str = preg_replace("/([\\-]){3,}/", "$1$1", $str);
-			$str = preg_replace("/([']){2,}/", "$1", $str);
+			$str = preg_replace("/([' ]){2,}/", "$1", $str);
 
 			//on supprime les éventuels tirets/espaces au début et à la fin du nom
 			return trim($str, " -\t\n\r\0\x0B");
@@ -104,7 +104,7 @@
 				'ã' => 'a', 'å' => 'a', 'æ' => 'ae', 'ì' => 'i', 'í' => 'i', 'ð' => 'o', 'ñ' => 'n',
 				'ò' => 'o', 'ó' => 'o', 'õ' => 'o', 'ø' => 'o', 'ú' => 'u', 'ý' => 'y', 'þ' => 'b',
 				'ƒ' => 'f', 'ă' => 'a', 'ș' => 's', 'ț' => 't', 'Ă' => 'A', 'Ș' => 'S', 'Ț' => 'T',
-				'œ' => 'oe', 'Œ' => 'OE'
+				'œ' => 'oe', 'Œ' => 'OE', '€' => 'e'
 			);
 
 			return strtr($str, $normalizeChars);
@@ -172,7 +172,7 @@
 			}
 
 			//on remplace les ligatures multiples en une seule
-			$str = preg_replace("/([\\-']){2,}/", "$1", $str);
+			$str = preg_replace("/([\\-' ]){2,}/", "$1", $str);
 
 			//on supprime les éventuels traits d'union/espaces au début et à la fin du prénom
 			return trim($str, " -\t\n\r\0\x0B");

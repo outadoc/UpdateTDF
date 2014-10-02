@@ -80,6 +80,12 @@
 			$this->assertEquals("Jean-Michel", TextUtils::normaliserPrenomCoureur("jean-----michel"));
 		}
 
+		public function testPrenomWTFBreton()
+		{
+			$this->assertEquals("'Eé'E-E'Bé'", TextUtils::normaliserPrenomCoureur("'éÉ'é-É'bé'"));
+			$this->assertEquals("Eé'Eé-Uù Gg", TextUtils::normaliserPrenomCoureur("éé''éé--uù  gg"));
+		}
+
 		/**
 		 * @expectedException \TDF\IllegalCharacterException
 		 */
