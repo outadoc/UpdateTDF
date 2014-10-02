@@ -90,6 +90,7 @@
 		 * @param array $items le tableau servant à peupler la liste
 		 * @param string $selectedId l'identifiant de l'entrée sélectionnée
 		 * @param string $default la valeur que prendra le champ si $value vaut null
+		 * @param string $addLink le lien pour ajouter un élément de ce type. ex: "form-annee.php"
 		 * @return string le contrôle au format HTML
 		 */
 		public static function getDropdownList($id, $label, $id_col, $name_col, $items, $selectedId = null, $default = null, $addLink = null)
