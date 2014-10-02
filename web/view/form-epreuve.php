@@ -39,19 +39,19 @@
 			<?php
 
 				echo FormUtils::getDropdownList("n_annee", "Année", "ANNEE", "ANNEE", $annees,
-					(isset($epreuve) ? $epreuve->ANNEE : $data_annee), null);
+					(isset($epreuve) ? $epreuve->ANNEE : $data_annee), null, "form-annee.php");
 
 				echo FormUtils::getNumberField("n_epreuve", "N° épreuve", 0, 50, 1,
 					(isset($epreuve) ? $epreuve->N_EPREUVE : $data_n_epreuve), 0);
 
 				echo FormUtils::getDropdownList("code_tdf_d", "Pays de départ", "CODE_TDF", "NOM", $pays,
-					(isset($epreuve) ? $epreuve->CODE_TDF_D : $data_code_tdf_d), "FRA");
+					(isset($epreuve) ? $epreuve->CODE_TDF_D : $data_code_tdf_d), "FRA", "form-pays.php");
 
 				echo FormUtils::getTextField("ville_d", "Ville de départ",
 					(isset($epreuve) ? $epreuve->VILLE_D : $data_ville_d), null, true, 40, "TOULON");
 
 				echo FormUtils::getDropdownList("code_tdf_a", "Pays d'arrivée", "CODE_TDF", "NOM", $pays,
-					(isset($epreuve) ? $epreuve->CODE_TDF_A : $data_code_tdf_a), "FRA");
+					(isset($epreuve) ? $epreuve->CODE_TDF_A : $data_code_tdf_a), "FRA", "form-pays.php");
 
 				echo FormUtils::getTextField("ville_a", "Ville d'arrivée",
 					(isset($epreuve) ? $epreuve->VILLE_A : $data_ville_a), null, true, 40, "PARIS");

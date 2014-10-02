@@ -43,7 +43,7 @@
 					(isset($coureur) ? $coureur->ANNEE_TDF : $data_annee_tdf), null, true, true);
 
 				echo FormUtils::getDropdownList("code_tdf", "Pays", "CODE_TDF", "NOM",
-					$pays, (isset($coureur) ? $coureur->CODE_TDF : $data_code_tdf), 'FRA');
+					$pays, (isset($coureur) ? $coureur->CODE_TDF : $data_code_tdf), 'FRA', "form-pays.php");
 
 				echo '<input type="submit" class="btn btn-default">';
 

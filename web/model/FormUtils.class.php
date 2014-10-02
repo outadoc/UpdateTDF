@@ -33,8 +33,10 @@
 
 			return '<div class="form-group">
 						<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>
-						<input type="' . $type . '" class="form-control" maxlength="' . $maxLength . '" name="' . htmlspecialchars($id) . '"
-							placeholder="' . htmlspecialchars($placeholder) . '" value="' . $value . '" ' . $required . ' ' . $pattern . '>
+						<div class="input-group">
+							<input type="' . $type . '" class="form-control" maxlength="' . $maxLength . '" name="' . htmlspecialchars($id) . '"
+								placeholder="' . htmlspecialchars($placeholder) . '" value="' . $value . '" ' . $required . ' ' . $pattern . '>
+						</div>
 					</div>';
 		}
 
@@ -69,11 +71,11 @@
 
 			return '<div class="form-group">
 						<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>
-						<div class="' . (($isNullable) ? 'input-group' : '') . '">
-						' . $nullable . '
-						<input type="number" min="' . htmlspecialchars($min) . '" max="' . htmlspecialchars($max) . '"
-							step="' . htmlspecialchars($step) . '" class="form-control" name="' . htmlspecialchars($id) . '"
-							value="' . (($value != null) ? htmlspecialchars($value) : htmlspecialchars($default)) . '" ' . $readonly . ' ' . $enabled . '>
+						<div class="input-group">
+							' . $nullable . '
+							<input type="number" min="' . htmlspecialchars($min) . '" max="' . htmlspecialchars($max) . '"
+								step="' . htmlspecialchars($step) . '" class="form-control" name="' . htmlspecialchars($id) . '"
+								value="' . (($value != null) ? htmlspecialchars($value) : htmlspecialchars($default)) . '" ' . $readonly . ' ' . $enabled . '>
 						</div>
 					</div>';
 		}
@@ -90,11 +92,20 @@
 		 * @param string $default la valeur que prendra le champ si $value vaut null
 		 * @return string le contrôle au format HTML
 		 */
-		public static function getDropdownList($id, $label, $id_col, $name_col, $items, $selectedId = null, $default = null)
+		public static function getDropdownList($id, $label, $id_col, $name_col, $items, $selectedId = null, $default = null, $addLink = null)
 		{
+			if ($addLink !== null) {
+				$addon = '	<span class="input-group-btn">
+								<a class="btn btn-default" href="' . $addLink . '"><span class="glyphicon glyphicon-plus"></span></a>
+					      	</span>';
+			} else {
+				$addon = "";
+			}
+
 			$html = '<div class="form-group">
 						<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>
-						<select name="' . htmlspecialchars($id) . '" class="form-control">';
+						<div class="input-group">
+							<select name="' . htmlspecialchars($id) . '" class="form-control">';
 
 			foreach ($items as $item) {
 
@@ -108,7 +119,11 @@
 					. htmlspecialchars($item->$name_col) . '</option>';
 			}
 
-			$html .= '</select></div>';
+			$html .= '		</select>
+							' . $addon . '
+						</div>
+					</div>';
+
 			return $html;
 		}
 

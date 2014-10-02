@@ -53,3 +53,15 @@ body > .container-fluid {
     text-decoration: line-through;
     color: gray;
 }
+
+.input-group {
+    width: 100%;
+}
+
+.input-group .form-control:last-child:first-child {
+    border-radius: 4px;
+}
+
+.input-group-btn .btn .glyphicon {
+    color: rgb(112, 112, 112);
+}
