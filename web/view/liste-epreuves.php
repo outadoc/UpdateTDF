@@ -16,7 +16,7 @@
 	</div>
 </div>
 <div class="row">
-	<table class="table table-striped table-condensed">
+	<table class="table table-striped table-condensed sortable">
 		<thead>
 		<tr>
 			<th class="center">Année</th>
