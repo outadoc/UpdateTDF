@@ -60,7 +60,7 @@
 	}
 
 	$title = (isset($n_coureur) && $n_coureur !== null) ? "Modifier un coureur" : "Ajouter un coureur";
-	define("PAGE_TITLE", "TDF - " . $title);
+	define("PAGE_TITLE", $title);
 
 	try {
 		$db   = new Database();

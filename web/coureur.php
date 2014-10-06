@@ -13,7 +13,7 @@
 	require "model/AlertBanner.class.php";
 	require "model/FormUtils.class.php";
 
-	define("PAGE_TITLE", "TDF - Détails du coureur");
+	define("PAGE_TITLE", "Détails du coureur");
 
 	try {
 		$n_coureur = FormUtils::getGetVar("n_coureur");

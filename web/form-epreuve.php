@@ -82,7 +82,7 @@
 	}
 
 	$title = (isset($key_annee) && $key_annee !== null) ? "Modifier une épreuve" : "Ajouter une épreuve";
-	define("PAGE_TITLE", "TDF - " . $title);
+	define("PAGE_TITLE", $title);
 
 	try {
 		$db     = new Database();

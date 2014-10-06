@@ -12,7 +12,7 @@
 	require "model/db/Database.class.php";
 	require "model/AlertBanner.class.php";
 
-	define("PAGE_TITLE", "TDF - Liste des coureurs");
+	define("PAGE_TITLE", "Liste des coureurs");
 
 	try {
 		$db       = new Database();

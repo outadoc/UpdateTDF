@@ -65,7 +65,7 @@
 	}
 
 	$title = "Ajouter / Modifier une année";
-	define("PAGE_TITLE", "TDF - " . $title);
+	define("PAGE_TITLE", $title);
 
 	try {
 		$db = new Database();

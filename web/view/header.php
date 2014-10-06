@@ -2,7 +2,7 @@
 	<!DOCTYPE html>
 	<html>
 	<head>
-		<title><?php echo PAGE_TITLE; ?></title>
+		<title>TDF - <?php echo PAGE_TITLE; ?></title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 

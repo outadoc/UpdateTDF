@@ -37,7 +37,7 @@
 	}
 
 	$title = "Ajouter un directeur";
-	define("PAGE_TITLE", "TDF - " . $title);
+	define("PAGE_TITLE", $title);
 
 	require "view/header.php";
 	require "view/form-directeur.php";

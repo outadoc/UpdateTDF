@@ -11,7 +11,7 @@
 	require 'model/AlertBanner.class.php';
 	require 'model/FormUtils.class.php';
 
-	define("PAGE_TITLE", "TDF - Connexion");
+	define("PAGE_TITLE", "Connexion");
 
 	$username = FormUtils::getPostVar("username");
 	$password = FormUtils::getPostVar("password");

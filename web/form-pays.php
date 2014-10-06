@@ -43,7 +43,7 @@
 	}
 
 	$title = "Ajouter un pays";
-	define("PAGE_TITLE", "TDF - " . $title);
+	define("PAGE_TITLE", $title);
 
 	require "view/header.php";
 	require "view/form-pays.php";
