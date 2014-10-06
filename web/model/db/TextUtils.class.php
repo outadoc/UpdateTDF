@@ -171,8 +171,10 @@
 				$str = implode($separator, array_map(array('TDF\TextUtils', 'normaliserSectionPrenomCoureur'), explode($separator, $str)));
 			}
 
-			//on remplace les ligatures multiples en une seule
-			$str = preg_replace("/([\\-' ]){2,}/", "$1", $str);
+			foreach ($separators as $separator) {
+				//on remplace les ligatures multiples en une seule
+				$str = preg_replace("/(" . $separator . "){2,}/", "$1", $str);
+			}
 
 			//on supprime les éventuels traits d'union/espaces au début et à la fin du prénom
 			return trim($str, " -\t\n\r\0\x0B");
