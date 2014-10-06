@@ -21,8 +21,13 @@
 	header('Content-Type: text/html; charset=utf-8');
 
 	//affichage des erreurs
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
+	if (preg_match("/localhost/", $_SERVER['HTTP_HOST'])) {
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+	} else {
+		error_reporting(0);
+		ini_set('display_errors', 0);
+	}
 
 	//connexion de l'utilisateur
 	session_start();
