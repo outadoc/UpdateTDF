@@ -24,7 +24,9 @@
 
 		$db             = new Database();
 		$coureur        = $db->getCoureur($n_coureur);
-		$participations = $db->getParticipations($n_coureur);
+		$participations = $db->getListeParticipations($n_coureur);
+		$epreuves = $db->getListeEpreuvesCoureur($n_coureur);
+
 		$db->close();
 	} catch (\Exception $e) {
 		$fatal_error = $e->getMessage();

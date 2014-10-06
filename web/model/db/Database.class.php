@@ -205,7 +205,7 @@
 		 */
 		public function supprimerCoureur($n_coureur)
 		{
-			if (count($this->getParticipations($n_coureur)) > 0) {
+			if (count($this->getListeParticipations($n_coureur)) > 0) {
 				//le coureur a des participations dans la base, on ne peut donc pas le supprimer
 				throw new \ErrorException("Ce coureur possède des participations");
 			}
@@ -220,7 +220,7 @@
 		 * @param integer $n_coureur le numéro du coureur
 		 * @return array la liste des participations
 		 */
-		public function getParticipations($n_coureur)
+		public function getListeParticipations($n_coureur)
 		{
 			$sql = "SELECT * FROM tdf_participation
 					JOIN tdf_sponsor spo USING (n_equipe, n_sponsor)
@@ -294,7 +294,7 @@
 		 */
 		public function getDernierNumCoureur()
 		{
-			$sql = "SELECT max(n_coureur) AS MAXNUM FROM tdf_coureur";
+			$sql = "SELECT max(n_coureur) AS maxnum FROM tdf_coureur";
 			return $this->executerRequeteAvecResultat($sql)[0]->MAXNUM;
 		}
 
@@ -422,6 +422,20 @@
 					ORDER BY annee DESC, jour DESC";
 
 			return $this->executerRequeteAvecResultat($sql);
+		}
+
+		public function getListeEpreuvesCoureur($n_coureur)
+		{
+			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, p1.nom as pays_d, p2.nom as pays_a,
+							to_char(jour, 'dd/MM/yyyy') AS date_epreuve, cat_code, total_seconde AS temps, rang_arrivee
+					FROM tdf_epreuve
+					JOIN tdf_temps USING (annee, n_epreuve)
+					JOIN tdf_pays p1 ON (code_tdf_d = p1.code_tdf)
+					JOIN tdf_pays p2 ON (code_tdf_a = p2.code_tdf)
+					WHERE n_coureur = :n_coureur
+					ORDER BY annee DESC, n_epreuve DESC";
+
+			return $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur));
 		}
 
 		/**
