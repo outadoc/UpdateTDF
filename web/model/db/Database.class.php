@@ -265,7 +265,7 @@
 			return $this->executerRequete($sql, array(
 				":code_tdf" => $code_tdf,
 				":c_pays"   => $c_pays,
-				":nom"      => TextUtils::normaliserNomVille($nom)
+				":nom" => TextUtils::normaliserNomPays($nom)
 			));
 		}
 
@@ -280,7 +280,7 @@
 			$sql = "SELECT * FROM tdf_pays WHERE nom = :nom";
 
 			try {
-				$res = $this->executerRequeteAvecResultat($sql, array(":nom" => TextUtils::normaliserNomVille(trim($nom))));
+				$res = $this->executerRequeteAvecResultat($sql, array(":nom" => TextUtils::normaliserNomPays(trim($nom))));
 				return count($res) > 0;
 			} catch (IllegalCharacterException $e) {
 				return false;

@@ -118,5 +118,13 @@
 			TextUtils::normaliserPrenomCoureur("Baptiste ?");
 		}
 
+		/**
+		 * @expectedException \TDF\IllegalCharacterException
+		 */
+		public function testPrenomAlphabetique()
+		{
+			TextUtils::normaliserPrenomCoureur("'-'");
+		}
+
 	}
  

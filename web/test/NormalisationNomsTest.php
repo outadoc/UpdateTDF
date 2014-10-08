@@ -93,5 +93,13 @@
 			TextUtils::normaliserNomCoureur("Candellier ?");
 		}
 
+		/**
+		 * @expectedException \TDF\IllegalCharacterException
+		 */
+		public function testNomAlphabetique()
+		{
+			TextUtils::normaliserNomCoureur("'-'");
+		}
+
 	}
  

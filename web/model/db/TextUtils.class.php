@@ -36,6 +36,7 @@
 		 * Toutes les lettres en majuscules.
 		 *
 		 * @param string $str la chaîne à formater
+		 * @throws IllegalCharacterException
 		 * @return string la chaîne normalisée
 		 */
 		private static function normaliserMajuscules($str)
@@ -49,6 +50,10 @@
 			//on remplace les ligatures se répètant plus de deux fois en deux seulement
 			$str = preg_replace("/([\\-]){3,}/", "$1$1", $str);
 			$str = preg_replace("/([' ]){2,}/", "$1", $str);
+
+			if (!preg_match("/[A-Z]/", $str)) {
+				throw new IllegalCharacterException('Le champ ' . htmlspecialchars($str) . ' doit contenir au moins une lettre.');
+			}
 
 			//on supprime les éventuels tirets/espaces au début et à la fin du nom
 			return trim($str, " -\t\n\r\0\x0B");
@@ -131,6 +136,26 @@
 		}
 
 		/**
+		 * Normalise le nom d'un pays.
+		 * Met le nom en majuscules, supprime les accents et les tirets/espaces superflus.
+		 * Les chiffres ne sont pas autorisés.
+		 *
+		 * @param $nom
+		 * @return string
+		 * @throws \ErrorException
+		 */
+		public static function normaliserNomPays($nom)
+		{
+			$nom = TextUtils::normaliserMajuscules($nom);
+
+			if (!preg_match("/^[A-Z\\-' ]*$/u", $nom)) {
+				throw new IllegalCharacterException('Le nom de pays "' . $nom . '" comporte des caractères non conformes.');
+			}
+
+			return $nom;
+		}
+
+		/**
 		 * Normalise le prénom d'un coureur.
 		 * Capitalise le nom, supprime l'accent de la première lettre, et supprime les tirets/espace superflus.
 		 *
@@ -143,7 +168,7 @@
 			$prenom = TextUtils::normaliserMinuscules($prenom);
 
 			if (!preg_match("/^[a-zA-Zéèàùôöäâêëüûïîŷÿç\\-' ]*$/u", $prenom)) {
-				throw new IllegalCharacterException('Le prénom "' . $prenom . '" comporte des caractères non conformes.');
+				throw new IllegalCharacterException('Le prénom "' . htmlspecialchars($prenom) . '" comporte des caractères non conformes.');
 			}
 
 			return $prenom;
@@ -157,6 +182,7 @@
 		 * Tirets et espaces acceptés.
 		 *
 		 * @param string $str la chaîne à formater
+		 * @throws IllegalCharacterException
 		 * @return string la chaîne normalisée
 		 */
 		private static function normaliserMinuscules($str)
@@ -174,6 +200,10 @@
 			foreach ($separators as $separator) {
 				//on remplace les ligatures multiples en une seule
 				$str = preg_replace("/(" . $separator . "){2,}/", "$1", $str);
+			}
+
+			if (!preg_match("/[a-zA-Z]/", $str)) {
+				throw new IllegalCharacterException('Le champ ' . htmlspecialchars($str) . ' doit contenir au moins une lettre.');
 			}
 
 			//on supprime les éventuels traits d'union/espaces au début et à la fin du prénom
