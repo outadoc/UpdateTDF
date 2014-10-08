@@ -426,7 +426,7 @@
 
 		public function getListeEpreuvesCoureur($n_coureur)
 		{
-			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, p1.nom as pays_d, p2.nom as pays_a,
+			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, p1.nom AS pays_d, p2.nom AS pays_a,
 							to_char(jour, 'dd/MM') AS date_epreuve, cat_code, total_seconde AS temps, rang_arrivee
 					FROM tdf_epreuve
 					JOIN tdf_temps USING (annee, n_epreuve)
@@ -575,6 +575,24 @@
 		{
 			$sql = "SELECT n_directeur, nom || ' ' || prenom AS nom FROM tdf_directeur ORDER BY nom, prenom";
 			return $this->executerRequeteAvecResultat($sql);
+		}
+
+		/**
+		 * Récupère la dernière équipe d'un coureur.
+		 *
+		 * @param integer $n_coureur le numéro du coureur
+		 * @return object le résultat de la requête
+		 */
+		public function getDerniereEquipeCoureur($n_coureur)
+		{
+			$sql = "SELECT nom FROM tdf_participation part
+					JOIN tdf_sponsor spo ON (part.n_equipe = spo.n_equipe AND part.n_sponsor = spo.n_sponsor)
+					WHERE n_coureur = :n_coureur AND annee = (
+						SELECT MAX(annee) FROM tdf_participation
+						WHERE n_coureur = :n_coureur
+					)";
+
+			return $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur))[0];
 		}
 
 	}

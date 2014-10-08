@@ -12,6 +12,7 @@
 	/** @var $coureur object */
 	/** @var $participations array */
 	/** @var $epreuves array */
+	/** @var $derniereEquipe object */
 
 ?>
 <div class="row">
@@ -45,6 +46,7 @@
 									. htmlspecialchars($coureur->ANNEE_NAISSANCE) . "</li>";
 								echo "<li><strong>Année de 1er Tour de France :</strong> "
 									. htmlspecialchars($coureur->ANNEE_TDF) . "</li>";
+								echo "<li><strong>Dernière équipe :</strong> " . htmlspecialchars($derniereEquipe->NOM) . "</li>";
 
 							?>
 						</ul>

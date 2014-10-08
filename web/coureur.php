@@ -26,6 +26,7 @@
 		$coureur        = $db->getCoureur($n_coureur);
 		$participations = $db->getListeParticipations($n_coureur);
 		$epreuves = $db->getListeEpreuvesCoureur($n_coureur);
+		$derniereEquipe = $db->getDerniereEquipeCoureur($n_coureur);
 
 		$db->close();
 	} catch (\Exception $e) {
