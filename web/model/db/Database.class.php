@@ -624,6 +624,59 @@
 			return $this->executerRequeteAvecResultat($sql);
 		}
 
+		/**
+		 * Ajoute une nouvelle équipe dans la base de données, avec un nouveau sponsor.
+		 *
+		 * @param integer $annee_creation l'année de création de l'équipe
+		 * @param integer $annee_disparition l'année de disparition de l'équipe
+		 * @param string $code_tdf le pays du sponsor
+		 * @param string $nom le nom du sponsor
+		 * @param string $na_sponsor le nom abrégé du sponsor
+		 */
+		public function ajouterEquipe($annee_creation, $annee_disparition, $code_tdf, $nom, $na_sponsor)
+		{
+			$sql = "INSERT INTO tdf_equipe (n_equipe, annee_creation, annee_disparition)
+					VALUES ((SELECT MAX(n_equipe) + 1 FROM tdf_equipe), :annee_creation, :annee_disparition)
+					RETURNING n_equipe INTO :n_equipe";
+
+			$n_equipe = 0;
+
+			$this->executerRequete($sql, array(
+				":n_equipe"          => &$n_equipe,
+				":annee_creation"    => $annee_creation,
+				":annee_disparition" => $annee_disparition
+			));
+
+			$this->ajouterSponsor($n_equipe, $code_tdf, $nom, $na_sponsor, $annee_creation);
+		}
+
+		/**
+		 * Ajoute un nouveau sponsor dans la base de données.
+		 *
+		 * @param integer $n_equipe l'identifiant de l'équipe à associer à ce sponsor
+		 * @param string $code_tdf le pays du sponsor
+		 * @param string $nom le nom du sponsor
+		 * @param string $na_sponsor le nom abrégé du sponsor
+		 * @param integer $annee_sponsor l'année de création du sponsor
+		 * @return resource le résultat de la requête
+		 */
+		public function ajouterSponsor($n_equipe, $code_tdf, $nom, $na_sponsor, $annee_sponsor)
+		{
+			$sql = "INSERT INTO tdf_sponsor (n_equipe, n_sponsor, code_tdf, nom, na_sponsor, annee_sponsor)
+					VALUES (:n_equipe, (
+						SELECT MAX(n_sponsor) + 1 FROM tdf_sponsor
+						WHERE n_equipe = :n_equipe
+					), :code_tdf, :nom, :na_sponsor, :annee_sponsor)";
+
+			return $this->executerRequete($sql, array(
+				":n_equipe"      => $n_equipe,
+				":code_tdf"      => $code_tdf,
+				":nom"           => $nom,
+				":na_sponsor"    => $na_sponsor,
+				":annee_sponsor" => $annee_sponsor
+			));
+		}
+
 	}
 
 	/**
