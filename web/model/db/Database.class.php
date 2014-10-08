@@ -427,7 +427,7 @@
 		public function getListeEpreuvesCoureur($n_coureur)
 		{
 			$sql = "SELECT annee, n_epreuve, ville_d, ville_a, p1.nom as pays_d, p2.nom as pays_a,
-							to_char(jour, 'dd/MM/yyyy') AS date_epreuve, cat_code, total_seconde AS temps, rang_arrivee
+							to_char(jour, 'dd/MM') AS date_epreuve, cat_code, total_seconde AS temps, rang_arrivee
 					FROM tdf_epreuve
 					JOIN tdf_temps USING (annee, n_epreuve)
 					JOIN tdf_pays p1 ON (code_tdf_d = p1.code_tdf)

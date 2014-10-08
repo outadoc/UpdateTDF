@@ -103,8 +103,6 @@
 			<table class="table table-striped sortable">
 				<thead>
 				<tr>
-					<!--annee, n_epreuve, ville_d, ville_a, distance, moyenne, code_tdf_d, code_tdf_a,
-							to_char(jour, 'dd/MM/yyyy'), cat_code, total_seconde-->
 					<th class="center">Année</th>
 					<th class="center">Épreuve</th>
 					<th>Date</th>
