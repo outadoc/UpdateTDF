@@ -594,11 +594,34 @@
 
 			$res = $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur));
 
-			if($res !== null && count($res) > 0) {
+			if ($res !== null && count($res) > 0) {
 				return $res[0];
 			} else {
 				return null;
 			}
+		}
+
+		/**
+		 * Récupère la liste des équipes et sponsors encore actifs.
+		 * Un sponsor actif est le dernier sponsor d'une équipe qui n'a pas disparu.
+		 *
+		 * @return array la liste des sponsors actifs
+		 */
+		public function getListeSponsorsActifs()
+		{
+			$sql = "SELECT n_equipe, annee_creation, n_sponsor, nom, na_sponsor FROM tdf_sponsor spo
+					JOIN tdf_equipe USING (n_equipe)
+					WHERE n_equipe IN (
+						SELECT n_equipe FROM tdf_equipe
+						WHERE annee_disparition IS NULL
+					) AND (annee_sponsor, n_equipe) IN (
+						SELECT MAX(annee_sponsor), n_equipe FROM tdf_equipe
+						JOIN tdf_sponsor USING(n_equipe)
+						GROUP BY n_equipe
+					)
+					ORDER BY n_equipe";
+
+			return $this->executerRequeteAvecResultat($sql);
 		}
 
 	}
