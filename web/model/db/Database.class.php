@@ -265,7 +265,7 @@
 			return $this->executerRequete($sql, array(
 				":code_tdf" => $code_tdf,
 				":c_pays"   => $c_pays,
-				":nom" => TextUtils::normaliserNomPays($nom)
+				":nom"      => TextUtils::normaliserNomPays($nom)
 			));
 		}
 
@@ -307,7 +307,7 @@
 		 */
 		public function getAnnee($annee)
 		{
-			$sql = "SELECT annee, jour_repos FROM tdf_annee WHERE annee = :annee";
+			$sql    = "SELECT annee, jour_repos FROM tdf_annee WHERE annee = :annee";
 			$result = $this->executerRequeteAvecResultat($sql, array(":annee" => $annee));
 
 			if ($result === null || count($result) < 1) {
@@ -487,8 +487,8 @@
 				":n_epreuve"  => $n_epreuve,
 				":code_tdf_d" => TextUtils::normaliserNomCoureur($code_tdf_d),
 				":code_tdf_a" => TextUtils::normaliserNomCoureur($code_tdf_a),
-				":ville_d" => TextUtils::normaliserNomVille($ville_d),
-				":ville_a" => TextUtils::normaliserNomVille($ville_a),
+				":ville_d"    => TextUtils::normaliserNomVille($ville_d),
+				":ville_a"    => TextUtils::normaliserNomVille($ville_a),
 				":distance"   => $distance,
 				":moyenne"    => $moyenne,
 				":jour"       => $jour . "/" . $annee,
