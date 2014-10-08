@@ -42,11 +42,20 @@
 								echo "<li><strong>Nom :</strong> " . htmlspecialchars($coureur->NOM) . "</li>";
 								echo "<li><strong>Prénom :</strong> " . htmlspecialchars($coureur->PRENOM) . "</li>";
 								echo "<li><strong>Pays :</strong> " . htmlspecialchars($coureur->PAYS) . "</li>";
-								echo "<li><strong>Année de naissance :</strong> "
-									. htmlspecialchars($coureur->ANNEE_NAISSANCE) . "</li>";
-								echo "<li><strong>Année de 1er Tour de France :</strong> "
-									. htmlspecialchars($coureur->ANNEE_TDF) . "</li>";
-								echo "<li><strong>Dernière équipe :</strong> " . htmlspecialchars($derniereEquipe->NOM) . "</li>";
+
+								if (isset($coureur->ANNEE_NAISSANCE)) {
+									echo "<li><strong>Année de naissance :</strong> "
+										. htmlspecialchars($coureur->ANNEE_NAISSANCE) . "</li>";
+								}
+
+								if (isset($coureur->ANNEE_TDF)) {
+									echo "<li><strong>Année de 1er Tour de France :</strong> "
+										. htmlspecialchars($coureur->ANNEE_TDF) . "</li>";
+								}
+
+								if (isset($derniereEquipe)) {
+									echo "<li><strong>Dernière équipe :</strong> " . htmlspecialchars($derniereEquipe->NOM) . "</li>";
+								}
 
 							?>
 						</ul>

@@ -592,7 +592,13 @@
 						WHERE n_coureur = :n_coureur
 					)";
 
-			return $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur))[0];
+			$res = $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur));
+
+			if($res !== null && count($res) > 0) {
+				return $res[0];
+			} else {
+				return null;
+			}
 		}
 
 	}
