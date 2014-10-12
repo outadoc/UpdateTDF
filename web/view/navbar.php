@@ -16,6 +16,7 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="./">Coureurs</a></li>
 						<li><a href="liste-epreuves.php">Épreuves</a></li>
+						<li><a href="liste-equipes.php">Équipes</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">

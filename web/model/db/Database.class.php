@@ -609,8 +609,9 @@
 		 */
 		public function getListeSponsorsActifs()
 		{
-			$sql = "SELECT n_equipe, annee_creation, n_sponsor, nom, na_sponsor, annee_sponsor, code_tdf FROM tdf_sponsor spo
+			$sql = "SELECT n_equipe, annee_creation, n_sponsor, spo.nom AS nom, na_sponsor, annee_sponsor, pay.nom AS pays FROM tdf_sponsor spo
 					JOIN tdf_equipe USING (n_equipe)
+					JOIN tdf_pays pay USING(code_tdf)
 					WHERE n_equipe IN (
 						SELECT n_equipe FROM tdf_equipe
 						WHERE annee_disparition IS NULL
@@ -619,7 +620,7 @@
 						JOIN tdf_sponsor USING(n_equipe)
 						GROUP BY n_equipe
 					)
-					ORDER BY n_equipe";
+					ORDER BY annee_sponsor DESC";
 
 			return $this->executerRequeteAvecResultat($sql);
 		}
