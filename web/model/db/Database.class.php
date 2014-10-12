@@ -68,7 +68,7 @@
 					VALUES ((SELECT max(n_coureur) + 1 FROM tdf_coureur), :code_tdf, :nom, :prenom, :annee_naissance, :annee_tdf)";
 
 			$this->executerRequete($sql, array(
-				":code_tdf"        => $code_tdf,
+				":code_tdf"        => TextUtils::normaliserCodeXLettres($code_tdf, 3),
 				":nom"             => TextUtils::normaliserNomCoureur($nom),
 				":prenom"          => TextUtils::normaliserPrenomCoureur($prenom),
 				":annee_naissance" => $annee_naissance,
@@ -121,7 +121,7 @@
 
 			$this->executerRequete($sql, array(
 				":n_coureur"       => $n_coureur,
-				":code_tdf"        => $code_tdf,
+				":code_tdf"        => TextUtils::normaliserCodeXLettres($code_tdf, 3),
 				":nom"             => TextUtils::normaliserNomCoureur($nom),
 				":prenom"          => TextUtils::normaliserPrenomCoureur($prenom),
 				":annee_naissance" => $annee_naissance,
@@ -263,8 +263,8 @@
 
 			$sql = "INSERT INTO tdf_pays (code_tdf, c_pays, nom) VALUES (UPPER(:code_tdf), UPPER(:c_pays), :nom)";
 			return $this->executerRequete($sql, array(
-				":code_tdf" => $code_tdf,
-				":c_pays"   => $c_pays,
+				":code_tdf" => TextUtils::normaliserCodeXLettres($code_tdf, 3),
+				":c_pays"   => TextUtils::normaliserCodeXLettres($c_pays, 2),
 				":nom"      => TextUtils::normaliserNomPays($nom)
 			));
 		}
@@ -485,8 +485,8 @@
 			return $this->executerRequete($sql, array(
 				":annee"      => $annee,
 				":n_epreuve"  => $n_epreuve,
-				":code_tdf_d" => TextUtils::normaliserNomCoureur($code_tdf_d),
-				":code_tdf_a" => TextUtils::normaliserNomCoureur($code_tdf_a),
+				":code_tdf_d" => TextUtils::normaliserCodeXLettres($code_tdf_d, 3),
+				":code_tdf_a" => TextUtils::normaliserCodeXLettres($code_tdf_a, 3),
 				":ville_d"    => TextUtils::normaliserNomVille($ville_d),
 				":ville_a"    => TextUtils::normaliserNomVille($ville_a),
 				":distance"   => $distance,
@@ -521,8 +521,8 @@
 			return $this->executerRequete($sql, array(
 				":annee"      => $annee,
 				":n_epreuve"  => $n_epreuve,
-				":code_tdf_d" => TextUtils::normaliserNomCoureur($code_tdf_d),
-				":code_tdf_a" => TextUtils::normaliserNomCoureur($code_tdf_a),
+				":code_tdf_d" => TextUtils::normaliserCodeXLettres($code_tdf_d, 3),
+				":code_tdf_a" => TextUtils::normaliserCodeXLettres($code_tdf_a, 3),
 				":ville_d"    => TextUtils::normaliserNomCoureur($ville_d),
 				":ville_a"    => TextUtils::normaliserNomCoureur($ville_a),
 				":distance"   => $distance,
@@ -609,7 +609,7 @@
 		 */
 		public function getListeSponsorsActifs()
 		{
-			$sql = "SELECT n_equipe, annee_creation, n_sponsor, nom, na_sponsor FROM tdf_sponsor spo
+			$sql = "SELECT n_equipe, annee_creation, n_sponsor, nom, na_sponsor, annee_sponsor, code_tdf FROM tdf_sponsor spo
 					JOIN tdf_equipe USING (n_equipe)
 					WHERE n_equipe IN (
 						SELECT n_equipe FROM tdf_equipe
@@ -630,24 +630,32 @@
 		 * @param integer $annee_creation l'année de création de l'équipe
 		 * @param integer $annee_disparition l'année de disparition de l'équipe
 		 * @param string $code_tdf le pays du sponsor
-		 * @param string $nom le nom du sponsor
+		 * @param string $nom_sponsor le nom du sponsor
 		 * @param string $na_sponsor le nom abrégé du sponsor
 		 */
-		public function ajouterEquipe($annee_creation, $annee_disparition, $code_tdf, $nom, $na_sponsor)
+		public function ajouterEquipe($annee_creation, $annee_disparition, $code_tdf, $nom_sponsor, $na_sponsor)
 		{
 			$sql = "INSERT INTO tdf_equipe (n_equipe, annee_creation, annee_disparition)
-					VALUES ((SELECT MAX(n_equipe) + 1 FROM tdf_equipe), :annee_creation, :annee_disparition)
-					RETURNING n_equipe INTO :n_equipe";
-
-			$n_equipe = 0;
+					VALUES ((SELECT MAX(n_equipe) + 1 FROM tdf_equipe), :annee_creation, :annee_disparition)";
 
 			$this->executerRequete($sql, array(
-				":n_equipe"          => &$n_equipe,
 				":annee_creation"    => $annee_creation,
 				":annee_disparition" => $annee_disparition
 			));
 
-			$this->ajouterSponsor($n_equipe, $code_tdf, $nom, $na_sponsor, $annee_creation);
+			$n_equipe = $this->getDernierNumEquipe();
+			$this->ajouterSponsor($n_equipe, $code_tdf, $nom_sponsor, $na_sponsor, $annee_creation);
+		}
+
+		/**
+		 * Récupère le numéro de la dernière équipe insérée dans la base de données.
+		 *
+		 * @return integer le numéro de l'équipe
+		 */
+		public function getDernierNumEquipe()
+		{
+			$sql = "SELECT max(n_equipe) AS maxnum FROM tdf_equipe";
+			return $this->executerRequeteAvecResultat($sql)[0]->MAXNUM;
 		}
 
 		/**
@@ -664,15 +672,15 @@
 		{
 			$sql = "INSERT INTO tdf_sponsor (n_equipe, n_sponsor, code_tdf, nom, na_sponsor, annee_sponsor)
 					VALUES (:n_equipe, (
-						SELECT MAX(n_sponsor) + 1 FROM tdf_sponsor
+						SELECT NVL(MAX(n_sponsor) + 1, 1) FROM tdf_sponsor
 						WHERE n_equipe = :n_equipe
 					), :code_tdf, :nom, :na_sponsor, :annee_sponsor)";
 
 			return $this->executerRequete($sql, array(
 				":n_equipe"      => $n_equipe,
-				":code_tdf"      => $code_tdf,
-				":nom"           => $nom,
-				":na_sponsor"    => $na_sponsor,
+				":code_tdf"      => TextUtils::normaliserCodeXLettres($code_tdf, 3),
+				":nom"           => TextUtils::normaliserNomCoureur($nom),
+				":na_sponsor"    => TextUtils::normaliserCodeXLettres($na_sponsor, 3),
 				":annee_sponsor" => $annee_sponsor
 			));
 		}

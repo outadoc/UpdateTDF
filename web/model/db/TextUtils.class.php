@@ -210,6 +210,18 @@
 			return trim($str, " -\t\n\r\0\x0B");
 		}
 
+		public static function normaliserCodeXLettres($str, $nb_lettres_max)
+		{
+			$str = TextUtils::normaliserMajuscules($str);
+
+			if (!preg_match("/^[A-Z]{0," . $nb_lettres_max . "}$/u", $str)) {
+				throw new IllegalCharacterException('Le code "' . htmlspecialchars($str) . '" comporte des
+				caractères non conformes ou fait plus de ' . $nb_lettres_max . ' lettres.');
+			}
+
+			return $str;
+		}
+
 		/**
 		 * Normalise une section du prénom d'un coureur.
 		 * Par exemple, si un coureur s'appelle Jean-Jérôme, vous devriez passer successivement à cette méthode :
