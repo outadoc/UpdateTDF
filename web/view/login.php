@@ -17,7 +17,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-4 col-md-offset-4">
+	<div class="col-md-4 col-md-offset-4 login-form">
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<form action="login.php" method="post">
@@ -27,7 +27,7 @@
 						echo FormUtils::getTextField("password", "Mot de passe", "", "", true, 50, "•••••••••••••••", null, true);
 
 					?>
-					<input type="submit" class="btn btn-primary" value="Connexion">
+					<input type="submit" class="btn btn-form btn-primary" value="Connexion">
 				</form>
 			</div>
 		</div>

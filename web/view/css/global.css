@@ -70,3 +70,8 @@ body > .container-fluid {
     margin-top: 15px;
     width: 100%;
 }
+
+.login-form {
+    padding-left: 65px;
+    padding-right: 65px;
+}
