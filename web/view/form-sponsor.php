@@ -1,12 +1,15 @@
 <?php
 	/**
-	 * Fichier de vue pour l'affichage d'un formulaire d'ajout d'équipe.
+	 * Fichier de vue pour l'affichage d'un formulaire d'ajout de sponsor.
 	 * (c) 2014 Baptiste Candellier
 	 */
 
 	namespace TDF;
 
 	/** @var $title string */
+	/** @var $equipes array */
+	/** @var $annees array */
+	/** @var $pays array */
 
 ?>
 <div class="row">
@@ -18,14 +21,13 @@
 </div>
 <div class="row">
 	<div class="col-md-3">
-		<form role="form" method="post" action="form-equipe.php">
+		<form role="form" method="post" action="form-sponsor.php">
 			<?php
 
-				echo FormUtils::getNumberField("annee_creation", "Année de création", Time::getCurrentYear(), 2999, 1,
-					Time::getCurrentYear(), null, true, false);
+				//afficher liste déroulante équipes
+				echo FormUtils::getDropdownList("n_equipe", "Équipe", "N_EQUIPE", "LIBELLE", $equipes, null, null, "form-equipe.php");
 
-				echo FormUtils::getNumberField("annee_disparition", "Année de disparition", Time::getCurrentYear(), 2999, 1,
-					null, null, true, true);
+				echo FormUtils::getDropdownList("annee_sponsor", "Année du sponsor", "ANNEE", "ANNEE", $annees, null, null, "form-annee.php");
 
 				echo FormUtils::getDropdownList("code_tdf", "Pays du sponsor", "CODE_TDF", "NOM", $pays, "FRA", "FRA", "form-pays.php");
 

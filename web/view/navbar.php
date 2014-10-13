@@ -26,6 +26,7 @@
 						<li><a href="form-directeur.php">Directeur</a></li>
 						<li role="presentation" class="divider"></li>
 						<li><a href="form-equipe.php">Équipe</a></li>
+						<li><a href="form-sponsor.php">Sponsor</a></li>
 						<li role="presentation" class="divider"></li>
 						<li><a href="form-annee.php">Année</a></li>
 						<li><a href="form-pays.php">Pays</a></li>

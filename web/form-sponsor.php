@@ -1,7 +1,7 @@
 <?php
 
 	/**
-	 * Fichier contrôleur pour le formulaire d'ajout d'une équipe.
+	 * Fichier contrôleur pour le formulaire d'ajout d'un sponsor.
 	 * (c) 2014 Baptiste Candellier
 	 */
 
@@ -19,25 +19,22 @@
 	$error = null;
 
 	//on récupère les éléments du formulaire, s'ils sont définis
-	$data_annee_creation    = FormUtils::getPostVar("annee_creation");
-	$data_annee_disparition = FormUtils::getPostVar("annee_disparition");
-	$data_code_tdf          = FormUtils::getPostVar("code_tdf");
-	$data_nom_sponsor       = FormUtils::getPostVar("nom_sponsor");
-	$data_na_sponsor        = FormUtils::getPostVar("na_sponsor");
+	$data_n_equipe      = FormUtils::getPostVar("n_equipe");
+	$data_annee_sponsor = FormUtils::getPostVar("annee_sponsor");
+	$data_code_tdf      = FormUtils::getPostVar("code_tdf");
+	$data_nom_sponsor   = FormUtils::getPostVar("nom_sponsor");
+	$data_na_sponsor    = FormUtils::getPostVar("na_sponsor");
 
 	//si le formulaire a été dûment rempli
-	if ($data_annee_creation !== null
+	if ($data_annee_sponsor !== null
 		&& $data_code_tdf !== null
 		&& $data_nom_sponsor !== null
 		&& $data_na_sponsor !== null
 	) {
-		if ($data_annee_creation < 9999 && $data_annee_creation >= Time::getCurrentYear()
-			&& ($data_annee_disparition === null ||
-				($data_annee_disparition < 9999 && $data_annee_disparition >= Time::getCurrentYear()))
-		) {
+		if ($data_annee_sponsor < 9999 && $data_annee_sponsor >= Time::getCurrentYear()) {
 			try {
 				$db = new Database();
-				$db->ajouterEquipe($data_annee_creation, $data_annee_disparition, $data_code_tdf, $data_nom_sponsor, $data_na_sponsor);
+				$db->ajouterSponsor($data_n_equipe, $data_code_tdf, $data_nom_sponsor, $data_na_sponsor, $data_annee_sponsor);
 				$db->close();
 
 				//on redirige vers la page de la liste des équipes
@@ -50,16 +47,18 @@
 		}
 	}
 
-	define("PAGE_TITLE", "Ajouter une équipe");
+	define("PAGE_TITLE", "Ajouter un sponsor");
 
 	try {
-		$db   = new Database();
-		$pays = $db->getListePays();
+		$db      = new Database();
+		$annees  = $db->getListeAnnees();
+		$pays    = $db->getListePays();
+		$equipes = $db->getListeSponsorsActifs();
 		$db->close();
 	} catch (\Exception $e) {
 		$fatal_error = $e->getMessage();
 	}
 
 	require "view/header.php";
-	require "view/form-equipe.php";
+	require "view/form-sponsor.php";
 	require "view/footer.php";

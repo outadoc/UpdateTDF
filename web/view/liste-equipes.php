@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="page-header">
-			<h1>Liste des équipes actives</h1>
+			<h1><?= PAGE_TITLE ?></h1>
 		</div>
 	</div>
 </div>
@@ -21,6 +21,7 @@
 		<tr>
 			<!-- n_equipe, annee_creation, n_sponsor, nom, na_sponsor, annee_sponsor, code_tdf -->
 			<th class="center">Année création</th>
+			<th class="center">Année disparition</th>
 			<th>Nom du sponsor</th>
 			<th class="center">Nom abrégé</th>
 			<th class="center">Année du sponsor</th>
@@ -35,6 +36,7 @@
 			foreach ($sponsors as $sponsor) {
 				echo "<tr>";
 				echo '<td class="center">' . $sponsor->ANNEE_CREATION . "</td>";
+				echo '<td class="center">' . (isset($sponsor->ANNEE_DISPARITION) ? $sponsor->ANNEE_DISPARITION : '--') . "</td>";
 				echo "<td>" . $sponsor->NOM . "</td>";
 				echo '<td class="center">' . $sponsor->NA_SPONSOR . "</td>";
 				echo '<td class="center">' . $sponsor->ANNEE_SPONSOR . "</td>";

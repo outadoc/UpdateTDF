@@ -12,11 +12,11 @@
 	require "model/db/Database.class.php";
 	require "model/AlertBanner.class.php";
 
-	define("PAGE_TITLE", "Liste des épreuves");
+	define("PAGE_TITLE", "Liste des équipes");
 
 	try {
 		$db       = new Database();
-		$sponsors = $db->getListeSponsorsActifs();
+		$sponsors = $db->getListeEquipesComplete();
 		$db->close();
 	} catch (\Exception $e) {
 		$fatal_error = $e->getMessage();
