@@ -20,18 +20,22 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-3">
-		<form role="form" method="post" action="form-pays.php">
-			<?php
+	<div class="col-md-4 col-lg-offset-4">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form role="form" method="post" action="form-pays.php">
+					<?php
 
-				echo FormUtils::getTextField("nom", "Nom du pays", "", "", true, 20, "Autriche");
-				echo FormUtils::getTextField("code_tdf", "Code pays (3 lettres)", "", "", true, 3, "AUT");
-				echo FormUtils::getTextField("c_pays", "Code pays (2 lettres)", "", "", true, 2, "AT");
+						echo FormUtils::getTextField("nom", "Nom du pays", "", "", true, 20, "Autriche");
+						echo FormUtils::getTextField("code_tdf", "Code pays (3 lettres)", "", "", true, 3, "AUT");
+						echo FormUtils::getTextField("c_pays", "Code pays (2 lettres)", "", "", true, 2, "AT");
 
-				echo '<input type="submit" class="btn btn-default">';
+						echo '<input type="submit" class="btn btn-default">';
 
-			?>
+					?>
 
-		</form>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>

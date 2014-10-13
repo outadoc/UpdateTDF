@@ -21,20 +21,24 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-3">
-		<form role="form"
-		      method="post" <?= 'action="form-annee.php' . (isset($key_annee) ? '?annee=' . $key_annee : '') . '"' ?>>
-			<?php
+	<div class="col-md-4 col-lg-offset-4">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form role="form"
+				      method="post" <?= 'action="form-annee.php' . (isset($key_annee) ? '?annee=' . $key_annee : '') . '"' ?>>
+					<?php
 
-				echo FormUtils::getNumberField("n_annee", "Année", Time::getCurrentYear(), 9999, 1,
-					(isset($annee) ? $annee->ANNEE : $data_annee), Time::getCurrentYear(), (!isset($annee) || $annee === null));
+						echo FormUtils::getNumberField("n_annee", "Année", Time::getCurrentYear(), 9999, 1,
+							(isset($annee) ? $annee->ANNEE : $data_annee), Time::getCurrentYear(), (!isset($annee) || $annee === null));
 
-				echo FormUtils::getNumberField("jours_repos", "Jours de repos", 0, 100, 1,
-					(isset($annee) ? $annee->JOUR_REPOS : $data_jours_repos), 0);
+						echo FormUtils::getNumberField("jours_repos", "Jours de repos", 0, 100, 1,
+							(isset($annee) ? $annee->JOUR_REPOS : $data_jours_repos), 0);
 
-				echo '<input type="submit" class="btn btn-default">';
+						echo '<input type="submit" class="btn btn-default">';
 
-			?>
-		</form>
+					?>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
