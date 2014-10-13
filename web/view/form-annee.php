@@ -9,7 +9,6 @@
 	namespace TDF;
 
 
-	/** @var $title string */
 	/** @var $data_annee string */
 	/** @var $data_jours_repos string */
 

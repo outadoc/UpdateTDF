@@ -19,7 +19,6 @@
 	<table class="table table-striped table-condensed sortable">
 		<thead>
 		<tr>
-			<!-- n_equipe, annee_creation, n_sponsor, nom, na_sponsor, annee_sponsor, code_tdf -->
 			<th class="center">Année création</th>
 			<th class="center">Année disparition</th>
 			<th>Nom du sponsor</th>

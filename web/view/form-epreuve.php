@@ -8,7 +8,6 @@
 
 	/** @var $pays array */
 	/** @var $annees array */
-	/** @var $title string */
 	/** @var $maxAnnee integer */
 
 	/** @var $data_annee integer */

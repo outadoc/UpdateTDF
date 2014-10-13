@@ -7,7 +7,6 @@
 	namespace TDF;
 
 
-	/** @var $title string */
 	/** @var $data_code_tdf string */
 	/** @var $data_c_pays string */
 	/** @var $data_nom string */

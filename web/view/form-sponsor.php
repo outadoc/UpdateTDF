@@ -6,7 +6,6 @@
 
 	namespace TDF;
 
-	/** @var $title string */
 	/** @var $equipes array */
 	/** @var $annees array */
 	/** @var $pays array */

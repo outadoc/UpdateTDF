@@ -7,7 +7,6 @@
 	namespace TDF;
 
 
-	/** @var $title string */
 	/** @var $data_prenom string */
 	/** @var $data_nom string */
 	/** @var $data_annee_naissance integer */

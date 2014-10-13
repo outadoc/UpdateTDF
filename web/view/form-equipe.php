@@ -6,8 +6,6 @@
 
 	namespace TDF;
 
-	/** @var $title string */
-
 ?>
 <div class="row">
 	<div class="col-md-12">
