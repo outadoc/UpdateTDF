@@ -51,7 +51,6 @@
 		 * @param string $value la valeur du champ
 		 * @param string $default la valeur que prendra le champ si $value vaut null
 		 * @param bool $isEnabled indique si le champ est activé et modifiable
-		 * @param bool $isNullable true si une checkbox doit être affichée à côté du contrôle pour pouvoir le désactiver
 		 * @return string le contrôle au format HTML
 		 */
 		public static function getNumberField($id, $label, $min, $max, $step = 1, $value = null, $default = null, $isEnabled = true)
