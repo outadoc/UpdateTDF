@@ -45,7 +45,11 @@ body > .container-fluid {
     text-align: center;
 }
 
-.glyphicon-trash {
+a .glyphicon {
+    color: #4a77dd;
+}
+
+a .glyphicon-trash {
     color: #c60000;
 }
 
