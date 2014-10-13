@@ -31,8 +31,8 @@
 </div>
 <div class="row">
 	<div class="col-md-3">
-		<form role="form" method="post"
-			<?php echo 'action="form-epreuve.php' . ((isset($key_annee) && isset($key_n_epreuve)) ? '?annee=' . $key_annee . '&epreuve=' . $key_n_epreuve : '') . '"'; ?>>
+		<form role="form"
+		      method="post" <?= 'action="form-epreuve.php' . ((isset($key_annee) && isset($key_n_epreuve)) ? '?annee=' . $key_annee . '&epreuve=' . $key_n_epreuve : '') . '"' ?>>
 			<?php
 
 				echo FormUtils::getDropdownList("n_annee", "Année", "ANNEE", "ANNEE", $annees,

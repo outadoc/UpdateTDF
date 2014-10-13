@@ -22,8 +22,8 @@
 </div>
 <div class="row">
 	<div class="col-md-3">
-		<form role="form" method="post"
-			<?php echo 'action="form-annee.php' . (isset($key_annee) ? '?annee=' . $key_annee : '') . '"'; ?>>
+		<form role="form"
+		      method="post" <?= 'action="form-annee.php' . (isset($key_annee) ? '?annee=' . $key_annee : '') . '"' ?>>
 			<?php
 
 				echo FormUtils::getNumberField("n_annee", "Année", Time::getCurrentYear(), 9999, 1,

@@ -24,8 +24,8 @@
 </div>
 <div class="row">
 	<div class="col-md-3">
-		<form role="form" method="post"
-			<?php echo 'action="form-coureur.php' . (isset($n_coureur) ? '?n_coureur=' . $n_coureur : '') . '"'; ?>>
+		<form role="form"
+		      method="post" <?= 'action="form-coureur.php' . (isset($n_coureur) ? '?n_coureur=' . $n_coureur : '') . '"' ?>>
 			<?php
 
 				echo FormUtils::getTextField("prenom", "Prénom",

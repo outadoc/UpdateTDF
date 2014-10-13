@@ -19,7 +19,7 @@
 	<div class="col-md-12">
 		<div class="page-header">
 			<h1>Détails du coureur
-				<small><?php echo htmlspecialchars($coureur->PRENOM . " " . $coureur->NOM); ?> </small>
+				<small><?= htmlspecialchars($coureur->PRENOM . " " . $coureur->NOM) ?> </small>
 			</h1>
 		</div>
 	</div>
@@ -31,7 +31,7 @@
 						<h3 class="panel-title">
 							<span class="glyphicon glyphicon-user"></span>
 							&nbsp;Fiche d'identité
-							<a href="form-coureur.php?n_coureur=<?php echo $n_coureur ?>"
+							<a href="form-coureur.php?n_coureur=<?= $n_coureur ?>"
 							   class="pull-right">Modifier</a>
 						</h3>
 					</div>
