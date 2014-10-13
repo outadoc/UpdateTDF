@@ -419,7 +419,7 @@
 					FROM tdf_epreuve
 					JOIN tdf_pays p1 ON (code_tdf_d = p1.code_tdf)
 					JOIN tdf_pays p2 ON (code_tdf_a = p2.code_tdf)
-					ORDER BY annee DESC, jour DESC";
+					ORDER BY annee DESC, jour DESC, n_epreuve DESC";
 
 			return $this->executerRequeteAvecResultat($sql);
 		}
@@ -433,7 +433,7 @@
 					JOIN tdf_pays p1 ON (code_tdf_d = p1.code_tdf)
 					JOIN tdf_pays p2 ON (code_tdf_a = p2.code_tdf)
 					WHERE n_coureur = :n_coureur
-					ORDER BY annee DESC, n_epreuve DESC";
+					ORDER BY annee DESC, date_epreuve DESC, n_epreuve DESC";
 
 			return $this->executerRequeteAvecResultat($sql, array(":n_coureur" => $n_coureur));
 		}
