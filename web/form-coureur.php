@@ -29,9 +29,8 @@
 
 	//si le formulaire a été dûment rempli
 	if ($data_nom !== null && $data_prenom !== null && $data_code_tdf !== null) {
-		if (($data_annee_naissance === null || ($data_annee_naissance < 9999 && $data_annee_naissance > 1800))
-			&& ($data_annee_tdf === null || ($data_annee_tdf < 9999 && $data_annee_tdf > 1800))
-			&& (($data_annee_tdf === null || $data_annee_naissance === null) || ($data_annee_naissance < $data_annee_tdf))
+		if (empty($data_annee_naissance) || ($data_annee_naissance < Time::getCurrentYear() && $data_annee_naissance > 1800)
+			&& empty($data_annee_tdf) || ($data_annee_tdf <= Time::getCurrentYear() && $data_annee_tdf > 1905)
 		) {
 			try {
 				$db = new Database();

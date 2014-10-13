@@ -54,28 +54,16 @@
 		 * @param bool $isNullable true si une checkbox doit être affichée à côté du contrôle pour pouvoir le désactiver
 		 * @return string le contrôle au format HTML
 		 */
-		public static function getNumberField($id, $label, $min, $max, $step = 1, $value = null, $default = null, $isEnabled = true, $isNullable = false)
+		public static function getNumberField($id, $label, $min, $max, $step = 1, $value = null, $default = null, $isEnabled = true)
 		{
-			if ($isNullable) $default = null;
-
-			if ($value === null && $default === null) {
-				$enabled       = "disabled";
-				$chkboxEnabled = "";
-			} else {
-				$enabled       = "";
-				$chkboxEnabled = "checked";
-			}
-
-			$readonly = (!$isEnabled) ? "readonly" : "";
-			$nullable = ($isNullable) ? '<span class="input-group-addon"><input class="nullable" type="checkbox" ' . $chkboxEnabled . '></span>' : "";
+			$enabled = (!$isEnabled) ? "readonly" : "";
 
 			return '<div class="form-group">
 						<label for="' . htmlspecialchars($id) . '">' . htmlspecialchars($label) . '</label>
 						<div class="input-group">
-							' . $nullable . '
 							<input type="number" min="' . htmlspecialchars($min) . '" max="' . htmlspecialchars($max) . '"
 								step="' . htmlspecialchars($step) . '" class="form-control" name="' . htmlspecialchars($id) . '"
-								value="' . (($value != null) ? htmlspecialchars($value) : htmlspecialchars($default)) . '" ' . $readonly . ' ' . $enabled . '>
+								value="' . (($value != null) ? htmlspecialchars($value) : htmlspecialchars($default)) . '" ' . $enabled . '>
 						</div>
 					</div>';
 		}
