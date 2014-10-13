@@ -29,7 +29,7 @@
 			<?php
 
 				echo FormUtils::getTextField("prenom", "Prénom",
-					(isset($coureur) ? $coureur->PRENOM : $data_prenom), "", true, 20, "Alberto");
+					(isset($coureur) ? $coureur->PRENOM : $data_prenom), "", true, 30, "Alberto");
 				echo FormUtils::getTextField("nom", "Nom",
 					(isset($coureur) ? $coureur->NOM : $data_nom), "", true, 20, "CONTADOR");
 

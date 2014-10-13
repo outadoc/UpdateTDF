@@ -30,7 +30,7 @@
 
 				echo FormUtils::getDropdownList("code_tdf", "Pays du sponsor", "CODE_TDF", "NOM", $pays, "FRA", "FRA", "form-pays.php");
 
-				echo FormUtils::getTextField("nom_sponsor", "Nom du sponsor", "", null, true, 40, "KRISPROLLS");
+				echo FormUtils::getTextField("nom_sponsor", "Nom du sponsor", "", null, true, 50, "KRISPROLLS");
 
 				echo FormUtils::getTextField("na_sponsor", "Nom abrégé du sponsor", "", null, true, 3, "ABC");
 
