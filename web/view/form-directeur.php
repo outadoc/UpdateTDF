@@ -28,7 +28,7 @@
 						echo FormUtils::getTextField("prenom", "Prénom", "", "", true, 20, "Michael");
 						echo FormUtils::getTextField("nom", "Nom", "", "", true, 30, "BAY");
 
-						echo '<input type="submit" class="btn btn-default">';
+						echo FormUtils::getFormControls();
 
 					?>
 

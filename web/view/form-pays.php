@@ -30,7 +30,7 @@
 						echo FormUtils::getTextField("code_tdf", "Code pays (3 lettres)", "", "", true, 3, "AUT");
 						echo FormUtils::getTextField("c_pays", "Code pays (2 lettres)", "", "", true, 2, "AT");
 
-						echo '<input type="submit" class="btn btn-default">';
+						echo FormUtils::getFormControls();
 
 					?>
 

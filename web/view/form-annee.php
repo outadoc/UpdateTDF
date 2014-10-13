@@ -34,7 +34,7 @@
 						echo FormUtils::getNumberField("jours_repos", "Jours de repos", 0, 100, 1,
 							(isset($annee) ? $annee->JOUR_REPOS : $data_jours_repos), 0);
 
-						echo '<input type="submit" class="btn btn-default">';
+						echo FormUtils::getFormControls();
 
 					?>
 				</form>

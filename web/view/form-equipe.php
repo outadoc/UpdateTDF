@@ -33,7 +33,7 @@
 
 						echo FormUtils::getTextField("na_sponsor", "Nom abrégé du sponsor", "", null, true, 3, "ABC");
 
-						echo '<input type="submit" class="btn btn-default">';
+						echo FormUtils::getFormControls();
 
 					?>
 				</form>

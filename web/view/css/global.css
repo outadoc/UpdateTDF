@@ -65,3 +65,8 @@ body > .container-fluid {
 .input-group-btn .btn .glyphicon {
     color: rgb(112, 112, 112);
 }
+
+.btn-form {
+    margin-top: 15px;
+    width: 100%;
+}

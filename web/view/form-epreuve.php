@@ -73,7 +73,7 @@
 								(object)array("ID" => "CMI")
 							), (isset($epreuve) ? $epreuve->CAT_CODE : $data_cat_code), "ETA");
 
-						echo '<input type="submit" class="btn btn-default">';
+						echo FormUtils::getFormControls();
 
 					?>
 				</form>

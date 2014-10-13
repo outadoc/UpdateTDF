@@ -128,6 +128,10 @@
 			return $html;
 		}
 
+		public static function getFormControls() {
+			return '<input type="submit" class="btn btn-primary btn-form">';
+		}
+
 		/**
 		 * Récupère une variable POST, et retourne soit sa valeur, soit null.
 		 *
