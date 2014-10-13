@@ -36,8 +36,7 @@
 		}
 	}
 
-	$title = "Ajouter un directeur";
-	define("PAGE_TITLE", $title);
+	define("PAGE_TITLE", "Ajouter un directeur");
 
 	require "view/header.php";
 	require "view/form-directeur.php";

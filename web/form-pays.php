@@ -42,8 +42,7 @@
 		}
 	}
 
-	$title = "Ajouter un pays";
-	define("PAGE_TITLE", $title);
+	define("PAGE_TITLE", "Ajouter un pays");
 
 	require "view/header.php";
 	require "view/form-pays.php";

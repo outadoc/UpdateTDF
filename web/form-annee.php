@@ -64,8 +64,7 @@
 		}
 	}
 
-	$title = "Ajouter / Modifier une année";
-	define("PAGE_TITLE", $title);
+	define("PAGE_TITLE", "Ajouter / Modifier une année");
 
 	try {
 		$db = new Database();

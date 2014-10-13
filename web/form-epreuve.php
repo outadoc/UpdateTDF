@@ -81,8 +81,7 @@
 		}
 	}
 
-	$title = (isset($key_annee) && $key_annee !== null) ? "Modifier une épreuve" : "Ajouter une épreuve";
-	define("PAGE_TITLE", $title);
+	define("PAGE_TITLE", (isset($key_annee) && $key_annee !== null) ? "Modifier une épreuve" : "Ajouter une épreuve");
 
 	try {
 		$db     = new Database();

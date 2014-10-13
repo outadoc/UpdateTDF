@@ -59,8 +59,7 @@
 		}
 	}
 
-	$title = (isset($n_coureur) && $n_coureur !== null) ? "Modifier un coureur" : "Ajouter un coureur";
-	define("PAGE_TITLE", $title);
+	define("PAGE_TITLE", (isset($n_coureur) && $n_coureur !== null) ? "Modifier un coureur" : "Ajouter un coureur");
 
 	try {
 		$db   = new Database();

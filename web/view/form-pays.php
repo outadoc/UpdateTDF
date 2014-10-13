@@ -16,9 +16,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="page-header">
-			<h1>
-				<?php echo $title; ?>
-			</h1>
+			<h1><?= PAGE_TITLE ?></h1>
 		</div>
 	</div>
 </div>
